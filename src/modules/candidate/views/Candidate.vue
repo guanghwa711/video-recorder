@@ -25,7 +25,7 @@
           </div>
 
           <div class="grid grid-cols-3 gap-4">
-            <Video v-for="video in videos" :key="video.id" :date="video.createdAt" :is-live="video.isLive" />
+            <Video v-for="video in videos" :key="video.id" :date="video.createdAt" :is-live="video.isLive" :video-id="video.video_id" />
           </div>
 
           <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[35%]">
@@ -79,17 +79,32 @@ const videos = [
   {
     id: 1,
     createdAt: 'Fri 05 April 2024 10:14 AM',
-    isLive: true
+    isLive: true,
+    video_id: 'z83nle02eR4Gw2uEu02fEAQ8CioGyJgpWUbxP00TYVnTmo'
   },
   {
     id: 2,
     createdAt: 'Sat 04 April 2024 10:14 AM',
-    isLive: false
+    isLive: false,
+    video_id: 'SfqM8FTu6kv02c28AuVkafPAkeKD02Z02Imodlpfai4BtA'
   },
   {
-    id: 2,
+    id: 3,
     createdAt: 'Sat 04 April 2024 10:14 AM',
-    isLive: false
+    isLive: false,
+    video_id: 'z83nle02eR4Gw2uEu02fEAQ8CioGyJgpWUbxP00TYVnTmo'
+  },
+  {
+    id: 4,
+    createdAt: 'Sat 04 April 2024 10:14 AM',
+    isLive: false,
+    video_id: 'rTnjNwhO3015XJ3D3sEmESgctvB9xZP2mMH02gTs5cMIc'
+  },
+  {
+    id: 5,
+    createdAt: 'Sat 04 April 2024 10:14 AM',
+    isLive: false,
+    video_id: ''
   }
 ]
 </script>
