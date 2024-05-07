@@ -25,7 +25,7 @@
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="relative w-full transform overflow-hidden rounded-xl bg-white px-6 pb-6 pt-8 text-left align-middle shadow-xl transition-all"
+              class="relative transform overflow-hidden rounded-xl bg-white px-6 pb-6 pt-8 text-left align-middle shadow-xl transition-all"
               :class="props.size"
             >
               <div @click="closeModal" class="cursor-pointer">
