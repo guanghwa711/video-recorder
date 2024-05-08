@@ -5,13 +5,13 @@
         <div class="flex px-10">
           <div class="w-full max-w-60 space-y-3">
             <div class="mb-4 font-medium">Job Title</div>
-            <Checkbox @update="jobTitle.web = !jobTitle.web" :checked="jobTitle.web" label="Web" />
-            <Checkbox @update="jobTitle.mobile = !jobTitle.mobile" :checked="jobTitle.mobile" label="Mobile" />
+            <Checkbox v-model:checked="jobTitle.web" label="Web" />
+            <Checkbox v-model:checked="jobTitle.mobile" label="Mobile" />
             
             <div class="mb-4 pt-6 font-medium">Contract Type</div>
-            <Checkbox @update="contractType.apprenti = !contractType.apprenti" :checked="contractType.apprenti" label="Apprenti" />
-            <Checkbox @update="contractType.employee = !contractType.employee" :checked="contractType.employee" label="Employee" />
-            <Checkbox @update="contractType.cadre = !contractType.cadre" :checked="contractType.cadre" label="Cadre" />
+            <Checkbox v-model:checked="contractType.apprenti" label="Apprenti" />
+            <Checkbox v-model:checked="contractType.employee" label="Employee" />
+            <Checkbox v-model:checked="contractType.cadre" label="Cadre" />
           </div>
 
           <div :hidden="candidates.length == 0" class="grid grid-cols-1 gap-4">
@@ -65,6 +65,7 @@ import Candidate from '../components/Candidate.vue'
 import Checkbox from '@/components/Checkbox.vue'
 import API from '@/utils/api/api';
 import type { ICandidateFilterObj } from '@/utils/common/types'
+import { SEEKING_FIELD, SEEKING_CONTRACT_TYPE } from '@/utils/common/enums';
 
 const candidates = ref<any[]>([])
 
@@ -98,19 +99,19 @@ watchEffect(() => {
     seeking_contract_type: []
   };
   if (jobTitle.web) {
-    queryParams.seeking_field.push("web");
+    queryParams.seeking_field.push(SEEKING_FIELD.WEB);
   }
   if (jobTitle.mobile) {
-    queryParams.seeking_field.push("mobile");
+    queryParams.seeking_field.push(SEEKING_FIELD.MOBILE);
   }
   if (contractType.apprenti) {
-    queryParams.seeking_contract_type.push("apprenti")
+    queryParams.seeking_contract_type.push(SEEKING_CONTRACT_TYPE.APPRENTI);
   }
   if (contractType.employee) {
-    queryParams.seeking_contract_type.push("employee")
+    queryParams.seeking_contract_type.push(SEEKING_CONTRACT_TYPE.EMPLOYEE);
   }
   if (contractType.cadre) {
-    queryParams.seeking_contract_type.push("cadre")
+    queryParams.seeking_contract_type.push(SEEKING_CONTRACT_TYPE.CADRE);
   }
 
   API.getCandidates(queryParams)
@@ -118,21 +119,6 @@ watchEffect(() => {
       candidates.value = response.data
     })
 })
-
-
-// const candidates = [
-//   {
-//     id: 1,
-//     firstName: 'John',
-//     lastName: 'Doe'
-//   },
-//   {
-//     id: 2,
-//     firstName: 'Jane',
-//     lastName: 'Doe'
-//   }
-// ]
-
 
 const candidatesWithCandidacy = [
   {

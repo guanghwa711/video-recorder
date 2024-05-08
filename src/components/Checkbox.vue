@@ -2,8 +2,7 @@
   <div class="flex flex-col gap-2.5">
     <label class="flex flex-row items-center gap-4 [&>.checkbox]:hover:bg-slate-50">
       <CheckboxRoot
-        v-model:checked="props.checked"
-        @update:checked="emit('update', checked)"
+        v-model:checked="checked"
         class="border flex h-[22px] w-[22px] appearance-none items-center justify-center rounded-[4px] border-slate-300 bg-white outline-none hover:bg-slate-50"
       >
         <CheckboxIndicator class="flex h-full w-full items-center justify-center rounded bg-white">
@@ -17,21 +16,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { CheckboxIndicator, CheckboxRoot } from 'radix-vue';
 import { PhCheck } from '@phosphor-icons/vue';
-
 
 const props = withDefaults(
   defineProps<{
     label: string;
-    checked: boolean;
   }>(),
   {
-    label: '',
-    checked: false
+    label: ''
   }
 );
+
+const checked = defineModel<boolean>('checked')
 
 const emit = defineEmits<{
   (e: 'update', checked: boolean): void
