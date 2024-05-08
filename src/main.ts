@@ -16,7 +16,7 @@ const auth0 = createAuth0({
   clientId: "38PaJs30B4IOLwI0qZCpvm3HwtPGZg1l",
   authorizationParams: {
     //redirect_uri: window.location.origin
-    redirect_uri: "https://videoresumesfe.onrender.com/login-callback"
+    redirect_uri: "https://videoresumesfe.onrender.com/recruiter"
   }
 });
 
