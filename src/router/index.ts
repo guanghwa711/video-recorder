@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Recruiter from '@/modules/recruiter/views/Recruiter.vue'
-import Candidate from '@/modules/candidate/views/Candidate.vue'
-import Profile from '@/modules/profile/views/Profile.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Recruiter from '@/modules/recruiter/views/Recruiter.vue';
+import Candidate from '@/modules/candidate/views/Candidate.vue';
+import Profile from '@/modules/profile/views/Profile.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +25,17 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: Profile
-    }
+    }, /*
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout
+    } */
   ]
 })
 
