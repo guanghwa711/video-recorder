@@ -42,6 +42,7 @@
             active ? 'bg-slate-100' : 'text-gray-900',
             'group flex w-full items-center rounded-md px-2 py-2 text-sm'
           ]"
+          @click="goToLogout"
         >
           <PhSignOut class="mr-2 h-5 w-5 text-primary-500" />
           Logout
