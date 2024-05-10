@@ -46,24 +46,18 @@
         <div class="flex px-10">
           <div class="w-full max-w-60 space-y-3">
             <div class="mb-4 font-medium">Candidates</div>
-            <Checkbox label="All candidates" />
-            <Checkbox label="Shortlisted" />
-            <Checkbox label="Not shortlisted" />
-
-            <div class="mb-4 pt-6 font-medium">Contract type</div>
-            <Checkbox label="Full time" />
-            <Checkbox label="Short term" />
-            <Checkbox label="Internship" />
+            <Checkbox v-model:checked="candidacyStatus.all" label="All candidates" />
+            <Checkbox v-model:checked="candidacyStatus.shortlisted" label="Shortlisted" />
           </div>
 
-          <div class="grid grid-cols-1 gap-4">
+          <div v-if="candidacies.length > 0" class="grid grid-cols-1 gap-4">
             <Candidate
-              v-for="candidate in candidatesWithCandidacy"
-              :key="candidate.id"
-              :candidateId="candidate.id"
-              :firstName="candidate.firstName"
-              :lastName="candidate.lastName"
-              :proposition-date="candidate.Candidacy[0].createdAt"
+              v-for="candidate in candidacies"
+              :key="candidate?.id"
+              :candidateId="candidate?.candidate?.id"
+              :firstName="candidate?.candidate?.first_name"
+              :lastName="candidate?.candidate?.last_name"
+              :proposition-date="candidate?.candidate?.createdAt"
               :bio="''"
             />
           </div>
@@ -86,6 +80,7 @@ import type { ICandidateFilterObj } from '@/utils/common/types'
 import { SEEKING_CONTRACT_TYPE } from '@/utils/common/enums';
 
 const candidates = ref<any[]>([])
+const candidacies = ref<any[]>([])
 
 const selectedJobTitle = ref<string>("");
 const seekingRate = ref<number[]>([20]);
@@ -96,6 +91,11 @@ const contractType = reactive({
   apprenti: false,
   employee: false,
   cadre: false
+})
+
+const candidacyStatus = reactive({
+  shortlisted: false,
+  all: false
 })
 
 const tabs = [
@@ -110,6 +110,10 @@ onMounted(() => {
     candidates.value = response.data
     isLoading.value = false;
   })
+  API.getCandidacies()
+    .then(response => {
+      candidacies.value = response.data
+    })
 })
 
 watchEffect(() => {
@@ -153,17 +157,24 @@ watchEffect(() => {
     })
 })
 
-const candidatesWithCandidacy = [
-  {
-    id: 3,
-    firstName: 'Jack',
-    lastName: 'Black',
-    Candidacy: [
-      {
-        id: 1,
-        createdAt: '24 April 2024'
-      }
-    ]
+watchEffect(() => {
+  let queryParams: any = {
+    status: []
+  };
+
+  if (candidacyStatus.shortlisted) {
+    queryParams.status.push("shortlisted")
   }
-]
+
+  if (candidacyStatus.all) {
+    queryParams = {
+      status: []
+    }
+  }
+
+  API.getCandidacies(queryParams)
+    .then(response => {
+      candidacies.value = response.data
+    })
+})
 </script>

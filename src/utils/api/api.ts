@@ -21,6 +21,23 @@ const API = {
                 reject(error)
             ))
         })
+    },
+    getCandidacies: (params?: any) => {
+        let parsedParams: any = {}
+
+        if (params) {
+            parsedParams.status = params.status.join(",");
+        }
+
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.get('/recruiters/candidacies', {
+                params: parsedParams
+            })
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
     }
 }
 
