@@ -21,15 +21,21 @@
               </div>
             </Button>
 
-            <VideoUploader />
+            <VideoUploader @get-video-resumes="getVideoResumes" />
           </div>
 
-          <div class="grid grid-cols-3 gap-4">
-            <Video v-for="video in videos" :key="video.id" :date="video.createdAt" :is-live="video.isLive" :video-id="video.video_id" />
+          <div v-if="!isUpLoading && videoResumes.length > 0" class="grid grid-cols-3 gap-4">
+            <Video v-for="video in videoResumes" @get-video-resumes="getVideoResumes" :vid="video.id" :key="video.id" :date="video.createdAt" :is-live="video.is_live" :video-id="video.video_id" />
+          </div>
+          <div v-if="!isUpLoading && videoResumes.length == 0" class="m-auto font-medium text-xl text-gray-700">
+            Not found
+          </div>
+          <div class="m-auto" v-if="isUpLoading">
+            <Spinner />
           </div>
 
           <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[35%]">
-            <VideoRecorder />
+            <VideoRecorder v-model:is-uploading="isUpLoading" />
           </Modal>
 
         </div>
@@ -39,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Tabs from '@/components/Tabs.vue'
 import Candidacy from '../components/Candidacy.vue'
 import Video from '../components/Video.vue'
@@ -47,9 +53,36 @@ import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue';
 import VideoRecorder from '../components/VideoRecorder.vue'
 import VideoUploader from '../components/VideoUploader.vue'
-import { PhVideoCamera, PhUpload } from '@phosphor-icons/vue'
+import { PhVideoCamera } from '@phosphor-icons/vue'
+import Spinner from '@/components/Spinner.vue'
+import API from '@/utils/api/api'
 
 const showVideoRecorderModal = ref(false)
+const videoResumes = ref<any[]>([])
+const isUpLoading = ref<boolean>(false);
+
+onMounted(() => {
+  getVideoResumes();
+})
+
+const getVideoResumes = () => {
+  isUpLoading.value = true;
+  API.getVideoResumesByUserId(localStorage.getItem("user_id") as string)
+    .then((response) => {
+      videoResumes.value = response.data.sort((a: any, b: any) => {
+        if (a.is_live && !b.is_live) {
+            return -1;
+        }
+        else if (!a.is_live && b.is_live) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+      })
+      isUpLoading.value = false
+    })
+}
 
 const tabs = [
   { title: 'My candidacies', value: 'tab1' },
@@ -72,39 +105,6 @@ const candidacies = [
       lastName: 'Doe'
     },
     createdAt: '24 April 2024 - 10:14 AM'
-  }
-]
-
-const videos = [
-  {
-    id: 1,
-    createdAt: 'Fri 05 April 2024 10:14 AM',
-    isLive: true,
-    video_id: 'z83nle02eR4Gw2uEu02fEAQ8CioGyJgpWUbxP00TYVnTmo'
-  },
-  {
-    id: 2,
-    createdAt: 'Sat 04 April 2024 10:14 AM',
-    isLive: false,
-    video_id: 'SfqM8FTu6kv02c28AuVkafPAkeKD02Z02Imodlpfai4BtA'
-  },
-  {
-    id: 3,
-    createdAt: 'Sat 04 April 2024 10:14 AM',
-    isLive: false,
-    video_id: 'z83nle02eR4Gw2uEu02fEAQ8CioGyJgpWUbxP00TYVnTmo'
-  },
-  {
-    id: 4,
-    createdAt: 'Sat 04 April 2024 10:14 AM',
-    isLive: false,
-    video_id: 'rTnjNwhO3015XJ3D3sEmESgctvB9xZP2mMH02gTs5cMIc'
-  },
-  {
-    id: 5,
-    createdAt: 'Sat 04 April 2024 10:14 AM',
-    isLive: false,
-    video_id: ''
   }
 ]
 </script>

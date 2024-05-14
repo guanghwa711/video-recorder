@@ -78,7 +78,13 @@ watchEffect(() => {
   if (!isLoading.value) {
     if (isAuthenticated.value) {
       if(!userId) {
-        API.handleUserLoginSignUp({email: user.value?.email, user_type: user.value?.user_role, sub: user.value?.sub})
+        API.handleUserLoginSignUp({
+          email: user.value?.email,
+          first_name: user.value?.first_name,
+          last_name: user.value?.last_name,
+          user_type: user.value?.user_role, 
+          sub: user.value?.sub
+        })
           .then(response => {
             localStorage.setItem("user_id", response.data?.id);
             localStorage.setItem("user_role", user.value?.user_role);

@@ -35,6 +35,7 @@
 import { ref, onMounted } from 'vue';
 import Button from '@/components/Button.vue';
 import { PhTrash, PhRecord, PhFloppyDisk } from '@phosphor-icons/vue';
+import API from '@/utils/api/api';
 
 const api_url = 'https://proxy.cors.sh/' + 'http://clownfish-app-9zwdy.ondigitalocean.app:8080';
 const isUploading = ref(false);
@@ -43,6 +44,7 @@ const isRecording = ref(false);
 const isTestingCam = ref(false);
 const showModal = ref(false);
 const isPlaying = ref(false);
+const userId = localStorage.getItem("user_id");
 
 const recordedBlobs = ref<Blob[]>([]);
 const mediaRecorder = ref<MediaRecorder | null>(null);
@@ -217,13 +219,19 @@ const uploadVideoToMux = async (blob: Blob) => {
     const uploadConfigResponse = await fetch(`${api_url}/video-upload/get-upload-url`, { headers: { 'x-cors-api-key': "temp_368b76b526936e794eb3e109cc7fb026" } });
     const uploadConfig = await uploadConfigResponse.json();
     const uploadURL = uploadConfig.url;
-    // const uploadID = uploadConfig.id;
+    const uploadID = uploadConfig.id;
     try {
         await fetch(uploadURL, {
             method: 'PUT',
             body: blob,
             headers: { "content-type": blob.type }
         });
+        await API.createVideoResume({
+            user_id: userId,
+            upload_id: uploadID,
+            status: 'created',
+            is_live: false
+        })
         // const uploadDataResponse = await fetch(`${api_url}/video-upload/get-playback-id?upload_id=${uploadID}`, {headers: {'x-cors-api-key': "temp_368b76b526936e794eb3e109cc7fb026"}})
         // const uploadData = await uploadDataResponse.json();
         // setTimeout(() => {

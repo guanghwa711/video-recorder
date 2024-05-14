@@ -1,4 +1,4 @@
-import type { AxiosResponse } from 'axios';
+import { Axios, type AxiosResponse } from 'axios';
 import HTTP from '../http/http';
 import type { ICandidateFilterObj } from '../common/types';
 
@@ -44,6 +44,42 @@ const API = {
             HTTP.get('/recruiters/candidacies', {
                 params: parsedParams
             })
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
+    createVideoResume: (videoData: any) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.post('/video-resumes', videoData)
+                .then(response => resolve(response))
+                .catch(error => reject(error))
+        })
+    },
+    getVideoResumesByUserId: (userId: string) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.get('/video-resumes', {
+                params: { user_id: userId }
+            })
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
+    updateVideoResume: (videoId: string, data: any) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.put('/video-resumes/', { id: videoId, ...data })
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
+    makeVideoResumeLive: (videoId: string, userId: string) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.post('/video-resumes/makelive', { id: videoId, user_id: userId })
             .then(response => resolve(response))
             .catch(error => (
                 reject(error)

@@ -17,7 +17,7 @@ const router = createRouter({
         if (localStorage.getItem('user_role') == 'candidate') {
           router.push('/candidate');
         }
-        return false;
+        return true;
       }
     },
     {

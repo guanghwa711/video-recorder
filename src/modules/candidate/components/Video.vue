@@ -27,12 +27,33 @@
       <span class="ml-2 font-medium">Live video</span>
     </div>
 
-    <Button v-else :outline="true" class="mt-4 w-full">
+    <Button @click="makeLiveModal = true" v-else :outline="true" class="mt-4 w-full">
       <div class="flex items-center">
         <PhStar class="h-5 w-5 text-primary-500" />
         <span class="ml-2">Make Live</span>
       </div>
     </Button>
+
+    <Modal
+      :show-modal="makeLiveModal"
+      :show-buttons="false"
+      @close="makeLiveModal = false"
+    >
+      <div class="space-y-2">
+        <div class="text-xl font-medium">Will you make live this video?</div>
+
+        <div class="space-y-4">
+          <div class="text-sm text-slate-600">
+            You can have only one live video at one time.
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+          <Button :outline="true" @click="makeLiveModal = false" class="px-4">Cancel</Button>
+          <Button @click="() => makeLiveVideo(vid, userId as string)" class="px-6">Make Live</Button>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -40,12 +61,27 @@
 import { onMounted, ref, computed } from 'vue';
 import { PhStar, PhImage, PhCheckCircle } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
+import Modal from '@/components/Modal.vue';
+import API from '@/utils/api/api';
 
+const userId = localStorage.getItem('user_id')
 const muxplayer = ref<HTMLElement | null>(null)
+const makeLiveModal = ref<boolean>(false);
 
 const isHiddenPlayer = computed(() => {
   return props.videoId === '';
 })
+
+const emit = defineEmits<{
+  (e: 'getVideoResumes'): void;
+}>();
+
+const makeLiveVideo = (id: string, userId: string) => {
+  API.makeVideoResumeLive(id, userId)
+    .then(response => {
+      emit('getVideoResumes');
+    })
+}
 
 onMounted(() => {
   if (document.getElementById('mux-player')) return; // was already loaded
@@ -59,5 +95,6 @@ const props = defineProps<{
   date: string
   isLive: boolean
   videoId: string
+  vid: string
 }>()
 </script>
