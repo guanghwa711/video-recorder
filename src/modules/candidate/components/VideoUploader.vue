@@ -18,7 +18,7 @@ import Button from '@/components/Button.vue';
 import { PhUpload } from '@phosphor-icons/vue';
 import API from '@/utils/api/api';
 
-const api_url = 'https://proxy.cors.sh/' + 'http://clownfish-app-9zwdy.ondigitalocean.app:8080';
+const api_url = 'https://clownfish-app-9zwdy.ondigitalocean.app';
 const fileUploadInput = ref<HTMLInputElement | null>(null)
 const uploadingSpinner = ref<HTMLElement | null>(null)
 const isUploading = ref(false);
@@ -48,7 +48,7 @@ const handleUploadFileInput = (event: any) => {
 
 const uploadVideoToMux = async (blob: Blob) => {
     isUploading.value = true;
-    const uploadConfigResponse = await fetch(`${api_url}/video-upload/get-upload-url`, { headers: { 'x-cors-api-key': "temp_368b76b526936e794eb3e109cc7fb026" } });
+    const uploadConfigResponse = await fetch(`${api_url}/video-upload/get-upload-url`);
     const uploadConfig = await uploadConfigResponse.json();
     const uploadURL = uploadConfig.url;
     const uploadID = uploadConfig.id;
