@@ -9,17 +9,46 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: '/recruiter'
+      redirect: '/recruiter',
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem('user_role') == 'recruiter') {
+          router.push('/recruiter');
+        }
+        if (localStorage.getItem('user_role') == 'candidate') {
+          router.push('/candidate');
+        }
+        return false;
+      }
     },
     {
       path: '/recruiter',
       name: 'recruiter',
-      component: Recruiter
+      component: Recruiter,
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem('user_role') == 'recruiter') {
+          return true;
+        } else {
+          if (localStorage.getItem('user_id')) {
+            alert("You don't have recruiter role now")
+            router.push('/candidate');
+          } else return true
+        }
+      }
     },
     {
       path: '/candidate',
       name: 'candidate',
-      component: Candidate
+      component: Candidate,
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem('user_role') == 'candidate') {
+          return true;
+        } else {
+          if (localStorage.getItem('user_id')) {
+            alert("You don't have candidate role now")
+            router.push('/recruiter');
+          } else return true
+        }
+      }
     },
     {
       path: '/profile',

@@ -53,13 +53,15 @@
 </template>
 
 <script setup lang="ts">
+import { watchEffect } from 'vue'
 import Navbar from '@/components/navbar/Navbar.vue'
 import NavbarDropdown from '@/components/navbar/NavbarDropdown.vue'
-
+import API from '@/utils/api/api'
 import { PhUserCircle, PhSignOut, PhSignIn } from '@phosphor-icons/vue'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue';
-const auth0 = useAuth0();
+const {loginWithRedirect, isAuthenticated, isLoading, logout, user} = useAuth0();
+const userId = localStorage.getItem("user_id");
 
 const router = useRouter()
 
@@ -72,6 +74,25 @@ const navbarItems = [
 
 const navbarDropdownItems = [{ name: 'profile' }, { name: 'login' }, { name: 'logout' }]
 
+watchEffect(() => {
+  if (!isLoading.value) {
+    if (isAuthenticated.value) {
+      if(!userId) {
+        API.handleUserLoginSignUp({email: user.value?.email, user_type: user.value?.user_role, sub: user.value?.sub})
+          .then(response => {
+            localStorage.setItem("user_id", response.data?.id);
+            localStorage.setItem("user_role", user.value?.user_role);
+          })
+          .catch(error => {
+            console.log(error, "User creation failed")
+          })
+      }
+    } else {
+      goToLogin()
+    }
+  }
+})
+
 function goToProfile() {
   router.push({
     name: 'profile'
@@ -79,15 +100,16 @@ function goToProfile() {
 }
 
 function goToLogin() {
-  auth0.loginWithRedirect();
+  loginWithRedirect();
 }
 
 function goToLogout() {
-  auth0.logout({ 
+  localStorage.removeItem('user_id');
+  localStorage.removeItem("user_role");
+  logout({ 
     logoutParams: { 
       returnTo: window.location.origin 
      } 
   });
 }
-  
 </script>

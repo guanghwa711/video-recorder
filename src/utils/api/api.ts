@@ -3,6 +3,17 @@ import HTTP from '../http/http';
 import type { ICandidateFilterObj } from '../common/types';
 
 const API = {
+    handleUserLoginSignUp: (userData: any) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.post('/users', userData)
+                .then((response) => {
+                    resolve(response);
+                })
+                .catch(error => {
+                    reject(error);
+                })
+        })
+    },
     getCandidates: (params?: ICandidateFilterObj) => {
         let parsedParams: any = {}
 
