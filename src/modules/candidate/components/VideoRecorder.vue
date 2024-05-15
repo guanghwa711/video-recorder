@@ -50,6 +50,10 @@ const recordedBlobs = ref<Blob[]>([]);
 const mediaRecorder = ref<MediaRecorder | null>(null);
 const camera = ref<HTMLVideoElement | null>(null);
 
+const emit = defineEmits<{
+  (e: 'getVideoResumes'): void;
+}>();
+
 onMounted(() => {
     showModal.value = true;
     recordedBlobs.value = [];
@@ -242,6 +246,7 @@ const uploadVideoToMux = async (blob: Blob) => {
         isUploaded.value = true;
         isUploading.value = false;
         isPlaying.value = false;
+        emit('getVideoResumes');
     } catch (error) {
         console.error(error);
     }

@@ -35,7 +35,7 @@
           </div>
 
           <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[35%]">
-            <VideoRecorder v-model:is-uploading="isUpLoading" />
+            <VideoRecorder @get-video-resumes="getVideoResumes" v-model:is-uploading="isUpLoading" />
           </Modal>
 
         </div>
