@@ -75,10 +75,12 @@ const navbarItems = [
 const navbarDropdownItems = [{ name: 'profile' }, { name: 'login' }, { name: 'logout' }]
 
 onMounted(() => {
-  const userRole = localStorage.getItem('user_role')
-
-  if(userRole) {
-    handeRouteByUserRole(userRole);
+  if(['/recruiter', '/candidate'].includes(router.currentRoute.value.path)) {
+    const userRole = localStorage.getItem('user_role')
+  
+    if(userRole) {
+      handeRouteByUserRole(userRole);
+    }
   }
 })
 
@@ -103,7 +105,7 @@ watchEffect(() => {
           })
       }
     } else {
-      goToLogin()
+      router.push('/logged-out')
     }
   }
 })
@@ -129,11 +131,11 @@ function goToLogout() {
 }
 
 const handeRouteByUserRole = (userRole: string) => {
-  if (userRole == 'recruiter') {
-    router.push('/recruiter');
-  }
-  if (userRole == 'candidate') {
-    router.push('/candidate');
-  }
+    if (userRole == 'recruiter') {
+      router.push('/recruiter');
+    }
+    if (userRole == 'candidate') {
+      router.push('/candidate');
+    }
 }
 </script>
