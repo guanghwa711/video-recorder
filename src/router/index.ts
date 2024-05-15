@@ -9,16 +9,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: '/recruiter',
-      beforeEnter: (to, from) => {
-        if (localStorage.getItem('user_role') == 'recruiter') {
-          router.push('/recruiter');
-        }
-        if (localStorage.getItem('user_role') == 'candidate') {
-          router.push('/candidate');
-        }
-        return true;
-      }
+      redirect: '/recruiter'
     },
     {
       path: '/recruiter',

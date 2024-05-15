@@ -53,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { watchEffect } from 'vue'
+import { onMounted, watchEffect } from 'vue'
 import Navbar from '@/components/navbar/Navbar.vue'
 import NavbarDropdown from '@/components/navbar/NavbarDropdown.vue'
 import API from '@/utils/api/api'
@@ -74,6 +74,14 @@ const navbarItems = [
 
 const navbarDropdownItems = [{ name: 'profile' }, { name: 'login' }, { name: 'logout' }]
 
+onMounted(() => {
+  const userRole = localStorage.getItem('user_role')
+
+  if(userRole) {
+    handeRouteByUserRole(userRole);
+  }
+})
+
 watchEffect(() => {
   if (!isLoading.value) {
     if (isAuthenticated.value) {
@@ -88,6 +96,7 @@ watchEffect(() => {
           .then(response => {
             localStorage.setItem("user_id", response.data?.id);
             localStorage.setItem("user_role", user.value?.user_role);
+            handeRouteByUserRole(user.value?.user_role)
           })
           .catch(error => {
             console.log(error, "User creation failed")
@@ -117,5 +126,14 @@ function goToLogout() {
       returnTo: window.location.origin 
      } 
   });
+}
+
+const handeRouteByUserRole = (userRole: string) => {
+  if (userRole == 'recruiter') {
+    router.push('/recruiter');
+  }
+  if (userRole == 'candidate') {
+    router.push('/candidate');
+  }
 }
 </script>

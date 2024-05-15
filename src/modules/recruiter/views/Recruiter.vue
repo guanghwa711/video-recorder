@@ -61,6 +61,12 @@
               :bio="''"
             />
           </div>
+          <div v-if="!isLoading && candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">
+            Not found
+          </div>
+          <div class="m-auto" v-if="isLoading">
+            <Spinner />
+          </div>
         </div>
       </template>
     </Tabs>
