@@ -31,7 +31,7 @@
               :candidateId="candidate.id"
               :firstName="candidate.first_name"
               :lastName="candidate.last_name"
-              :bio="candidate.bio"
+              :bio="candidate.bio_text"
               :video-id="candidate?.video_resume[0]?.video_id"
             />
           </div>
@@ -60,7 +60,7 @@
               :firstName="candidacy?.candidate?.first_name"
               :lastName="candidacy?.candidate?.last_name"
               :proposition-date="candidacy?.candidate?.createdAt"
-              :bio="candidacy?.candidate?.bio"
+              :bio="candidacy?.candidate?.bio_text"
               :video-id="candidacy?.candidate?.video_resume[0]?.video_id"
             />
           </div>
