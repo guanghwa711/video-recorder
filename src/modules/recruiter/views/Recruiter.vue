@@ -22,8 +22,9 @@
             </div>
           </div>
 
-          <div v-if="!isLoading && candidates.length > 0"  class="grid grid-cols-1 gap-4">
+          <div v-if="!isLoading && candidates.length > 0"  class="w-full grid grid-cols-1 gap-4">
             <Candidate
+              @get-candidacies="getCandidacies"
               :is-loading="true"
               v-for="candidate in candidates"
               :key="candidate.id"
@@ -31,6 +32,7 @@
               :firstName="candidate.first_name"
               :lastName="candidate.last_name"
               :bio="candidate.bio"
+              :video-id="candidate?.video_resume[0]?.video_id"
             />
           </div>
           <div v-if="!isLoading && candidates.length == 0" class="m-auto font-medium text-xl text-gray-700">
@@ -50,15 +52,16 @@
             <Checkbox v-model:checked="candidacyStatus.shortlisted" label="Shortlisted" />
           </div>
 
-          <div v-if="candidacies.length > 0" class="grid grid-cols-1 gap-4">
+          <div v-if="candidacies.length > 0" class="w-full grid grid-cols-1 gap-4">
             <Candidate
-              v-for="candidate in candidacies"
-              :key="candidate?.id"
-              :candidateId="candidate?.candidate?.id"
-              :firstName="candidate?.candidate?.first_name"
-              :lastName="candidate?.candidate?.last_name"
-              :proposition-date="candidate?.candidate?.createdAt"
-              :bio="''"
+              v-for="candidacy in candidacies"
+              :key="candidacy?.id"
+              :candidateId="candidacy?.candidate?.id"
+              :firstName="candidacy?.candidate?.first_name"
+              :lastName="candidacy?.candidate?.last_name"
+              :proposition-date="candidacy?.candidate?.createdAt"
+              :bio="candidacy?.candidate?.bio"
+              :video-id="candidacy?.candidate?.video_resume[0]?.video_id"
             />
           </div>
           <div v-if="!isLoading && candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">
@@ -116,11 +119,14 @@ onMounted(() => {
     candidates.value = response.data
     isLoading.value = false;
   })
-  API.getCandidacies()
+})
+
+const getCandidacies = (queryParams?: any) => {
+  API.getCandidacies(queryParams)
     .then(response => {
       candidacies.value = response.data
     })
-})
+}
 
 watchEffect(() => {
   isLoading.value = true;
@@ -178,9 +184,6 @@ watchEffect(() => {
     }
   }
 
-  API.getCandidacies(queryParams)
-    .then(response => {
-      candidacies.value = response.data
-    })
+  getCandidacies(queryParams)
 })
 </script>

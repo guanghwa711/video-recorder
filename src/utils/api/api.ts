@@ -85,6 +85,15 @@ const API = {
                 reject(error)
             ))
         })
+    },
+    updateCandidacies: (candidacyData: any) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.put('/recruiters/candidacies', candidacyData)
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
     }
 }
 

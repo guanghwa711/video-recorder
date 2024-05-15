@@ -1,7 +1,18 @@
 <template>
   <div v-if="candidateId" class="flex h-52 min-h-52 w-full gap-8 rounded-xl border border-slate-200 p-6">
     <div class="aspect-square h-full w-40 shrink-0 rounded-xl bg-slate-200 p-2">
-      <PhImage class="h-full w-full text-slate-300" />
+      <div v-if="!videoId">
+        <PhImage class="h-full w-full text-slate-300" />
+      </div>
+      <div v-if="videoId">
+        <mux-player
+          class="aspect-square max-h-40 w-full shrink-0 rounded-xl bg-slate-200"
+          ref="muxplayer"
+          :playback-id="videoId"
+          metadata-video-title="Test video title"
+          metadata-viewer-user-id="user-id-007"
+        ></mux-player>
+      </div>
     </div>
 
     <div class="flex h-full w-full flex-col justify-between">
@@ -9,9 +20,7 @@
         <div class="text-2xl font-medium">{{ props.firstName }} {{ props.lastName }}</div>
 
         <div class="w-full rounded-lg text-sm text-slate-600">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni obcaecati at aliquid maxime
-          possimus quam placeat, quae aperiam, adipisci corrupti aliquam praesentium culpa minima
-          libero.
+          {{ bio || "This candidate has not bio yet." }}
         </div>
       </div>
 
@@ -49,7 +58,7 @@
 
       <div class="flex justify-end gap-2 pt-2">
         <Button :outline="true" @click="showShortlistModal = false" class="px-4">Cancel</Button>
-        <Button class="px-6">Shortlist</Button>
+        <Button @click="() => updateCandidacyStatus('shortlisted')" class="px-6">Shortlist</Button>
       </div>
     </div>
   </Modal>
@@ -71,17 +80,32 @@
 
       <div class="flex justify-end gap-2 pt-2">
         <Button :outline="true" @click="showPropositionModal = false" class="px-4">Cancel</Button>
-        <Button class="px-6">Send</Button>
+        <Button @click="() => updateCandidacyStatus('requested')" class="px-6">Send</Button>
       </div>
     </div>
   </Modal>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { PhImage, PhStar, PhPaperPlaneTilt, PhCheckCircle } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
+import API from '@/utils/api/api'
+
+const userId = localStorage.getItem("user_id");
+
+onMounted(() => {
+  if (document.getElementById('mux-player')) return; // was already loaded
+  var scriptTag = document.createElement("script");
+  scriptTag.src = "https://cdn.jsdelivr.net/npm/@mux/mux-player";
+  scriptTag.id = "mux-player";
+  document.getElementsByTagName('head')[0].appendChild(scriptTag);
+})
+
+const emit = defineEmits<{
+  (e: 'getCandidacies'): void;
+}>();
 
 const props = defineProps<{
   candidateId: number
@@ -89,7 +113,21 @@ const props = defineProps<{
   lastName: string
   bio: string
   propositionDate?: string
+  videoId?: string
 }>()
+
+const updateCandidacyStatus = (status: string) => {
+  API.updateCandidacies({
+    user_id: userId,
+    candidate_id: props.candidateId,
+    status: status
+  })
+  .then((response) => {
+    showPropositionModal.value = false;
+    showShortlistModal.value = false
+    emit("getCandidacies");
+  })
+}
 
 const showPropositionModal = ref(false)
 const showShortlistModal = ref(false)
