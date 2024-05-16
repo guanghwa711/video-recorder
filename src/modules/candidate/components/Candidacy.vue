@@ -12,8 +12,8 @@
       <div class="text-xs text-slate-500">{{ props.date }}</div>
     </div>
 
-    <div class="mt-2 w-full rounded-lg text-justify text-sm text-slate-600">
-      {{ preposition_text || "No preposition text" }}
+    <div v-if="preposition_text" class="mt-2 w-full rounded-lg text-justify text-sm text-slate-600">
+      {{ preposition_text }}
     </div>
 
     <div class="flex w-full gap-2 pt-4">
