@@ -95,7 +95,7 @@ watchEffect(() => {
           user_type: user.value?.user_role, 
           sub: user.value?.sub
         })
-          .then(response => {
+          .then((response) => {
             localStorage.setItem("user_id", response.data?.id);
             localStorage.setItem("user_role", user.value?.user_role);
             handeRouteByUserRole(user.value?.user_role)
@@ -117,7 +117,9 @@ function goToProfile() {
 }
 
 function goToLogin() {
-  loginWithRedirect();
+  loginWithRedirect({openUrl: (url: string) => {
+    console.log(user.value, url, "erwerwrwrwewefewf" )
+  }});
 }
 
 function goToLogout() {

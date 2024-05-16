@@ -76,7 +76,7 @@ const emit = defineEmits<{
   (e: 'getVideoResumes'): void;
 }>();
 
-const makeLiveVideo = (id: string, userId: string) => {
+const makeLiveVideo = (id: number, userId: string) => {
   API.makeVideoResumeLive(id, userId)
     .then(response => {
       emit('getVideoResumes');
@@ -95,6 +95,6 @@ const props = defineProps<{
   date: string
   isLive: boolean
   videoId: string
-  vid: string
+  vid: number
 }>()
 </script>

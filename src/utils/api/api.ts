@@ -76,7 +76,7 @@ const API = {
             ))
         })
     },
-    makeVideoResumeLive: (videoId: string, userId: string) => {
+    makeVideoResumeLive: (videoId: number, userId: string) => {
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.post('/video-resumes/makelive', { id: videoId, user_id: userId })
             .then(response => resolve(response))

@@ -86,9 +86,9 @@ const userId = localStorage.getItem("user_id");
 const props = defineProps<{
   recruiterName: string
   date: string
-  recruiterId: string
+  recruiterId: number
   status: string
-  preposition_text: string
+  preposition_text?: string
 }>()
 
 const emit = defineEmits<{
