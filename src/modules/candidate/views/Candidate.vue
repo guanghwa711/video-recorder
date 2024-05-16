@@ -5,8 +5,13 @@
         <div class="space-y-6 px-10">
           <div class="grid grid-cols-3 gap-4">
             <Candidacy v-for="candidacy in candidacies" :key="candidacy.id"
-              :recruiter-name="candidacy.recruiter.firstName + ' ' + candidacy.recruiter.lastName"
-              :date="candidacy.createdAt" />
+              :recruiter-name="candidacy.recruiter.first_name + ' ' + candidacy.recruiter.last_name"
+              :date="candidacy.createdAt"
+              :recruiter-id="candidacy.recruiter.id"
+              :status="candidacy.status"
+              :preposition_text="candidacy?.preposition_text"
+              @get-candidacies="getCandidacies"
+            />
           </div>
         </div>
       </template>
@@ -59,10 +64,13 @@ import API from '@/utils/api/api'
 
 const showVideoRecorderModal = ref(false)
 const videoResumes = ref<any[]>([])
+const candidacies = ref<any[]>([])
 const isUpLoading = ref<boolean>(false);
+const userId = localStorage.getItem("user_id");
 
 onMounted(() => {
   getVideoResumes();
+  getCandidacies();
 })
 
 const getVideoResumes = () => {
@@ -84,27 +92,15 @@ const getVideoResumes = () => {
     })
 }
 
+const getCandidacies = () => {
+  API.getCandidacies({user_id: userId})
+    .then(response => {
+      candidacies.value = response.data
+    })
+}
+
 const tabs = [
   { title: 'My candidacies', value: 'tab1' },
   { title: 'My videos', value: 'tab2' }
-]
-
-const candidacies = [
-  {
-    id: 1,
-    recruiter: {
-      firstName: 'John',
-      lastName: 'Doe'
-    },
-    createdAt: '24 April 2024 - 10:14 AM'
-  },
-  {
-    id: 2,
-    recruiter: {
-      firstName: 'Jane',
-      lastName: 'Doe'
-    },
-    createdAt: '24 April 2024 - 10:14 AM'
-  }
 ]
 </script>

@@ -24,7 +24,7 @@
 
           <div v-if="!isLoading && candidates.length > 0"  class="w-full grid grid-cols-1 gap-4">
             <Candidate
-              @get-candidacies="getCandidacies"
+              @get-candidacies="() => getCandidacies({user_id: userId})"
               :is-loading="true"
               v-for="candidate in candidates"
               :key="candidate.id"
@@ -95,6 +95,7 @@ const selectedJobTitle = ref<string>("");
 const seekingRate = ref<number[]>([20]);
 const enableSeekingRate = ref<boolean>(false);
 const isLoading = ref<boolean>(true);
+const userId = localStorage.getItem("user_id");
 
 const contractType = reactive({
   apprenti: false,
@@ -171,7 +172,8 @@ watchEffect(() => {
 
 watchEffect(() => {
   let queryParams: any = {
-    status: []
+    status: [],
+    user_id: userId
   };
 
   if (candidacyStatus.shortlisted) {
@@ -179,9 +181,7 @@ watchEffect(() => {
   }
 
   if (candidacyStatus.all) {
-    queryParams = {
-      status: []
-    }
+    queryParams.status = []
   }
 
   getCandidacies(queryParams)

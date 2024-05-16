@@ -34,15 +34,14 @@ const API = {
         })
     },
     getCandidacies: (params?: any) => {
-        let parsedParams: any = {}
 
-        if (params) {
-            parsedParams.status = params.status.join(",");
+        if (params.status) {
+            params.status = params.status.join(",");
         }
 
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.get('/recruiters/candidacies', {
-                params: parsedParams
+                params: params
             })
             .then(response => resolve(response))
             .catch(error => (

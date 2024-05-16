@@ -13,26 +13,26 @@
     </div>
 
     <div class="mt-2 w-full rounded-lg text-justify text-sm text-slate-600">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero odit eius recusandae ducimus
-      ab ratione sunt dolores neque ipsam beatae cupiditate aliquam, velit cum omnis.
+      {{ preposition_text || "No preposition text" }}
     </div>
 
     <div class="flex w-full gap-2 pt-4">
-      <Button :outline="true" class="w-full max-w-52" @click="showAcceptModal = true">
+      <Button :outline="true" class="w-full max-w-52 text-primary-500 disabled:!bg-gray-300 disabled:!text-gray-600 disabled:!border-gray-300" @click="showAcceptModal = true" :disabled="status == 'approved'">
         <div class="flex items-center">
-          <PhCheck class="h-5 w-5 text-primary-500" />
-          <span class="ml-2">Accept</span>
+          <PhCheck class="h-5 w-5" />
+          <span class="ml-2">{{status == "approved" ? "Accepted" : "Accept"}}</span>
         </div>
       </Button>
 
       <Button
         :outline="true"
-        class="w-full max-w-52 !border-slate-500 !text-slate-500"
+        class="w-full max-w-52 !border-slate-500 !text-slate-500 disabled:!bg-gray-300 disabled:!text-gray-600 disabled:!border-gray-300"
         @click="showDeclineModal = true"
+        :disabled="status == 'declined'"
       >
         <div class="flex items-center">
-          <PhX class="h-5 w-5 text-slate-500" />
-          <span class="ml-2">Decline</span>
+          <PhX class="h-5 w-5" />
+          <span class="ml-2">{{status == "declined" ? "Declined" : "Decline"}}</span>
         </div>
       </Button>
     </div>
@@ -50,7 +50,7 @@
 
       <div class="flex justify-end gap-2 pt-2">
         <Button :outline="true" @click="showAcceptModal = false" class="px-4">Cancel</Button>
-        <Button class="px-6">Accept</Button>
+        <Button @click="() => updateCandidacyStatus('approved')" class="px-6">Accept</Button>
       </div>
     </div>
   </Modal>
@@ -68,7 +68,7 @@
 
       <div class="flex justify-end gap-2 pt-2">
         <Button :outline="true" @click="showDeclineModal = false" class="px-4">Cancel</Button>
-        <Button class="px-6">Decline</Button>
+        <Button @click="() => updateCandidacyStatus('declined')" class="px-6">Decline</Button>
       </div>
     </div>
   </Modal>
@@ -79,11 +79,34 @@ import { ref } from 'vue'
 import { PhCheck, PhX, PhImage } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
+import API from '@/utils/api/api'
+
+const userId = localStorage.getItem("user_id");
 
 const props = defineProps<{
   recruiterName: string
   date: string
+  recruiterId: string
+  status: string
+  preposition_text: string
 }>()
+
+const emit = defineEmits<{
+  (e: 'getCandidacies'): void;
+}>();
+
+const updateCandidacyStatus = (status: string) => {
+  API.updateCandidacies({
+    user_id: userId,
+    recruiter_id: props.recruiterId,
+    status: status,
+  })
+  .then((response) => {
+    showDeclineModal.value = false;
+    showAcceptModal.value = false;
+    emit("getCandidacies");
+  })
+}
 
 const showAcceptModal = ref(false)
 const showDeclineModal = ref(false)
