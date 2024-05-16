@@ -93,6 +93,15 @@ const API = {
                 reject(error)
             ))
         })
+    },
+    deleteVideoResume: (id: number) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.post('/video-resumes/delete', {id})
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
     }
 }
 

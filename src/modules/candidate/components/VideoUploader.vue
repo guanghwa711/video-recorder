@@ -24,6 +24,10 @@ const uploadingSpinner = ref<HTMLElement | null>(null)
 const isUploading = ref(false);
 const userId = localStorage.getItem("user_id");
 
+const props = defineProps<{
+  uploadedVideoCount: number;
+}>()
+
 const emit = defineEmits<{
   (e: 'getVideoResumes'): void;
 }>();
@@ -38,7 +42,11 @@ watchEffect(() => {
 })
 
 const triggerFileUplaodInput = () => {
-    fileUploadInput.value?.click();
+    if (props.uploadedVideoCount >= 3) {
+        alert("You have already 3 upladed videos, To upload a new video, please remove one first.");
+    } else {
+        fileUploadInput.value?.click();
+    }
 }
 
 const handleUploadFileInput = (event: any) => {
@@ -64,9 +72,11 @@ const uploadVideoToMux = async (blob: Blob) => {
             status: 'created',
             is_live: false
         })
-        isUploading.value = false;
     } catch (error) {
         console.error(error);
+    } finally {
+        isUploading.value = false;
+        fileUploadInput.value!.value = '';
     }
 }
 </script>

@@ -19,20 +19,29 @@
       {{ props.date }}
     </div>
 
-    <div
-      v-if="props.isLive"
-      class="mt-4 flex h-10 items-center rounded-lg justify-center bg-slate-50 text-sm text-slate-600"
-    >
-      <PhCheckCircle class="h-6 w-6 text-primary-500" />
-      <span class="ml-2 font-medium">Live video</span>
-    </div>
-
-    <Button @click="makeLiveModal = true" v-else :outline="true" class="mt-4 w-full">
-      <div class="flex items-center">
-        <PhStar class="h-5 w-5 text-primary-500" />
-        <span class="ml-2">Make Live</span>
+    <div class="flex items-center mt-4 justify-between">
+      <div class="w-2/3">
+        <div
+          v-if="props.isLive"
+          class="flex h-10 items-center rounded-lg justify-center bg-slate-50 text-sm text-slate-600"
+        >
+          <PhCheckCircle class="h-6 w-6 text-primary-500" />
+          <span class="ml-2 font-medium">Live video</span>
+        </div>
+    
+        <Button @click="makeLiveModal = true" v-else :outline="true" class="w-full">
+          <div class="flex items-center">
+            <PhStar class="h-5 w-5 text-primary-500" />
+            <span class="ml-2">Make Live</span>
+          </div>
+        </Button>
       </div>
-    </Button>
+      <div>
+        <Button @click="deleteVideoModal = true" :outline="true" class="px-1 py-0">
+            <PhTrash class="h-5 w-5 text-primary-500" />
+        </Button>
+      </div>
+    </div>
 
     <Modal
       :show-modal="makeLiveModal"
@@ -54,12 +63,32 @@
         </div>
       </div>
     </Modal>
+    <Modal
+      :show-modal="deleteVideoModal"
+      :show-buttons="false"
+      @close="deleteVideoModal = false"
+    >
+      <div class="space-y-2">
+        <div class="text-xl font-medium">Will you delete this video?</div>
+
+        <div class="space-y-4">
+          <div class="text-sm text-slate-600">
+            You can have only 3 uploaded videos. To upload a new video, please remove one first.
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+          <Button :outline="true" @click="deleteVideoModal = false" class="px-4">Cancel</Button>
+          <Button @click="deleteVideo" class="px-6">Delete</Button>
+        </div>
+      </div>
+    </Modal>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref, computed } from 'vue';
-import { PhStar, PhImage, PhCheckCircle } from '@phosphor-icons/vue'
+import { PhStar, PhImage, PhCheckCircle, PhTrash } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue';
 import API from '@/utils/api/api';
@@ -67,6 +96,7 @@ import API from '@/utils/api/api';
 const userId = localStorage.getItem('user_id')
 const muxplayer = ref<HTMLElement | null>(null)
 const makeLiveModal = ref<boolean>(false);
+const deleteVideoModal = ref<boolean>(false);
 
 const isHiddenPlayer = computed(() => {
   return props.videoId === '';
@@ -78,6 +108,13 @@ const emit = defineEmits<{
 
 const makeLiveVideo = (id: number, userId: string) => {
   API.makeVideoResumeLive(id, userId)
+    .then(response => {
+      emit('getVideoResumes');
+    })
+}
+
+const deleteVideo = () => {
+  API.deleteVideoResume(props.vid)
     .then(response => {
       emit('getVideoResumes');
     })

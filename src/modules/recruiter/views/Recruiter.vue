@@ -48,8 +48,10 @@
         <div class="flex px-10">
           <div class="w-full max-w-60 space-y-3">
             <div class="mb-4 font-medium">Candidates</div>
-            <Checkbox v-model:checked="candidacyStatus.all" label="All candidates" />
             <Checkbox v-model:checked="candidacyStatus.shortlisted" label="Shortlisted" />
+            <Checkbox v-model:checked="candidacyStatus.requested" label="Proposition Sent" />
+            <Checkbox v-model:checked="candidacyStatus.approved" label="Proposition Accepted" />
+            <Checkbox v-model:checked="candidacyStatus.declined" label="Proposition Declined" />
           </div>
 
           <div v-if="candidacies.length > 0" class="w-full grid grid-cols-1 gap-4">
@@ -86,7 +88,7 @@ import Slider from '@/components/Slider.vue'
 import API from '@/utils/api/api';
 import Spinner from '@/components/Spinner.vue'
 import type { ICandidateFilterObj } from '@/utils/common/types'
-import { SEEKING_CONTRACT_TYPE } from '@/utils/common/enums';
+import { SEEKING_CONTRACT_TYPE, CANDIDACY_STATUS } from '@/utils/common/enums';
 
 const candidates = ref<any[]>([])
 const candidacies = ref<any[]>([])
@@ -104,8 +106,10 @@ const contractType = reactive({
 })
 
 const candidacyStatus = reactive({
-  shortlisted: false,
-  all: false
+  shortlisted: true,
+  requested: true,
+  approved: true,
+  declined: true
 })
 
 const tabs = [
@@ -177,11 +181,19 @@ watchEffect(() => {
   };
 
   if (candidacyStatus.shortlisted) {
-    queryParams.status.push("shortlisted")
+    queryParams.status.push(CANDIDACY_STATUS.SHORTLISTED)
   }
 
-  if (candidacyStatus.all) {
-    queryParams.status = []
+  if (candidacyStatus.approved) {
+    queryParams.status.push(CANDIDACY_STATUS.APPROVED)
+  }
+
+  if (candidacyStatus.requested) {
+    queryParams.status.push(CANDIDACY_STATUS.REQUESTED)
+  }
+
+  if (candidacyStatus.declined) {
+    queryParams.status.push(CANDIDACY_STATUS.DECLINED)
   }
 
   getCandidacies(queryParams)

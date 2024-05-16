@@ -8,3 +8,10 @@ export enum SEEKING_CONTRACT_TYPE {
     EMPLOYEE = "employee",
     CADRE = "cadre"
 }
+
+export enum CANDIDACY_STATUS {
+    SHORTLISTED = 'shortlisted',
+    APPROVED = 'approved',
+    REQUESTED = 'requested',
+    DECLINED = 'declined'
+}

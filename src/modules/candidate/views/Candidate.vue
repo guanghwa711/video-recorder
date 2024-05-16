@@ -19,14 +19,14 @@
       <template #tab2>
         <div class="space-y-6 px-10">
           <div class="flex gap-4">
-            <Button @click="showVideoRecorderModal = true" :outline="true" class="w-60">
+            <Button @click="handleClickRecordVideo" :outline="true" class="w-60">
               <div class="flex items-center">
                 <PhVideoCamera class="h-5 w-5 text-red-500" />
                 <span class="ml-2">Record Video</span>
               </div>
             </Button>
 
-            <VideoUploader @get-video-resumes="getVideoResumes" />
+            <VideoUploader :uploaded-video-count="videoResumes.length" @get-video-resumes="getVideoResumes" />
           </div>
 
           <div v-if="!isUpLoading && videoResumes.length > 0" class="grid grid-cols-3 gap-4">
@@ -68,6 +68,11 @@ const candidacies = ref<any[]>([])
 const isUpLoading = ref<boolean>(false);
 const userId = localStorage.getItem("user_id");
 
+const tabs = [
+  { title: 'My candidacies', value: 'tab1' },
+  { title: 'My videos', value: 'tab2' }
+]
+
 onMounted(() => {
   getVideoResumes();
   getCandidacies();
@@ -99,8 +104,11 @@ const getCandidacies = () => {
     })
 }
 
-const tabs = [
-  { title: 'My candidacies', value: 'tab1' },
-  { title: 'My videos', value: 'tab2' }
-]
+const handleClickRecordVideo = () => {
+  if (videoResumes.value.length >= 3) {
+    alert("You have already 3 upladed videos, To upload a new video, please remove one first.");
+  } else {
+    showVideoRecorderModal.value = true;
+  }
+}
 </script>
