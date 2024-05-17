@@ -55,11 +55,12 @@ import Tabs from '@/components/Tabs.vue'
 import Candidacy from '../components/Candidacy.vue'
 import Video from '../components/Video.vue'
 import Button from '@/components/Button.vue'
-import Modal from '@/components/Modal.vue';
+import Modal from '@/components/Modal.vue'
 import VideoRecorder from '../components/VideoRecorder.vue'
 import VideoUploader from '../components/VideoUploader.vue'
 import { PhVideoCamera } from '@phosphor-icons/vue'
 import Spinner from '@/components/Spinner.vue'
+import { toast } from 'vue3-toastify'
 import API from '@/utils/api/api'
 
 const showVideoRecorderModal = ref(false)
@@ -106,7 +107,11 @@ const getCandidacies = () => {
 
 const handleClickRecordVideo = () => {
   if (videoResumes.value.length >= 3) {
-    alert("You have already 3 upladed videos, To upload a new video, please remove one first.");
+    toast("You have already 3 upladed videos, To upload a new video, please remove one first.", {
+        autoClose: 3000,
+        theme: "light",
+        type: "warning"
+    });
   } else {
     showVideoRecorderModal.value = true;
   }

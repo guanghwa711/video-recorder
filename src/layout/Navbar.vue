@@ -117,9 +117,7 @@ function goToProfile() {
 }
 
 function goToLogin() {
-  loginWithRedirect({openUrl: (url: string) => {
-    console.log(user.value, url, "erwerwrwrwewefewf" )
-  }});
+  loginWithRedirect();
 }
 
 function goToLogout() {

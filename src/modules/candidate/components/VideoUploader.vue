@@ -16,6 +16,7 @@
 import { ref, watchEffect } from 'vue';
 import Button from '@/components/Button.vue';
 import { PhUpload } from '@phosphor-icons/vue';
+import { toast } from 'vue3-toastify'
 import API from '@/utils/api/api';
 
 const api_url = 'https://clownfish-app-9zwdy.ondigitalocean.app';
@@ -43,7 +44,11 @@ watchEffect(() => {
 
 const triggerFileUplaodInput = () => {
     if (props.uploadedVideoCount >= 3) {
-        alert("You have already 3 upladed videos, To upload a new video, please remove one first.");
+        toast("You have already 3 upladed videos, To upload a new video, please remove one first.", {
+            autoClose: 3000,
+            theme: "light",
+            type: "warning"
+        });
     } else {
         fileUploadInput.value?.click();
     }

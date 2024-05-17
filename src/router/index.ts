@@ -4,6 +4,7 @@ import Candidate from '@/modules/candidate/views/Candidate.vue';
 import Profile from '@/modules/profile/views/Profile.vue';
 import Home from '@/modules/home/views/Home.vue';
 import LoggedOut from '@/modules/loggedOut/LoggedOut.vue';
+import { toast } from 'vue3-toastify';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,8 +23,13 @@ const router = createRouter({
           return true;
         } else {
           if (localStorage.getItem('user_id')) {
-            alert("You don't have recruiter role now")
-            router.push('/candidate');
+            toast("You don't have recruiter role now", {
+                autoClose: 3000,
+                theme: "light",
+                type: "warning"
+            });
+            return false;
+            // router.push('/candidate');
           } else return true
         }
       }
@@ -37,8 +43,13 @@ const router = createRouter({
           return true;
         } else {
           if (localStorage.getItem('user_id')) {
-            alert("You don't have candidate role now")
-            router.push('/recruiter');
+            toast("You don't have candidate role now", {
+                autoClose: 3000,
+                theme: "light",
+                type: "warning"
+            });
+            return false;
+            // router.push('/recruiter');
           } else return true
         }
       }

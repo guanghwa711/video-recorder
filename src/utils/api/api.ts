@@ -102,6 +102,24 @@ const API = {
                 reject(error)
             ))
         })
+    },
+    getUserById: (userId: number) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.get(`/users/${userId}`)
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
+    updateUserById: (userId: number, data: any) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.post( `/users/update/${userId}`, data)
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
     }
 }
 

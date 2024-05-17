@@ -36,6 +36,7 @@ import { ref, onMounted } from 'vue';
 import Button from '@/components/Button.vue';
 import { PhTrash, PhRecord, PhFloppyDisk } from '@phosphor-icons/vue';
 import API from '@/utils/api/api';
+import { toast } from 'vue3-toastify';
 
 const api_url = 'https://clownfish-app-9zwdy.ondigitalocean.app';
 const isUploading = ref(false);
@@ -76,8 +77,11 @@ const init = async () => {
             }
         };
     } catch (e) {
-        alert('Error accessing media devices. Please check your camera again.');
-        return;
+        toast("Error accessing media devices. Please check your camera again.", {
+            autoClose: 3000,
+            theme: "light",
+            type: "error"
+        });
     }
 }
 
@@ -152,7 +156,11 @@ const playRecording = () => {
             isPlaying.value = false;
         }
     } else {
-        alert('Please select a valid .webm video file.');
+        toast("Please select a valid .webm video file.", {
+            autoClose: 3000,
+            theme: "light",
+            type: "error"
+        });
     }
 }
 
