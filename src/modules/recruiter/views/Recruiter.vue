@@ -5,7 +5,7 @@
         <div class="flex px-10">
           <div class="w-full max-w-60 space-y-3">
             <div class="font-medium">Job Title</div>
-            <Select v-model:selected:value="selectedJobTitle" :options="['web', 'mobile', 'all']" />
+            <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" />
             <!-- <Checkbox v-model:checked="jobTitle.web" label="Web" />
             <Checkbox v-model:checked="jobTitle.mobile" label="Mobile" /> -->
             
@@ -15,7 +15,7 @@
             <Checkbox v-model:checked="contractType.cadre" label="Cadre" />
 
             <div class="mb-4 pt-6 font-medium">Seeking Rate</div>
-            <Checkbox v-model:checked="enableSeekingRate" label="Enable Seeking Rate" />
+            <!-- <Checkbox v-model:checked="enableSeekingRate" label="Enable Seeking Rate" /> -->
             <div class="flex items-center gap-x-2">
               <Slider v-model:value="seekingRate" />
               <span>{{ seekingRate[0] }} %</span>
@@ -93,16 +93,16 @@ import { SEEKING_CONTRACT_TYPE, CANDIDACY_STATUS } from '@/utils/common/enums';
 const candidates = ref<any[]>([])
 const candidacies = ref<any[]>([])
 
-const selectedJobTitle = ref<string>("");
+const selectedJobTitle = ref<string>("All");
 const seekingRate = ref<number[]>([20]);
-const enableSeekingRate = ref<boolean>(false);
+// const enableSeekingRate = ref<boolean>(false);
 const isLoading = ref<boolean>(true);
 const userId = localStorage.getItem("user_id");
 
 const contractType = reactive({
-  apprenti: false,
-  employee: false,
-  cadre: false
+  apprenti: true,
+  employee: true,
+  cadre: true
 })
 
 const candidacyStatus = reactive({
@@ -142,13 +142,13 @@ watchEffect(() => {
   };
   
   if(selectedJobTitle.value) {
-    queryParams.seeking_field.push(selectedJobTitle.value)
-    if(selectedJobTitle.value == 'all') {
+    queryParams.seeking_field.push(selectedJobTitle.value.toLowerCase())
+    if(selectedJobTitle.value == 'All') {
       queryParams.seeking_field  = []
     }
   }
 
-  if(seekingRate.value && enableSeekingRate.value) {
+  if(seekingRate.value) {
     queryParams.seeking_rate.push(seekingRate.value[0].toString())
   }
   // if (jobTitle.web) {
