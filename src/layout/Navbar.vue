@@ -75,7 +75,7 @@ const navbarItems = [
 const navbarDropdownItems = [{ name: 'profile' }, { name: 'login' }, { name: 'logout' }]
 
 onMounted(() => {
-  if(['/recruiter', '/candidate'].includes(router.currentRoute.value.path)) {
+  if(['/recruiter', '/candidate', '/admin'].includes(router.currentRoute.value.path)) {
     const userRole = localStorage.getItem('user_role')
   
     if(userRole) {
@@ -136,6 +136,9 @@ const handeRouteByUserRole = (userRole: string) => {
     }
     if (userRole == 'candidate') {
       router.push('/candidate');
+    }
+    if (userRole == 'admin') {
+      router.push('/admin');
     }
 }
 </script>

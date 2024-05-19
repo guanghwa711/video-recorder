@@ -30,7 +30,7 @@
           </div>
 
           <div v-if="!isUpLoading && videoResumes.length > 0" class="grid grid-cols-3 gap-4">
-            <Video v-for="video in videoResumes" @get-video-resumes="getVideoResumes" :vid="video.id" :key="video.id" :date="video.createdAt" :is-live="video.is_live" :video-id="video.video_id" />
+            <Video v-for="video in videoResumes" @get-video-resumes="getVideoResumes" :vid="video.id" :key="video.id" :date="video.createdAt" :is-live="video.is_live" :video-id="video.video_id" :status="video.status" />
           </div>
           <div v-if="!isUpLoading && videoResumes.length == 0" class="m-auto font-medium text-xl text-gray-700">
             Not found
@@ -81,7 +81,7 @@ onMounted(() => {
 
 const getVideoResumes = () => {
   isUpLoading.value = true;
-  API.getVideoResumesByUserId(localStorage.getItem("user_id") as string)
+  API.getVideoResumesByUserId(Number(localStorage.getItem("user_id")))
     .then((response) => {
       videoResumes.value = response.data.sort((a: any, b: any) => {
         if (a.is_live && !b.is_live) {

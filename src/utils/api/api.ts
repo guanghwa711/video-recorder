@@ -56,7 +56,7 @@ const API = {
                 .catch(error => reject(error))
         })
     },
-    getVideoResumesByUserId: (userId: string) => {
+    getVideoResumesByUserId: (userId: number) => {
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.get('/video-resumes', {
                 params: { user_id: userId }
@@ -115,6 +115,15 @@ const API = {
     updateUserById: (userId: number, data: any) => {
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.post( `/users/update/${userId}`, data)
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
+    updateVideoResumeStatus: (id: number, status: string) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.post('/video-resumes/status', {id, status})
             .then(response => resolve(response))
             .catch(error => (
                 reject(error)

@@ -19,6 +19,12 @@
       {{ props.date }}
     </div>
 
+    <div class="text-sm font-medium">
+      <span class="text-yellow-500" v-if="props.status == 'created'">Pending</span>
+      <span class="text-green-500" v-if="props.status == 'approved'">Approved</span>
+      <span class="text-red-500" v-if="props.status == 'declined'">Declined</span>
+    </div>
+
     <div class="flex items-center mt-4 justify-between">
       <div class="w-2/3">
         <div
@@ -29,7 +35,7 @@
           <span class="ml-2 font-medium">Live video</span>
         </div>
     
-        <Button @click="makeLiveModal = true" v-else :outline="true" class="w-full">
+        <Button @click="handleOpenLiveVideoModal" v-else :outline="true" class="w-full">
           <div class="flex items-center">
             <PhStar class="h-5 w-5 text-primary-500" />
             <span class="ml-2">Make Live</span>
@@ -91,6 +97,7 @@ import { onMounted, ref, computed } from 'vue';
 import { PhStar, PhImage, PhCheckCircle, PhTrash } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue';
+import { toast } from 'vue3-toastify';
 import API from '@/utils/api/api';
 
 const userId = localStorage.getItem('user_id')
@@ -106,10 +113,26 @@ const emit = defineEmits<{
   (e: 'getVideoResumes'): void;
 }>();
 
+const handleOpenLiveVideoModal = () => {
+  if (['created', 'declined'].includes(props.status)) {
+    toast("This video has not approved yet, You can make live once the video is approved.", {
+        autoClose: 3000,
+        theme: "light",
+        type: "error"
+    });
+  } else {
+    makeLiveModal.value = true;
+  }
+}
+
 const makeLiveVideo = (id: number, userId: string) => {
   API.makeVideoResumeLive(id, userId)
     .then(response => {
       emit('getVideoResumes');
+    })
+    .catch((error) => {
+      console.log(error, "Error while deleting...")
+      makeLiveModal.value = false
     })
 }
 
@@ -117,6 +140,10 @@ const deleteVideo = () => {
   API.deleteVideoResume(props.vid)
     .then(response => {
       emit('getVideoResumes');
+    })
+    .catch((error) => {
+      console.log(error, "Error while deleting...")
+      deleteVideoModal.value = false
     })
 }
 
@@ -133,5 +160,6 @@ const props = defineProps<{
   isLive: boolean
   videoId: string
   vid: number
+  status: string
 }>()
 </script>

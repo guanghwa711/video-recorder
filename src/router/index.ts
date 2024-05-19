@@ -5,6 +5,7 @@ import Profile from '@/modules/profile/views/Profile.vue';
 import Home from '@/modules/home/views/Home.vue';
 import LoggedOut from '@/modules/loggedOut/LoggedOut.vue';
 import { toast } from 'vue3-toastify';
+import Admin from '@/modules/admin/views/Admin.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,17 +69,27 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: Home
-    } /*
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
     },
     {
-      path: '/logout',
-      name: 'logout',
-      component: Logout
-    } */
+      path: '/admin',
+      name: 'admin',
+      component: Admin,
+      // beforeEnter: (to, from) => {
+      //   if (localStorage.getItem('user_role') == 'admin') {
+      //     return true;
+      //   } else {
+      //     if (localStorage.getItem('user_id')) {
+      //       toast("You don't have admin role now", {
+      //           autoClose: 3000,
+      //           theme: "light",
+      //           type: "warning"
+      //       });
+      //       return false;
+      //       // router.push('/recruiter');
+      //     } else return true
+      //   }
+      // }
+    }
   ]
 })
 
