@@ -74,21 +74,21 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: Admin,
-      // beforeEnter: (to, from) => {
-      //   if (localStorage.getItem('user_role') == 'admin') {
-      //     return true;
-      //   } else {
-      //     if (localStorage.getItem('user_id')) {
-      //       toast("You don't have admin role now", {
-      //           autoClose: 3000,
-      //           theme: "light",
-      //           type: "warning"
-      //       });
-      //       return false;
-      //       // router.push('/recruiter');
-      //     } else return true
-      //   }
-      // }
+      beforeEnter: (to, from) => {
+        if (localStorage.getItem('user_role') == 'admin') {
+          return true;
+        } else {
+          if (localStorage.getItem('user_id')) {
+            toast("You don't have admin role now", {
+                autoClose: 3000,
+                theme: "light",
+                type: "warning"
+            });
+            return false;
+            // router.push('/recruiter');
+          } else return true
+        }
+      }
     }
   ]
 })

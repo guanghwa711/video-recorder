@@ -97,8 +97,14 @@ watchEffect(() => {
         })
           .then((response) => {
             localStorage.setItem("user_id", response.data?.id);
-            localStorage.setItem("user_role", user.value?.user_role);
-            handeRouteByUserRole(user.value?.user_role)
+            if(response.data?.is_admin) {
+              localStorage.setItem("user_role", response.data?.user_type);
+              handeRouteByUserRole(response.data?.user_type)
+            }
+            else {
+              localStorage.setItem("user_role", user.value?.user_role);
+              handeRouteByUserRole(user.value?.user_role)
+            }
           })
           .catch(error => {
             console.log(error, "User creation failed")
