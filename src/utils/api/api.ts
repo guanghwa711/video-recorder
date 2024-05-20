@@ -67,6 +67,17 @@ const API = {
             ))
         })
     },
+    getVideoResumesByStatus: (status?: string) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.get('/video-resumes/bystatus', {
+                params: { status: status }
+            })
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
     updateVideoResume: (videoId: string, data: any) => {
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.put('/video-resumes/', { id: videoId, ...data })

@@ -98,8 +98,8 @@ watchEffect(() => {
           .then((response) => {
             localStorage.setItem("user_id", response.data?.id);
             if(response.data?.is_admin) {
-              localStorage.setItem("user_role", response.data?.user_type);
-              handeRouteByUserRole(response.data?.user_type)
+              localStorage.setItem("user_role", 'admin');
+              handeRouteByUserRole('admin')
             }
             else {
               localStorage.setItem("user_role", user.value?.user_role);
