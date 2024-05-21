@@ -94,7 +94,7 @@ const candidates = ref<any[]>([])
 const candidacies = ref<any[]>([])
 
 const selectedJobTitle = ref<string>("All");
-const seekingRate = ref<number[]>([20]);
+const seekingRate = ref<number[]>([100]);
 // const enableSeekingRate = ref<boolean>(false);
 const isLoading = ref<boolean>(true);
 const userId = localStorage.getItem("user_id");
