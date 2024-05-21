@@ -1,7 +1,7 @@
 <template>
   <Navbar :items="navbarItems">
     <NavbarDropdown :items="navbarDropdownItems">
-      <template #profile="{ active }">
+      <!-- <template #profile="{ active }">
         <button
           :class="[
             active ? 'bg-slate-100' : 'text-gray-900',
@@ -12,7 +12,7 @@
           <PhUserCircle class="mr-2 h-5 w-5 text-primary-500" />
           Profile
         </button>
-      </template>
+      </template> -->
 
       /* BEGIN ALEX TEMPORARY CODE
       ////////////////////////////
@@ -20,16 +20,18 @@
       ////////////////////////////
       */
       <template #login="{ active }">
-        <button
-          :class="[
-            active ? 'bg-slate-100' : 'text-gray-900',
-            'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-          ]"
-          @click="goToLogin"
-        >
-          <PhSignIn class="mr-2 h-5 w-5 text-primary-500" />
-          Login
-        </button>
+        <div v-if="!userId">
+          <button
+            :class="[
+              active ? 'bg-slate-100' : 'text-gray-900',
+              'group flex w-full items-center rounded-md px-2 py-2 text-sm'
+            ]"
+              @click="goToLogin"
+            >
+            <PhSignIn class="mr-2 h-5 w-5 text-primary-500" />
+            Login
+          </button>
+        </div>
       </template>
 
       /* END ALEX TEMPORARY CODE
@@ -37,16 +39,18 @@
       */
 
       <template #logout="{ active }">
-        <button
-          :class="[
-            active ? 'bg-slate-100' : 'text-gray-900',
-            'group flex w-full items-center rounded-md px-2 py-2 text-sm'
-          ]"
-          @click="goToLogout"
-        >
+        <div v-if="userId">
+          <button
+            :class="[
+              active ? 'bg-slate-100' : 'text-gray-900',
+              'group flex w-full items-center rounded-md px-2 py-2 text-sm'
+            ]"
+            @click="goToLogout"
+          >
           <PhSignOut class="mr-2 h-5 w-5 text-primary-500" />
-          Logout
-        </button>
+            Logout
+          </button>
+        </div>
       </template>
     </NavbarDropdown>
   </Navbar>
@@ -72,7 +76,7 @@ const navbarItems = [
   { title: 'Contact', to: 'home' }
 ]
 
-const navbarDropdownItems = [{ name: 'profile' }, { name: 'login' }, { name: 'logout' }]
+const navbarDropdownItems = [{ name: 'login' }, { name: 'logout' }]
 
 onMounted(() => {
   if(['/recruiter', '/candidate', '/admin'].includes(router.currentRoute.value.path)) {
