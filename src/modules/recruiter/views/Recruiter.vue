@@ -74,6 +74,9 @@
           </div>
         </div>
       </template>
+      <template #tab3>
+        <Profile/>
+      </template>
     </Tabs>
   </div>
 </template>
@@ -85,6 +88,7 @@ import Candidate from '../components/Candidate.vue'
 import Checkbox from '@/components/Checkbox.vue'
 import Select from '@/components/Select.vue'
 import Slider from '@/components/Slider.vue'
+import Profile from '../../profile/components/Recruiter.vue'
 import API from '@/utils/api/api';
 import Spinner from '@/components/Spinner.vue'
 import type { ICandidateFilterObj } from '@/utils/common/types'
@@ -114,7 +118,8 @@ const candidacyStatus = reactive({
 
 const tabs = [
   { title: 'Find candidate', value: 'tab1' },
-  { title: 'My candidates', value: 'tab2' }
+  { title: 'My candidates', value: 'tab2' },
+  { title: 'My profile', value: 'tab3' }
 ]
 
 onMounted(() => {

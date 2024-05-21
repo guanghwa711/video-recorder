@@ -45,6 +45,10 @@
 
         </div>
       </template>
+
+      <template #tab3>
+        <Profile/>
+      </template>
     </Tabs>
   </div>
 </template>
@@ -58,6 +62,7 @@ import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
 import VideoRecorder from '../components/VideoRecorder.vue'
 import VideoUploader from '../components/VideoUploader.vue'
+import Profile from '../../profile/components/Candidate.vue'
 import { PhVideoCamera } from '@phosphor-icons/vue'
 import Spinner from '@/components/Spinner.vue'
 import { toast } from 'vue3-toastify'
@@ -71,7 +76,8 @@ const userId = localStorage.getItem("user_id");
 
 const tabs = [
   { title: 'My candidacies', value: 'tab1' },
-  { title: 'My videos', value: 'tab2' }
+  { title: 'My videos', value: 'tab2' },
+  { title: 'My profile', value: 'tab3' }
 ]
 
 onMounted(() => {
