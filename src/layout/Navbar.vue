@@ -20,7 +20,7 @@
       ////////////////////////////
       */
       <template #login="{ active }">
-        <div v-if="!userId">
+        <div v-if="!isAuthenticated">
           <button
             :class="[
               active ? 'bg-slate-100' : 'text-gray-900',
@@ -32,6 +32,7 @@
             Login
           </button>
         </div>
+        <div v-else></div>
       </template>
 
       /* END ALEX TEMPORARY CODE
@@ -39,7 +40,7 @@
       */
 
       <template #logout="{ active }">
-        <div v-if="userId">
+        <div v-if="isAuthenticated">
           <button
             :class="[
               active ? 'bg-slate-100' : 'text-gray-900',
@@ -51,13 +52,14 @@
             Logout
           </button>
         </div>
+        <div v-else></div>
       </template>
     </NavbarDropdown>
   </Navbar>
 </template>
 
 <script setup lang="ts">
-import { onMounted, watchEffect } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import Navbar from '@/components/navbar/Navbar.vue'
 import NavbarDropdown from '@/components/navbar/NavbarDropdown.vue'
 import API from '@/utils/api/api'
