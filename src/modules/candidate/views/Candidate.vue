@@ -2,6 +2,10 @@
   <div>
     <Tabs :tabs="tabs">
       <template #tab1>
+        <Profile/>
+      </template>
+      
+      <template #tab2>
         <div class="space-y-6 px-10">
           <div class="grid grid-cols-3 gap-4">
             <Candidacy v-for="candidacy in candidacies" :key="candidacy.id"
@@ -16,7 +20,7 @@
         </div>
       </template>
 
-      <template #tab2>
+      <template #tab3>
         <div class="space-y-6 px-10">
           <div class="flex gap-4">
             <Button @click="handleClickRecordVideo" :outline="true" class="w-60">
@@ -46,9 +50,6 @@
         </div>
       </template>
 
-      <template #tab3>
-        <Profile/>
-      </template>
     </Tabs>
   </div>
 </template>
@@ -75,9 +76,9 @@ const isUpLoading = ref<boolean>(false);
 const userId = localStorage.getItem("user_id");
 
 const tabs = [
-  { title: 'My candidacies', value: 'tab1' },
-  { title: 'My videos', value: 'tab2' },
-  { title: 'My profile', value: 'tab3' }
+  { title: 'My profile', value: 'tab1' },
+  { title: 'My candidacies', value: 'tab2' },
+  { title: 'My videos', value: 'tab3' },
 ]
 
 onMounted(() => {

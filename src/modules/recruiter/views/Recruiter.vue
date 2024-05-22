@@ -2,6 +2,9 @@
   <div>
     <Tabs :tabs="tabs">
       <template #tab1>
+        <Profile/>
+      </template>
+      <template #tab2>
         <div class="flex px-10">
           <div class="w-full max-w-60 space-y-3">
             <div class="font-medium">Job Title</div>
@@ -45,7 +48,7 @@
         </div>
       </template>
 
-      <template #tab2>
+      <template #tab3>
         <div class="flex px-10">
           <div class="w-full max-w-60 space-y-3">
             <div class="mb-4 font-medium">Candidates</div>
@@ -77,9 +80,6 @@
             <Spinner />
           </div>
         </div>
-      </template>
-      <template #tab3>
-        <Profile/>
       </template>
     </Tabs>
   </div>
@@ -122,9 +122,9 @@ const candidacyStatus = reactive({
 })
 
 const tabs = [
-  { title: 'Find candidate', value: 'tab1' },
-  { title: 'My candidates', value: 'tab2' },
-  { title: 'My profile', value: 'tab3' }
+  { title: 'My profile', value: 'tab1' },
+  { title: 'Find candidate', value: 'tab2' },
+  { title: 'My candidates', value: 'tab3' }
 ]
 
 // onMounted(() => {
