@@ -138,11 +138,14 @@
     <CandidateInfo 
       :firstName="props.firstName" 
       :lastName="props.lastName"
+      :email="props.email"
+      :phone="props.phone"
       :company="props.company"
       :videoId="props.videoId"
       :seeking_contract_type="props.seeking_contract_type"
       :seeking_field="props.seeking_field"
       :seeking_rate="props.seeking_rate"
+      :status="props.status"
     />
   </Modal>
 
@@ -175,6 +178,8 @@ const props = defineProps<{
   candidateId: number
   firstName: string
   lastName: string
+  email?: string
+  phone?: string
   bio: string
   propositionDate?: string
   videoId?: string
