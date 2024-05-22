@@ -37,6 +37,10 @@
               :lastName="candidate.last_name"
               :bio="candidate.bio_text"
               :video-id="candidate?.video_resume[0]?.video_id"
+              :company="candidate?.company"
+              :seeking_contract_type="candidate?.seeking_contract_type"
+              :seeking_field= "candidate?.seeking_field"
+              :seeking_rate="candidate?.seeking_rate"
             />
           </div>
           <div v-if="!isLoading && candidates.length == 0" class="m-auto font-medium text-xl text-gray-700">
@@ -71,6 +75,11 @@
               :bio="candidacy?.candidate?.bio_text"
               :video-id="candidacy?.candidate?.video_resume[0]?.video_id"
               :status="candidacy?.status"
+              :company="candidacy?.candidate?.company"
+              :seeking_contract_type="candidacy?.candidate?.seeking_contract_type"
+              :seeking_field= "candidacy?.candidate?.seeking_field"
+              :seeking_rate="candidacy?.candidate?.seeking_rate"
+
             />
           </div>
           <div v-if="!isLoading && candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">

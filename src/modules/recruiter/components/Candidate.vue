@@ -16,11 +16,11 @@
     </div>
 
     <div class="flex h-full w-full flex-col justify-between">
-      <div class="space-y-2">
+      <div class="space-y-2" @click="showUserInfoModal= true">
         <div class="text-2xl font-medium">{{ props.firstName }} {{ props.lastName }}</div>
 
         <div class="w-full rounded-lg text-sm text-slate-600">
-          {{ bio || "This candidate has not bio yet." }}
+          {{ props.bio || "This candidate has not bio yet." }}
         </div>
       </div>
 
@@ -133,6 +133,19 @@
       </div>
     </div>
   </Modal>
+
+  <Modal :show-modal="showUserInfoModal" :show-buttons="false" :size="`w-[500px]`" @close="showUserInfoModal = false">
+    <CandidateInfo 
+      :firstName="props.firstName" 
+      :lastName="props.lastName"
+      :company="props.company"
+      :videoId="props.videoId"
+      :seeking_contract_type="props.seeking_contract_type"
+      :seeking_field="props.seeking_field"
+      :seeking_rate="props.seeking_rate"
+    />
+  </Modal>
+
 </template>
 
 <script setup lang="ts">
@@ -141,6 +154,7 @@ import { PhImage, PhStar, PhPaperPlaneTilt, PhCheckCircle, PhClock, PhX, PhThumb
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
 import API from '@/utils/api/api'
+import CandidateInfo from './CandidateInfo.vue'
 
 const userId = localStorage.getItem("user_id");
 
@@ -165,6 +179,11 @@ const props = defineProps<{
   propositionDate?: string
   videoId?: string
   status?: string
+  company?:string
+  seeking_contract_type?:string
+  seeking_field?: string
+  seeking_rate?: string
+
 }>()
 
 const updateCandidacyStatus = (status: string) => {
@@ -185,4 +204,5 @@ const updateCandidacyStatus = (status: string) => {
 const showPropositionModal = ref(false)
 const showShortlistModal = ref(false)
 const showNotinteresetedModal = ref(false)
+const showUserInfoModal = ref<boolean>(false);
 </script>
