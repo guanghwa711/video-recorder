@@ -15,11 +15,14 @@
             <Input type="text" label="City" v-model="candidate.address_city" placeholder="City" />
             <Input type="text" label="Country" v-model="candidate.address_country" placeholder="Country" />
             <Input type="text" label="Post Code" v-model="candidate.address_postcode" placeholder="Post Code" />
-            <Select v-model:selected:value="candidate.seeking_contract_type" :options="['apprenti', 'employee', 'cadre']" />
-            <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" />
+            <Label>Contract Type</Label>
+            <Select v-model:selected:value="candidate.seeking_contract_type" :options="['apprenti', 'employee', 'cadre']" :label="`Contract Type`" />
+            <Label>Seeking</Label>
+            <Select  v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :label="`Seeking`"/>
+            <Label>Seeking Rate</Label>
             <div class="flex items-center gap-x-2">
-              <Slider v-model:value="candidate.seeking_rate" />
-              <span>{{ candidate.seeking_rate[0] }} %</span>
+                <Slider v-model:value="candidate.seeking_rate" />
+                <span>{{ candidate.seeking_rate[0] }} %</span>
             </div>
 
             <div class="pt-4">
@@ -38,6 +41,7 @@ import { toast } from 'vue3-toastify'
 import Select from '@/components/Select.vue'
 import Slider from '@/components/Slider.vue'
 import API from '@/utils/api/api'
+import Label from '@/components/input/Label.vue'
 
 const userId = localStorage.getItem('user_id')
 const candidate = reactive({
