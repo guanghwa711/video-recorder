@@ -9,7 +9,7 @@
       <Input type="text" label="City" v-model="recruiter.address_city" placeholder="City" />
       <Input type="text" label="Country" v-model="recruiter.address_country" placeholder="Country" />
       <Input type="text" label="Post Code" v-model="recruiter.address_postcode" placeholder="Post Code" />
-      <Input type="text" label="Commerce Registration" v-model="recruiter.commerce_registration"
+      <Input type="number" label="Commerce Registration" v-model="recruiter.commerce_registration"
         placeholder="Commerce Registration" />
 
       <div class="pt-4">

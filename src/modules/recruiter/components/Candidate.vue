@@ -44,12 +44,29 @@
             <span class="ml-2">Send proposition</span>
           </div>
         </Button>
+
+        <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
+          <div class="flex items-center">
+            <PhThumbsDown class="h-5 w-5 text-primary-500" />
+            <span class="ml-2">Not interested</span>
+          </div>
+        </Button>
+      
       </div>
       <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
         <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
           <div class="flex items-center">
             <PhPaperPlaneTilt class="h-5 w-5 text-primary-500" />
             <span class="ml-2">Send proposition</span>
+          </div>
+        </Button>
+      </div>
+
+      <div v-if="['shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
+        <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
+          <div class="flex items-center">
+            <PhThumbsDown class="h-5 w-5 text-primary-500" />
+            <span class="ml-2">Not interested</span>
           </div>
         </Button>
       </div>
@@ -94,11 +111,33 @@
       </div>
     </div>
   </Modal>
+
+  <Modal
+    :show-modal="showNotinteresetedModal"
+    :show-buttons="false"
+    @close="showNotinteresetedModal = false"
+  >
+    <div class="space-y-2">
+      <div class="text-xl font-medium">Not interested for this candidate?</div>
+
+      <div class="space-y-4">
+        <div class="text-sm text-slate-600">
+          We will let them know. You can find their details in the "My candidates" section from now
+          on.
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <Button :outline="true" @click="showNotinteresetedModal = false" class="px-4">Cancel</Button>
+        <Button @click="() => updateCandidacyStatus('uninterested')" class="px-6">Ok</Button>
+      </div>
+    </div>
+  </Modal>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { PhImage, PhStar, PhPaperPlaneTilt, PhCheckCircle, PhClock, PhX } from '@phosphor-icons/vue'
+import { PhImage, PhStar, PhPaperPlaneTilt, PhCheckCircle, PhClock, PhX, PhThumbsDown } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
 import API from '@/utils/api/api'
@@ -136,7 +175,8 @@ const updateCandidacyStatus = (status: string) => {
   })
   .then((response) => {
     showPropositionModal.value = false;
-    showShortlistModal.value = false
+    showShortlistModal.value = false;
+    showNotinteresetedModal.value = false;
     emit("getCandidacies");
     emit("getCandidates");
   })
@@ -144,4 +184,5 @@ const updateCandidacyStatus = (status: string) => {
 
 const showPropositionModal = ref(false)
 const showShortlistModal = ref(false)
+const showNotinteresetedModal = ref(false)
 </script>
