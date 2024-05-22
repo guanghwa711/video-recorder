@@ -25,6 +25,7 @@
           <div v-if="!isLoading && candidates.length > 0"  class="w-full grid grid-cols-1 gap-4">
             <Candidate
               @get-candidacies="() => getCandidacies({user_id: userId})"
+              @get-candidates="getCandidates"
               :is-loading="true"
               v-for="candidate in candidates"
               :key="candidate.id"
@@ -52,10 +53,12 @@
             <Checkbox v-model:checked="candidacyStatus.requested" label="Proposition Sent" />
             <Checkbox v-model:checked="candidacyStatus.approved" label="Proposition Accepted" />
             <Checkbox v-model:checked="candidacyStatus.declined" label="Proposition Declined" />
+            <Checkbox v-model:checked="candidacyStatus.uninterested" label="Uninterested" />
           </div>
 
           <div v-if="candidacies.length > 0" class="w-full grid grid-cols-1 gap-4">
             <Candidate
+              @get-candidacies="() => getCandidacies({user_id: userId})"
               v-for="candidacy in candidacies"
               :key="candidacy?.id"
               :candidateId="candidacy?.candidate?.id"
@@ -64,6 +67,7 @@
               :proposition-date="candidacy?.candidate?.createdAt"
               :bio="candidacy?.candidate?.bio_text"
               :video-id="candidacy?.candidate?.video_resume[0]?.video_id"
+              :status="candidacy?.status"
             />
           </div>
           <div v-if="!isLoading && candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">
@@ -82,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watchEffect, reactive } from 'vue'
+import { ref, watchEffect, reactive } from 'vue'
 import Tabs from '@/components/Tabs.vue'
 import Candidate from '../components/Candidate.vue'
 import Checkbox from '@/components/Checkbox.vue'
@@ -113,7 +117,8 @@ const candidacyStatus = reactive({
   shortlisted: true,
   requested: true,
   approved: true,
-  declined: true
+  declined: true,
+  uninterested: false
 })
 
 const tabs = [
@@ -122,14 +127,14 @@ const tabs = [
   { title: 'My profile', value: 'tab3' }
 ]
 
-onMounted(() => {
-  isLoading.value = true;
-  API.getCandidates()
-  .then(response => {
-    candidates.value = response.data
-    isLoading.value = false;
-  })
-})
+// onMounted(() => {
+//   isLoading.value = true;
+//   API.getCandidates()
+//   .then(response => {
+//     candidates.value = response.data
+//     isLoading.value = false;
+//   })
+// })
 
 const getCandidacies = (queryParams?: any) => {
   API.getCandidacies(queryParams)
@@ -138,7 +143,7 @@ const getCandidacies = (queryParams?: any) => {
     })
 }
 
-watchEffect(() => {
+const getCandidates = () => {
   isLoading.value = true;
   let queryParams: ICandidateFilterObj = {
     seeking_field: [],
@@ -177,6 +182,10 @@ watchEffect(() => {
       candidates.value = response.data
       isLoading.value = false;
     })
+}
+
+watchEffect(() => {
+  getCandidates();
 })
 
 watchEffect(() => {
@@ -199,6 +208,10 @@ watchEffect(() => {
 
   if (candidacyStatus.declined) {
     queryParams.status.push(CANDIDACY_STATUS.DECLINED)
+  }
+
+  if (candidacyStatus.uninterested) {
+    queryParams.status.push(CANDIDACY_STATUS.UNINTERESTED)
   }
 
   getCandidacies(queryParams)

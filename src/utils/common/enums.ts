@@ -13,5 +13,6 @@ export enum CANDIDACY_STATUS {
     SHORTLISTED = 'shortlisted',
     APPROVED = 'approved',
     REQUESTED = 'requested',
-    DECLINED = 'declined'
+    DECLINED = 'declined',
+    UNINTERESTED = 'uninterested'
 }
