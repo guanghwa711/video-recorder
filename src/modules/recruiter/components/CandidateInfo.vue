@@ -33,6 +33,9 @@
                     <div class="text-sm text-slate-700 font-medium m-3 flex">
                         <p class="font-extrabold mr-2">Seeking Rate:</p> {{ props.seeking_rate }}%
                     </div>
+                    <div class="text-sm text-slate-700 font-medium m-3 flex">
+                        <p class="font-extrabold mr-2">Bio:</p> {{ props.bio }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,6 +64,7 @@ const props = defineProps<{
     seeking_contract_type?: string
     seeking_field?: string
     seeking_rate?: string
+    bio?: string
     status?: string
 }>()
 

@@ -15,6 +15,8 @@
             <Input type="text" label="City" v-model="candidate.address_city" placeholder="City" />
             <Input type="text" label="Country" v-model="candidate.address_country" placeholder="Country" />
             <Input type="text" label="Post Code" v-model="candidate.address_postcode" placeholder="Post Code" />
+            <Label>Bio</Label>
+            <textarea v-model="candidate.bio_text" class="peer h-28 w-full rounded-md border border-slate-400 bg-white focus-within:border-slate-400 pl-3 text-sm placeholder-slate-400 outline-none !ring-0 focus:ring-0"></textarea>
             <Label>Contract Type</Label>
             <Select v-model:selected:value="candidate.seeking_contract_type" :options="['apprenti', 'employee', 'cadre']" :label="`Contract Type`" />
             <Label>Seeking</Label>
@@ -53,6 +55,7 @@ const candidate = reactive({
     address_postcode: "",
     address_city: "",
     address_country: "",
+    bio_text: "",
     seeking_contract_type: "",
     seeking_field: "",
     seeking_rate: [20]
@@ -69,6 +72,7 @@ const getUser = () => {
             candidate.last_name = response.data.candidate.last_name;
             candidate.phone = response.data.candidate.phone;
             candidate.company = response.data.candidate.company;
+            candidate.bio_text = response.data.candidate.bio_text;
             candidate.address_street = response.data.candidate.address_street;
             candidate.address_postcode = response.data.candidate.address_postcode;
             candidate.address_city = response.data.candidate.address_city;

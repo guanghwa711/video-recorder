@@ -145,6 +145,7 @@
       :seeking_contract_type="props.seeking_contract_type"
       :seeking_field="props.seeking_field"
       :seeking_rate="props.seeking_rate"
+      :bio="props.bio"
       :status="props.status"
     />
   </Modal>
