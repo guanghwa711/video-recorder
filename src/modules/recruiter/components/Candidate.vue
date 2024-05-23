@@ -53,22 +53,24 @@
         </Button>
       
       </div>
-      <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
-        <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
-          <div class="flex items-center">
-            <PhPaperPlaneTilt class="h-5 w-5 text-primary-500" />
-            <span class="ml-2">Send proposition</span>
-          </div>
-        </Button>
-      </div>
+      <div class="flex">
+        <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
+          <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
+            <div class="flex items-center">
+              <PhPaperPlaneTilt class="h-5 w-5 text-primary-500" />
+              <span class="ml-2">Send proposition</span>
+            </div>
+          </Button>
+        </div>
 
-      <div v-if="['shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
-        <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
-          <div class="flex items-center">
-            <PhThumbsDown class="h-5 w-5 text-primary-500" />
-            <span class="ml-2">Not interested</span>
-          </div>
-        </Button>
+        <div v-if="['shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
+          <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
+            <div class="flex items-center">
+              <PhThumbsDown class="h-5 w-5 text-primary-500" />
+              <span class="ml-2">Not interested</span>
+            </div>
+          </Button>
+        </div>
       </div>
     </div>
   </div>

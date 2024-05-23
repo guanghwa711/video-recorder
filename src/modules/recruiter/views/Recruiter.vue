@@ -27,7 +27,7 @@
 
           <div v-if="!isLoading && candidates.length > 0"  class="w-full grid grid-cols-1 gap-4">
             <Candidate
-              @get-candidacies="() => getCandidacies({user_id: userId})"
+              @get-candidacies="getCandidacies"
               @get-candidates="getCandidates"
               :is-loading="true"
               v-for="candidate in candidates"
@@ -67,7 +67,7 @@
 
           <div v-if="candidacies.length > 0" class="w-full grid grid-cols-1 gap-4">
             <Candidate
-              @get-candidacies="() => getCandidacies({user_id: userId})"
+              @get-candidacies="getCandidacies"
               v-for="candidacy in candidacies"
               :key="candidacy?.id"
               :candidateId="candidacy?.candidate?.id"
@@ -149,7 +149,32 @@ const tabs = [
 //   })
 // })
 
-const getCandidacies = (queryParams?: any) => {
+const getCandidacies = () => {
+  let queryParams: any = {
+    status: [],
+    user_id: userId
+  };
+
+  if (candidacyStatus.shortlisted) {
+    queryParams.status.push(CANDIDACY_STATUS.SHORTLISTED)
+  }
+
+  if (candidacyStatus.approved) {
+    queryParams.status.push(CANDIDACY_STATUS.APPROVED)
+  }
+
+  if (candidacyStatus.requested) {
+    queryParams.status.push(CANDIDACY_STATUS.REQUESTED)
+  }
+
+  if (candidacyStatus.declined) {
+    queryParams.status.push(CANDIDACY_STATUS.DECLINED)
+  }
+
+  if (candidacyStatus.uninterested) {
+    queryParams.status.push(CANDIDACY_STATUS.UNINTERESTED)
+  }
+  
   API.getCandidacies(queryParams)
     .then(response => {
       candidacies.value = response.data
@@ -202,31 +227,6 @@ watchEffect(() => {
 })
 
 watchEffect(() => {
-  let queryParams: any = {
-    status: [],
-    user_id: userId
-  };
-
-  if (candidacyStatus.shortlisted) {
-    queryParams.status.push(CANDIDACY_STATUS.SHORTLISTED)
-  }
-
-  if (candidacyStatus.approved) {
-    queryParams.status.push(CANDIDACY_STATUS.APPROVED)
-  }
-
-  if (candidacyStatus.requested) {
-    queryParams.status.push(CANDIDACY_STATUS.REQUESTED)
-  }
-
-  if (candidacyStatus.declined) {
-    queryParams.status.push(CANDIDACY_STATUS.DECLINED)
-  }
-
-  if (candidacyStatus.uninterested) {
-    queryParams.status.push(CANDIDACY_STATUS.UNINTERESTED)
-  }
-
-  getCandidacies(queryParams)
+  getCandidacies()
 })
 </script>
