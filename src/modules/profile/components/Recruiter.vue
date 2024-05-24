@@ -15,19 +15,47 @@
       <div class="pt-4">
         <Button @click="updateUser" class="w-full">Update Profile</Button>
       </div>
+      <div class="pt-4">
+          <Button @click="deleteRecruiterModal = true" class="w-full">Delete Profile</Button>
+      </div>
     </div>
   </div>
+  <Modal
+    :show-modal="deleteRecruiterModal"
+    :show-buttons="false"
+    @close="deleteRecruiterModal = false"
+    >
+    <div class="space-y-2">
+        <div class="text-xl font-medium">Will you delete this candidate?</div>
+
+        <div class="space-y-4">
+        <div class="text-sm text-slate-600">
+            If you delete profile, you will lost your all data.
+        </div>
+        </div>
+
+        <div class="flex justify-end gap-2 pt-2">
+        <Button :outline="true" @click="deleteRecruiterModal = false" class="px-4">Cancel</Button>
+        <Button @click="deleteRecruiter" class="px-6">Ok</Button>
+      </div>
+    </div>
+  </Modal>
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import Button from '@/components/Button.vue'
 import Input from '@/components/input/Input.vue'
+import Modal from '@/components/Modal.vue'
 import { toast } from 'vue3-toastify'
 import API from '@/utils/api/api'
+import { useAuth0 } from '@auth0/auth0-vue';
+const {logout} = useAuth0();
 
 const userId = localStorage.getItem('user_id')
+const deleteRecruiterModal = ref(false)
 const recruiter = reactive({
+  id: 0,
   first_name: "",
   last_name: "",
   phone: "",
@@ -46,6 +74,7 @@ onMounted(() => {
 const getUser = () => {
   API.getUserById(Number(userId))
     .then((response) => {
+      recruiter.id = response.data.recruiter.id;
       recruiter.first_name = response.data.recruiter.first_name;
       recruiter.last_name = response.data.recruiter.last_name;
       recruiter.phone = response.data.recruiter.phone;
@@ -67,6 +96,23 @@ const updateUser = () => {
         theme: "light",
         type: "success"
       });
+    })
+}
+
+const deleteRecruiter = () => {
+  API.deleteRecruiter(recruiter.id)
+    .then((response:any)=> {
+        localStorage.removeItem('user_id');
+        localStorage.removeItem("user_role");
+        logout({ 
+            logoutParams: { 
+                returnTo: window.location.origin 
+            }
+        });
+    })
+    .catch((error:any) => {
+      console.log(error, "Error while deleting...")
+      deleteRecruiterModal.value = false
     })
 }
 </script>
