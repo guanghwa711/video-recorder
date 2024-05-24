@@ -2,9 +2,10 @@
     <div class="flex h-full items-center justify-center">
         <div class="flex w-full max-w-sm flex-col space-y-4">
             <div class="mb-4 flex justify-center">
-                <div class="flex h-40 w-40 items-center justify-center rounded-xl bg-slate-100 p-6">
+                <div @click="triggerFileUplaodInput" class="flex h-40 w-40 items-center justify-center rounded-xl bg-slate-100 p-6">
                     <PhImage class="h-full w-full text-slate-300" />
                 </div>
+                <input type="file" accept="image/*" @change="onFileInputChange" style="display: none" ref="avatarUploadInput" />
             </div>
 
             <Input type="text" label="First name" v-model="candidate.first_name" placeholder="First name" />
@@ -35,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { PhImage } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Input from '@/components/input/Input.vue'
@@ -44,8 +45,10 @@ import Select from '@/components/Select.vue'
 import Slider from '@/components/Slider.vue'
 import API from '@/utils/api/api'
 import Label from '@/components/input/Label.vue'
+import axios from 'axios'
 
 const userId = localStorage.getItem('user_id')
+const avatarUploadInput = ref<HTMLInputElement | null>(null)
 const candidate = reactive({
     first_name: "",
     last_name: "",
@@ -64,6 +67,39 @@ const candidate = reactive({
 onMounted(() => {
     getUser();
 })
+
+const triggerFileUplaodInput = () => {
+    avatarUploadInput.value?.click();
+}
+
+const onFileInputChange = (event: any) => {
+    const file = event.target.files[0];
+    uploadAvatar(file);
+};
+
+const uploadAvatar = async (file: File) => {
+    if (!file) {
+        alert('Please select a file first!');
+        return;
+    }
+
+    const response = await API.getS3SignedURL(Number(userId), file.name)
+    try {
+        await axios.put(response.data.url, file, {
+          headers: {
+            'Content-Type': file.type,
+            'x-amz-acl': 'public-read'
+          },
+        });
+        console.log('File uploaded successfully:');
+        alert('File uploaded successfully!');
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        alert('Error uploading file.');
+    } finally {
+        avatarUploadInput.value!.value = '';
+    }
+};
 
 const getUser = () => {
     API.getUserById(Number(userId))

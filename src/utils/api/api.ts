@@ -140,6 +140,15 @@ const API = {
                 reject(error)
             ))
         })
+    },
+    getS3SignedURL: (userId: number, fileName: string) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.get('/users/get-signed-url', {params: {userId, fileName}})
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
     }
 }
 
