@@ -1,5 +1,5 @@
 <template>
-    <div class="flex h-full items-center justify-center">
+    <div class="flex h-full itmes-center justify-center">
         <div class="flex w-full max-w-sm flex-col space-y-4">
             <div class="mb-4 flex justify-center">
                 <div @click="triggerFileUplaodInput" class="flex h-40 w-40 items-center justify-center rounded-xl bg-slate-100 p-6">
@@ -17,11 +17,13 @@
             <Input type="text" label="Country" v-model="candidate.address_country" placeholder="Country" />
             <Input type="text" label="Post Code" v-model="candidate.address_postcode" placeholder="Post Code" />
             <Label>Bio</Label>
-            <textarea v-model="candidate.bio_text" class="peer h-28 w-full rounded-md border border-slate-400 bg-white focus-within:border-slate-400 pl-3 text-sm placeholder-slate-400 outline-none !ring-0 focus:ring-0"></textarea>
+            <textarea v-model="candidate.bio_text"
+                class="peer h-28 w-full rounded-md border border-slate-400 bg-white focus-within:border-slate-400 pl-3 text-sm placeholder-slate-400 outline-none !ring-0 focus:ring-0"></textarea>
             <Label>Contract Type</Label>
-            <Select v-model:selected:value="candidate.seeking_contract_type" :options="['apprenti', 'employee', 'cadre']" :label="`Contract Type`" />
+            <Select v-model:selected:value="candidate.seeking_contract_type"
+                :options="['apprenti', 'employee', 'cadre']" :label="`Contract Type`" />
             <Label>Seeking</Label>
-            <Select  v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :label="`Seeking`"/>
+            <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :label="`Seeking`" />
             <Label>Seeking Rate</Label>
             <div class="flex items-center gap-x-2">
                 <Slider v-model:value="candidate.seeking_rate" />
@@ -31,7 +33,32 @@
             <div class="pt-4">
                 <Button @click="updateUser" class="w-full">Update Profile</Button>
             </div>
+           
+            <div class="pt-4">
+                <Button @click="deleteCandidateModal = true" class="w-full">Delete Profile</Button>
+            </div>
+
         </div>
+        <Modal
+            :show-modal="deleteCandidateModal"
+            :show-buttons="false"
+            @close="deleteCandidateModal = false"
+            >
+            <div class="space-y-2">
+                <div class="text-xl font-medium">Will you delete this candidate?</div>
+
+                <div class="space-y-4">
+                <div class="text-sm text-slate-600">
+                    If you delete profile, you will lost your all data.
+                </div>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                <Button :outline="true" @click="deleteCandidateModal = false" class="px-4">Cancel</Button>
+                <Button @click="deleteCandidate" class="px-6">Ok</Button>
+                </div>
+            </div>
+        </Modal>
     </div>
 </template>
 
@@ -45,11 +72,16 @@ import Select from '@/components/Select.vue'
 import Slider from '@/components/Slider.vue'
 import API from '@/utils/api/api'
 import Label from '@/components/input/Label.vue'
+import Modal from '@/components/Modal.vue'
+import { useAuth0 } from '@auth0/auth0-vue';
 import axios from 'axios'
 
-const userId = localStorage.getItem('user_id')
+const {logout} = useAuth0();
 const avatarUploadInput = ref<HTMLInputElement | null>(null)
+const userId = localStorage.getItem('user_id');
+const deleteCandidateModal = ref(false)
 const candidate = reactive({
+    id:0,
     first_name: "",
     last_name: "",
     phone: "",
@@ -104,6 +136,7 @@ const uploadAvatar = async (file: File) => {
 const getUser = () => {
     API.getUserById(Number(userId))
         .then((response) => {
+            candidate.id= response.data.candidate.id
             candidate.first_name = response.data.candidate.first_name;
             candidate.last_name = response.data.candidate.last_name;
             candidate.phone = response.data.candidate.phone;
@@ -129,5 +162,22 @@ const updateUser = () => {
                 type: "success"
             });
         })
+}
+
+const deleteCandidate = () => {
+  API.deleteCandidate(candidate.id)
+    .then((response:any)=> {
+        localStorage.removeItem('user_id');
+        localStorage.removeItem("user_role");
+        logout({ 
+            logoutParams: { 
+                returnTo: window.location.origin 
+            }
+        });
+    })
+    .catch((error:any) => {
+      console.log(error, "Error while deleting...")
+      deleteCandidateModal.value = false
+    })
 }
 </script>
