@@ -140,6 +140,15 @@ const API = {
                 reject(error)
             ))
         })
+    },
+    deleteCandidate: (id:number) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.delete(`/candidates/${id}`)
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
     }
 }
 
