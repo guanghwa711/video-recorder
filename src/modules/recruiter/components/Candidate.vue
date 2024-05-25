@@ -1,5 +1,5 @@
 <template>
-  <div v-if="candidateId" class="flex h-52 min-h-52 w-full gap-8 rounded-xl border border-slate-200 p-6">
+  <div v-if="candidateId && videoId" class="flex h-52 min-h-52 w-full gap-8 rounded-xl border border-slate-200 p-6">
     <div class="aspect-square h-full w-40 shrink-0 rounded-xl bg-slate-200 p-2">
       <div v-if="!videoId">
         <PhImage class="h-full w-full text-slate-300" />

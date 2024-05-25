@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Recruiter from '@/modules/recruiter/views/Recruiter.vue';
 import Candidate from '@/modules/candidate/views/Candidate.vue';
-import Profile from '@/modules/profile/views/Profile.vue';
 import Home from '@/modules/home/views/Home.vue';
 import LoggedOut from '@/modules/loggedOut/LoggedOut.vue';
 import { toast } from 'vue3-toastify';
@@ -54,11 +53,6 @@ const router = createRouter({
           } else return true
         }
       }
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
     },
     {
       path: '/logged-out',
