@@ -1,15 +1,23 @@
 <template>
     <div class="flex h-full itmes-center justify-center">
         <div class="flex w-full max-w-sm flex-col space-y-4">
-            <div class="mb-4 flex justify-center">
-                <div @click="triggerFileUplaodInput" class="flex h-40 w-40 items-center justify-center rounded-xl bg-slate-100 p-6">
-                    <PhImage v-if="!candidate.profile_photo" class="h-full w-full text-slate-300" />
-                    <img v-else class="w-full h-full object-cover" :src="candidate.profile_photo" alt="user avatar" />
+            <div class="mb-4 flex flex-col justify-center">
+                <div class="flex justify-center">
+                    <div class="flex h-36 w-36 items-center justify-center rounded-full border-slate-400 border-[3px] bg-slate-100 p-[0.5px]">
+                        <PhImage v-if="!candidate.profile_photo" class="h-full w-full rounded-full text-slate-300" />
+                        <img v-else class="w-full h-full object-cover rounded-full" :src="candidate.profile_photo" alt="user avatar" />
+                    </div>
+                    <input type="file" accept="image/*" @change="onFileInputChange" style="display: none" ref="avatarUploadInput" />
+                    <FullSpinner v-if="isUploading" />
                 </div>
-                <input type="file" accept="image/*" @change="onFileInputChange" style="display: none" ref="avatarUploadInput" />
-                <FullSpinner v-if="isUploading" />
+                <div class="flex justify-center mt-3" v-if="!candidate.profile_photo">
+                    <Button :outline="true" class="w-40" @click="triggerFileUplaodInput">Upload</Button>
+                </div>
+                <div class="flex justify-center mt-3" v-else>
+                    <Button :outline="true" class="w-40" @click="triggerFileUplaodInput">Change</Button>
+                </div>
             </div>
-
+            
             <Input type="text" label="First name" v-model="candidate.first_name" placeholder="First name" />
             <Input type="text" label="Last name" v-model="candidate.last_name" placeholder="Last name" />
             <Input type="text" label="Phone number" v-model="candidate.phone" placeholder="Phone number" />
@@ -28,7 +36,7 @@
             <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :label="`Seeking`" />
             <Label>Seeking Rate</Label>
             <div class="flex items-center gap-x-2">
-                <Slider v-model:value="candidate.seeking_rate" />
+                <Slider class="w-80" v-model:value="candidate.seeking_rate"/>
                 <span>{{ candidate.seeking_rate[0] }} %</span>
             </div>
 
