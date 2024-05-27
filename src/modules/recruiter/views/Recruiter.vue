@@ -215,7 +215,7 @@ const getCandidates = () => {
     queryParams.seeking_contract_type.push(SEEKING_CONTRACT_TYPE.CADRE);
   }
 
-  API.getCandidates(queryParams)
+  API.getCandidates(Number(userId), queryParams)
     .then(response => {
       candidates.value = response.data
       isLoading.value = false;

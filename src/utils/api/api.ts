@@ -14,7 +14,7 @@ const API = {
                 })
         })
     },
-    getCandidates: (params?: ICandidateFilterObj) => {
+    getCandidates: (userId: number, params?: ICandidateFilterObj) => {
         let parsedParams: any = {}
 
         if (params) {
@@ -25,7 +25,7 @@ const API = {
 
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.get('/candidates', {
-                params: parsedParams
+                params: {...parsedParams, userId}
             })
             .then(response => resolve(response))
             .catch(error => (
