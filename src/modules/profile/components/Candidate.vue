@@ -139,7 +139,7 @@ const uploadAvatar = async (file: File) => {
           },
         });
         const newURL = new URL(response.data.url)
-        const imgUrl = newURL.origin + newURL.pathname;
+        const imgUrl = newURL.origin + newURL.pathname + `?t=${Date.now()}`;
         candidate.profile_photo = imgUrl;
         console.log('File uploaded successfully:', imgUrl);
         isUploading.value = false;
