@@ -3,9 +3,11 @@
         <div class="flex w-full max-w-sm flex-col space-y-4">
             <div class="mb-4 flex justify-center">
                 <div @click="triggerFileUplaodInput" class="flex h-40 w-40 items-center justify-center rounded-xl bg-slate-100 p-6">
-                    <PhImage class="h-full w-full text-slate-300" />
+                    <PhImage v-if="!candidate.profile_photo" class="h-full w-full text-slate-300" />
+                    <img v-else class="w-full h-full object-cover" :src="candidate.profile_photo" alt="user avatar" />
                 </div>
                 <input type="file" accept="image/*" @change="onFileInputChange" style="display: none" ref="avatarUploadInput" />
+                <FullSpinner v-if="isUploading" />
             </div>
 
             <Input type="text" label="First name" v-model="candidate.first_name" placeholder="First name" />
@@ -73,13 +75,15 @@ import Slider from '@/components/Slider.vue'
 import API from '@/utils/api/api'
 import Label from '@/components/input/Label.vue'
 import Modal from '@/components/Modal.vue'
+import FullSpinner from '@/components/FullSpinner.vue'
 import { useAuth0 } from '@auth0/auth0-vue';
 import axios from 'axios'
 
 const {logout} = useAuth0();
 const avatarUploadInput = ref<HTMLInputElement | null>(null)
 const userId = localStorage.getItem('user_id');
-const deleteCandidateModal = ref(false)
+const deleteCandidateModal = ref(false);
+const isUploading = ref<boolean>(false);
 const candidate = reactive({
     id:0,
     first_name: "",
@@ -93,7 +97,8 @@ const candidate = reactive({
     bio_text: "",
     seeking_contract_type: "",
     seeking_field: "",
-    seeking_rate: [20]
+    seeking_rate: [20],
+    profile_photo: ""
 });
 
 onMounted(() => {
@@ -114,20 +119,34 @@ const uploadAvatar = async (file: File) => {
         alert('Please select a file first!');
         return;
     }
+    isUploading.value = true;
 
     const response = await API.getS3SignedURL(Number(userId), file.name)
     try {
-        await axios.put(response.data.url, file, {
+        await axios.put('https://proxy.cors.sh/' + response.data.url, file, {
           headers: {
             'Content-Type': file.type,
-            'x-amz-acl': 'public-read'
+            'x-amz-acl': 'public-read',
+            'x-cors-api-key': "temp_368b76b526936e794eb3e109cc7fb026"
           },
         });
-        console.log('File uploaded successfully:');
-        alert('File uploaded successfully!');
+        const newURL = new URL(response.data.url)
+        const imgUrl = newURL.origin + newURL.pathname;
+        candidate.profile_photo = imgUrl;
+        console.log('File uploaded successfully:', imgUrl);
+        isUploading.value = false;
+        toast("Avatar image has been uploaded successfully!", {
+            autoClose: 3000,
+            theme: "light",
+            type: "success"
+        });
     } catch (error) {
         console.error('Error uploading file:', error);
-        alert('Error uploading file.');
+        toast("Failed to upload", {
+            autoClose: 3000,
+            theme: "light",
+            type: "error"
+        });
     } finally {
         avatarUploadInput.value!.value = '';
     }
@@ -149,6 +168,7 @@ const getUser = () => {
             candidate.seeking_contract_type = response.data.candidate.seeking_contract_type;
             candidate.seeking_field = response.data.candidate.seeking_field;
             candidate.seeking_rate = [response.data.candidate.seeking_rate];
+            candidate.profile_photo = response.data.candidate.profile_photo;
         })
 }
 
