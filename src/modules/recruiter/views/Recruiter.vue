@@ -43,6 +43,7 @@
               :seeking_contract_type="candidate?.seeking_contract_type"
               :seeking_field= "candidate?.seeking_field"
               :seeking_rate="candidate?.seeking_rate"
+              :profile_photo="candidate?.profile_photo"
             />
           </div>
           <div v-if="!isLoading && candidates.length == 0" class="m-auto font-medium text-xl text-gray-700">
@@ -83,7 +84,7 @@
               :seeking_contract_type="candidacy?.candidate?.seeking_contract_type"
               :seeking_field= "candidacy?.candidate?.seeking_field"
               :seeking_rate="candidacy?.candidate?.seeking_rate"
-
+              :profile_photo="candidacy?.candidate?.profile_photo"
             />
           </div>
           <div v-if="!isLoading && candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">

@@ -2,8 +2,9 @@
     <div class="flex h-full justify-center w-full">
         <div class="flex w-full max-w-sm flex-col space-y-4">
             <div class="mb-4 flex justify-center items-center w-full">
-                <div class="flex h-20 w-20 items-center justify-center rounded-xl bg-slate-100 p-6">
-                    <PhImage class="h-full w-full text-slate-300" />
+                <div class="flex h-20 w-20 items-center justify-center rounded-full border-slate-400 border-[2px] bg-slate-100 p-[0.5px]">
+                    <PhImage v-if="!props.profile_photo" class="h-full w-full rounded-full text-slate-300" />
+                    <img v-else class="w-full h-full object-cover rounded-full" :src="props.profile_photo" alt="user avatar" />
                 </div>
                 <p class="text-2xl text-slate-700 font-medium ml-5">{{ props.firstName }} {{ props.lastName }}</p>
             </div>
@@ -66,6 +67,7 @@ const props = defineProps<{
     seeking_rate?: string
     bio?: string
     status?: string
+    profile_photo?: string
 }>()
 
 </script>

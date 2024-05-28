@@ -149,6 +149,7 @@
       :seeking_rate="props.seeking_rate"
       :bio="props.bio"
       :status="props.status"
+      :profile_photo="props.profile_photo"
     />
   </Modal>
 
@@ -191,7 +192,7 @@ const props = defineProps<{
   seeking_contract_type?:string
   seeking_field?: string
   seeking_rate?: string
-
+  profile_photo?: string
 }>()
 
 const updateCandidacyStatus = (status: string) => {

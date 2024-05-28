@@ -36,7 +36,7 @@
             <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :label="`Seeking`" />
             <Label>Seeking Rate</Label>
             <div class="flex items-center gap-x-2">
-                <Slider class="w-80" v-model:value="candidate.seeking_rate"/>
+                <Slider class="w-[330px]" v-model:value="candidate.seeking_rate"/>
                 <span>{{ candidate.seeking_rate[0] }} %</span>
             </div>
 
