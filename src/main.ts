@@ -16,8 +16,8 @@ const auth0 = createAuth0({
   clientId: "38PaJs30B4IOLwI0qZCpvm3HwtPGZg1l",
   authorizationParams: {
     //redirect_uri: window.location.origin
-    // redirect_uri: "https://videoresumesfe.onrender.com/"
-    redirect_uri: "http://localhost:5173/"
+    redirect_uri: "https://videoresumesfe.onrender.com/"
+    // redirect_uri: "http://localhost:5173/"
   }
 });
 

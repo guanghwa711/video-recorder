@@ -2,7 +2,7 @@
     <div class="flex justify-center">
         <div class="absolute flex items-center justify-center p-4 gap-x-96">
             <img src="../../../assets/logo.png"/>
-            <div class="flex gap-16">
+            <div class="flex gap-20">
                 <button class="text-slate-50 text-lg font-bold">Recruiter</button>
                 <button class="text-slate-50 text-lg font-bold">Candidate</button>
                 <button class="text-slate-50 text-lg font-bold">About us</button>
