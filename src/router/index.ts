@@ -5,6 +5,7 @@ import Home from '@/modules/home/views/Home.vue';
 import LoggedOut from '@/modules/loggedOut/LoggedOut.vue';
 import { toast } from 'vue3-toastify';
 import Admin from '@/modules/admin/views/Admin.vue';
+import Layout from '@/layout/Layout.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

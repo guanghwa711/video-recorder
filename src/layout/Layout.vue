@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isAuthenticated">
+  <div v-if="!isNoAuthRoute">
     <Navbar />
 
     <div class="py-10" style="height: calc(100% - 64px)">
