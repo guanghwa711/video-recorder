@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'https://clownfish-app-9zwdy.ondigitalocean.app';
-// const API_URL = 'http://localhost:8080';
+// const API_URL = 'https://clownfish-app-9zwdy.ondigitalocean.app';
+const API_URL = 'http://localhost:8080';
 
 const instance = axios.create({
   baseURL: API_URL,

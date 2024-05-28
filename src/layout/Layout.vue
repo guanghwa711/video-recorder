@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isAuthenticated">
     <Navbar />
 
     <div class="py-10" style="height: calc(100% - 64px)">
@@ -8,11 +8,15 @@
       </main>
     </div>
   </div>
+  <div v-else>
+    <Home/>
+  </div>
 </template>
 
 <script setup lang="ts">
 import Navbar from './Navbar.vue'
 import { useRouter } from 'vue-router'
+import Home from '@/modules/home/views/Home.vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { computed } from 'vue';
 const { isAuthenticated } = useAuth0()
