@@ -5,7 +5,8 @@ import Home from '@/modules/home/views/Home.vue';
 import LoggedOut from '@/modules/loggedOut/LoggedOut.vue';
 import { toast } from 'vue3-toastify';
 import Admin from '@/modules/admin/views/Admin.vue';
-import Layout from '@/layout/Layout.vue';
+import About from '@/modules/about/About.vue';
+import Contacts from '@/modules/contacts/Contacts.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -84,6 +85,16 @@ const router = createRouter({
           } else return true
         }
       }
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: About
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: Contacts
     }
   ]
 })

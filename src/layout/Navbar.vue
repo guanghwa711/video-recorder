@@ -74,14 +74,14 @@ const router = useRouter()
 const navbarItems = [
   { title: 'Recruiters', to: 'recruiter' },
   { title: 'Candidates', to: 'candidate' },
-  { title: 'About us', to: 'home' },
-  { title: 'Contact', to: 'home' }
+  { title: 'About us', to: 'about' },
+  { title: 'Contact', to: 'contact' }
 ]
 
 const navbarDropdownItems = [{ name: 'login' }, { name: 'logout' }]
 
 onMounted(() => {
-  if(['/recruiter', '/candidate', '/admin'].includes(router.currentRoute.value.path)) {
+  if(['/recruiter', '/candidate', '/admin', '/about', '/contact'].includes(router.currentRoute.value.path)) {
     const userRole = localStorage.getItem('user_role')
   
     if(userRole) {

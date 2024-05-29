@@ -1,7 +1,7 @@
 <template>
     <div class="flex justify-center">
         <div class="absolute flex items-center justify-center p-4 gap-x-96">
-            <img src="../../../assets/logo.png"/>
+            <img src="../../../assets/logo.png" class="cursor-pointer"/>
             <div class="flex gap-20">
                 <button class="text-slate-50 text-lg font-bold">
                     <RouterLink to="/recruiter">Recruiter</RouterLink>
@@ -35,6 +35,7 @@
         </div>
     </div>
 </template>
+
 
 <script setup lang="ts">
 import { onMounted, watchEffect } from 'vue'

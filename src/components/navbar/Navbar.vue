@@ -2,7 +2,7 @@
   <nav class="bg-primary-500">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
-        <Logo />
+        <img src="../../assets/logo.png" @click="router.push('/')" class="cursor-pointer"/>
 
         <div class="flex">
           <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-4">
@@ -60,7 +60,9 @@
 </template>
 
 <script setup lang="ts">
-import Logo from '../Logo.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 import NavbarItem from './NavbarItem.vue'
 
 const props = defineProps<{

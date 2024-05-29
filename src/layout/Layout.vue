@@ -2,10 +2,13 @@
   <div v-if="!isNoAuthRoute">
     <Navbar />
 
-    <div class="py-10" style="height: calc(100% - 64px)">
+    <div class="py-10" style="height: calc(100% - 64px)" v-if="!isotherRoutes">
       <main v-if="isAuthenticated || isNoAuthRoute" class="mx-auto min-h-[80vh] max-w-7xl rounded-xl bg-white sm:px-6 lg:px-12 lg:py-8">
         <router-view />
       </main>
+    </div>
+    <div v-else>
+      <router-view />
     </div>
   </div>
   <div v-else>
@@ -23,5 +26,7 @@ const { isAuthenticated } = useAuth0()
 const router = useRouter()
 
 const noAuthRoutes = ['/home', '/logged-out'];
+const otherRoutes = ['/about', '/contact'];
 const isNoAuthRoute = computed(() => noAuthRoutes.includes(router.currentRoute.value.path))
+const isotherRoutes = computed(() => otherRoutes.includes(router.currentRoute.value.path))
 </script>
