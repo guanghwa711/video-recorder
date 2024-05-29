@@ -7,9 +7,13 @@ const strapi = axios.create({
   }
 })
 
-export const getStrapiObject = (singularApiId: string, relation?: string ) => {
+export const getStrapiObject = (singularApiId: string, relations?: string[] ) => {
     return new Promise((resolve, reject) => {
-        strapi.get(`/api/${singularApiId}?populate=${relation || "*"}`)
+        let mediaPopulateQuery = ''
+        if(relations && relations?.length > 0) {
+            mediaPopulateQuery = relations?.map(relation => `populate[${relation}][populate]=*`).join('&')
+        }
+        strapi.get(`/api/${singularApiId}?${mediaPopulateQuery}`)
             .then((response) => {
                 resolve(response.data.data.attributes)
             })
