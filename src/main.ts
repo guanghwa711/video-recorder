@@ -15,9 +15,7 @@ const auth0 = createAuth0({
   domain: "dev-hso2gnbwosy1ymq0.eu.auth0.com",
   clientId: "38PaJs30B4IOLwI0qZCpvm3HwtPGZg1l",
   authorizationParams: {
-    //redirect_uri: window.location.origin
-    redirect_uri: "https://videoresumesfe.onrender.com/"
-    // redirect_uri: "http://localhost:5173/"
+    redirect_uri: import.meta.env.VITE_REDIRECT_URL
   }
 });
 

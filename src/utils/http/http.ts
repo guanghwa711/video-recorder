@@ -1,10 +1,7 @@
 import axios from 'axios'
 
-const API_URL = 'https://clownfish-app-9zwdy.ondigitalocean.app';
-// const API_URL = 'http://localhost:8080';
-
 const instance = axios.create({
-  baseURL: API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
   // headers: {
   //   'x-cors-api-key': "temp_368b76b526936e794eb3e109cc7fb026"
   // }
