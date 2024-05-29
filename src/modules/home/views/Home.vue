@@ -1,19 +1,19 @@
 <template>
     <div class="flex justify-center">
         <div class="absolute flex items-center justify-center p-4 gap-x-96">
-            <img src="../../../assets/logo.png" class="cursor-pointer"/>
+            <img :src="getImgUrl(homepageContent?.navbar?.logo_img)" class="cursor-pointer"/>
             <div class="flex gap-20">
                 <button class="text-slate-50 text-lg font-bold">
-                    <RouterLink to="/recruiter">Recruiter</RouterLink>
+                    <RouterLink to="/recruiter">{{ homepageContent?.navbar?.recruiter }}</RouterLink>
                 </button>
                 <button class="text-slate-50 text-lg font-bold"><RouterLink to="/candidate">
-                    Candidate</RouterLink>
+                  {{ homepageContent?.navbar?.candidate }}</RouterLink>
                 </button>
                 <button class="text-slate-50 text-lg font-bold">
-                    <RouterLink to="/about">About us</RouterLink>
+                    <RouterLink to="/about">{{ homepageContent?.navbar?.aboutus }}</RouterLink>
                 </button>
                 <button class="text-slate-50 text-lg font-bold">
-                    <RouterLink to="/contact">Contact</RouterLink>
+                    <RouterLink to="/contact">{{ homepageContent?.navbar?.contact }}</RouterLink>
                 </button>
                 <button class="outline-slate-50 text-slate-50 font-bold text-lg outline outline-offset-8 outline-1 w-28 rounded-sm" v-if="!isAuthenticated" @click="goToLogin">Login</button>
                 <button class="outline-slate-50 text-slate-50 font-bold text-lg outline outline-offset-8 outline-1 w-28 rounded-sm" v-else @click="goToLogout">Logout</button>
@@ -22,13 +22,13 @@
         <div class="flex flex-row">
             <div class="flex items-center justify-center">
                 <button class="outline-slate-50 text-slate-50 font-normal outline outline-offset-4 outline-1 text-3xl w-96 rounded-sm absolute">
-                    <RouterLink to="/recruiter">Recruiter</RouterLink>
+                    <RouterLink to="/recruiter">{{ homepageContent?.recruiter }}</RouterLink>
                 </button>
                 <img src="../.././../assets/1.png" alt="" class="h-[100vh] w-[50vw]">
             </div>
             <div class="flex items-center justify-center">
                 <button class="outline-slate-50 text-slate-50 font-normal outline outline-offset-4 outline-1 text-3xl w-96 rounded-sm absolute">
-                    <RouterLink to="/candidate">Candidate</RouterLink>
+                    <RouterLink to="/candidate">{{ homepageContent?.candidate }}</RouterLink>
                 </button>
                 <img src="../.././../assets/2.png" alt="" class="h-[100vh] w-[50vw]"/>
             </div>
@@ -38,15 +38,19 @@
 
 
 <script setup lang="ts">
-import { onMounted, watchEffect } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import API from '@/utils/api/api'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue';
+import { getStrapiObject, getImgUrl } from '@/utils/http/strapi';
+
 const {loginWithRedirect, isAuthenticated, isLoading, logout, user} = useAuth0();
 const userId = localStorage.getItem("user_id");
+const homepageContent = ref<any>(null);
 
 const router = useRouter()
-onMounted(() => {
+onMounted(async () => {
+  homepageContent.value = await getStrapiObject("home-page", "navbar.logo_img")
   if(['/recruiter', '/candidate', '/admin'].includes(router.currentRoute.value.path)) {
     const userRole = localStorage.getItem('user_role')
   
