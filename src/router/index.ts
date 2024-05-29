@@ -7,6 +7,8 @@ import { toast } from 'vue3-toastify';
 import Admin from '@/modules/admin/views/Admin.vue';
 import About from '@/modules/about/About.vue';
 import Contacts from '@/modules/contacts/Contacts.vue';
+import DataPrivacy from '@/modules/data-privacy/DataPrivacy.vue'
+import TermsOfService from '@/modules/terms-of-service/TermsOfService.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -95,7 +97,17 @@ const router = createRouter({
       path: '/contact',
       name: 'contact',
       component: Contacts
-    }
+    },
+    {
+      path: '/terms-of-service',
+      name: 'terms-of-service',
+      component: TermsOfService
+    },
+    {
+      path: '/data-privacy',
+      name: 'data-privacy',
+      component: DataPrivacy
+    },
   ]
 })
 
