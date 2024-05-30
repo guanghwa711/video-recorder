@@ -1,7 +1,7 @@
 <template>
     <div class="flex items-center justify-center">
         <div
-            class="w-[100vw] h-[470px] opacity-80 mix-blend-multiply bg-indigo-900 absolute flex items-center justify-center">
+            class="w-full h-[470px] opacity-80 mix-blend-multiply bg-indigo-900 absolute flex items-center justify-center">
         </div>
         <div class="absolute flex flex-col items-center justify-center">
             <div class="text-center text-white text-[56px] font-extrabold leading-[64px]">
@@ -21,10 +21,10 @@
                 </div>
             </div> -->
         </div>
-        <div class="w-[100vw] h-[470px] bg-[url('@/assets/3.png')] bg-center bg-cover bg-no-repeat">
+        <div class="w-full h-[470px] bg-[url('@/assets/3.png')] bg-center bg-cover bg-no-repeat">
         </div>
     </div>
-    <div class="mx-20 m-10">
+    <div class="px-20 p-10">
         <div class="text-5xl font-extrabold leading-[64px]">About Us</div>
         <div class="flex items-center justify-center">
             <div class="mt-7 text-xl text-black font-normal leading-7">

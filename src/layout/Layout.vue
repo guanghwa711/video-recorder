@@ -7,7 +7,7 @@
         <router-view />
       </main>
     </div>
-    <div v-else>
+    <div v-else class="min-h-[783px]">
       <router-view />
     </div>
     <Footer />
