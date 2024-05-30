@@ -1,6 +1,6 @@
 <template>
-    <div class="flex h-full itmes-center justify-center">
-        <PhArrowLeft size="25px" class="cursor-pointer" @click="chageStatus"/>
+    <div class="flex h-full itmes-center justify-center gap-60">
+        <!-- <PhArrowLeft size="25px" class="cursor-pointer" @click="chageStatus"/> -->
         <div class="flex w-full max-w-sm flex-col space-y-4">
             <div class="mb-4 flex flex-col justify-center">
                 <div class="flex justify-center">
@@ -50,6 +50,11 @@
             </div>
 
         </div>
+
+        <div>
+            <div class="text-black text-3xl font-normal mb-5 p-4">My FAQ</div>
+            <Accordion class="shadow-lg"/>
+        </div>
         <Modal
             :show-modal="deleteCandidateModal"
             :show-buttons="false"
@@ -76,6 +81,7 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
 import { PhImage,PhArrowLeft } from '@phosphor-icons/vue'
+import Accordion from '@/components/Accordion.vue'
 import Button from '@/components/Button.vue'
 import Input from '@/components/input/Input.vue'
 import { toast } from 'vue3-toastify'
@@ -110,13 +116,13 @@ const candidate = reactive({
     profile_photo: ""
 });
 
-const emit = defineEmits<{
-  (e: 'getStatus'): void;
-}>();
+// const emit = defineEmits<{
+//   (e: 'getStatus'): void;
+// }>();
 
-const chageStatus = () =>{
-    emit('getStatus')
-}
+// const chageStatus = () =>{
+//     emit('getStatus')
+// }
 
 onMounted(() => {
     getUser();
@@ -198,7 +204,7 @@ const updateUser = () => {
                 theme: "light",
                 type: "success"
             });
-            chageStatus();
+            // chageStatus();
         })
 }
 
