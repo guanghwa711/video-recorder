@@ -81,7 +81,7 @@ const navbarItems = [
 const navbarDropdownItems = [{ name: 'login' }, { name: 'logout' }]
 
 onMounted(() => {
-  if(['/recruiter', '/candidate', '/admin', '/about', '/contact', 'data-privacy', 'terms-of-service'].includes(router.currentRoute.value.path)) {
+  if(['/recruiter', '/candidate', '/admin', '/about', '/contact', '/data-privacy', '/terms-of-service'].includes(router.currentRoute.value.path)) {
     const userRole = localStorage.getItem('user_role')
   
     if(userRole) {
@@ -117,7 +117,10 @@ watchEffect(() => {
           })
       }
     } else {
-      router.push('/logged-out')
+      if(['/about', '/contact', '/data-privacy', '/terms-of-service'].includes(router.currentRoute.value.path)) {
+        router.push(router.currentRoute.value.path)
+      }
+      else router.push('/home')
     }
   }
 })

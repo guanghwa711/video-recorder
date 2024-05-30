@@ -10,18 +10,3 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
-.img1{
-  background-image: linear-gradient(url('./1.png'), #D63418 80%);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: "#2B3681 80%";
-}
-
-.img2{
-  background-image: url('./2.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: "#D63418 80%";
-}

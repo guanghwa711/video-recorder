@@ -40,6 +40,9 @@
                 <img :src="getImgUrl(homepageContent?.candidate_bg)" alt="" class="h-[100vh] w-[50vw]" />
             </div>
         </div>
+        <div class="flex absolute items-center justify-center h-16 gap-2 text-sm font-medium bottom-0 text-white">
+            © 2024 Your Company Name. All rights reserved. | <RouterLink to="data-privacy">Privacy Policy</RouterLink> | <RouterLink to="terms-of-service">Terms of Service</RouterLink>
+        </div>
     </div>
 </template>
 
@@ -58,7 +61,6 @@ const homepageContent = ref<any>(null);
 const router = useRouter()
 onMounted(async () => {
     homepageContent.value = await getStrapiObject("home-page", ['navbar', 'recruiter_bg', 'candidate_bg'])
-    console.log(homepageContent.value)
     if (['/recruiter', '/candidate', '/admin'].includes(router.currentRoute.value.path)) {
         const userRole = localStorage.getItem('user_role')
 

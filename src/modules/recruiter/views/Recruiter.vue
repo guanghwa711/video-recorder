@@ -19,9 +19,13 @@
 
             <div class="mb-4 pt-6 font-medium">Seeking Rate</div>
             <!-- <Checkbox v-model:checked="enableSeekingRate" label="Enable Seeking Rate" /> -->
-            <div class="flex items-center gap-x-2">
+            <div class="items-center gap-x-2 w-[180px]">
               <Slider v-model:value="seekingRate" />
-              <span>{{ seekingRate[0] }} %</span>
+              <div class="flex mt-2">
+                <span>{{ seekingRate[0] }} %</span>
+                <span class="ml-auto">{{ seekingRate[1] }} %</span>
+              </div>
+              
             </div>
           </div>
 
@@ -105,7 +109,7 @@ import Tabs from '@/components/Tabs.vue'
 import Candidate from '../components/Candidate.vue'
 import Checkbox from '@/components/Checkbox.vue'
 import Select from '@/components/Select.vue'
-import Slider from '@/components/Slider.vue'
+import Slider from '@/components/RangeSlider.vue'
 import Profile from '../../profile/components/Recruiter.vue'
 import API from '@/utils/api/api';
 import Spinner from '@/components/Spinner.vue'
@@ -116,7 +120,7 @@ const candidates = ref<any[]>([])
 const candidacies = ref<any[]>([])
 
 const selectedJobTitle = ref<string>("All");
-const seekingRate = ref<number[]>([100]);
+const seekingRate = ref<number[]>([20, 80]);
 // const enableSeekingRate = ref<boolean>(false);
 const isLoading = ref<boolean>(true);
 const userId = localStorage.getItem("user_id");
@@ -199,6 +203,7 @@ const getCandidates = () => {
 
   if(seekingRate.value) {
     queryParams.seeking_rate.push(seekingRate.value[0].toString())
+    queryParams.seeking_rate.push(seekingRate.value[1].toString())
   }
   // if (jobTitle.web) {
   //   queryParams.seeking_field.push(SEEKING_FIELD.WEB);
