@@ -1,5 +1,6 @@
 <template>
     <div class="flex h-full itmes-center justify-center">
+        <PhArrowLeft size="25px" class="cursor-pointer" @click="chageStatus"/>
         <div class="flex w-full max-w-sm flex-col space-y-4">
             <div class="mb-4 flex flex-col justify-center">
                 <div class="flex justify-center">
@@ -74,7 +75,7 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue'
-import { PhImage } from '@phosphor-icons/vue'
+import { PhImage,PhArrowLeft } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Input from '@/components/input/Input.vue'
 import { toast } from 'vue3-toastify'
@@ -108,6 +109,14 @@ const candidate = reactive({
     seeking_rate: [20],
     profile_photo: ""
 });
+
+const emit = defineEmits<{
+  (e: 'getStatus'): void;
+}>();
+
+const chageStatus = () =>{
+    emit('getStatus')
+}
 
 onMounted(() => {
     getUser();
@@ -189,6 +198,7 @@ const updateUser = () => {
                 theme: "light",
                 type: "success"
             });
+            chageStatus();
         })
 }
 

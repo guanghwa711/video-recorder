@@ -2,7 +2,12 @@
   <div>
     <Tabs :tabs="tabs">
       <template #tab1>
-        <Profile/>
+        <div v-if="profilestatus.valueOf() == true">
+          <ProfileEdit @get-status="changeStatus"/>
+        </div>
+        <div v-else>
+          <Profile @get-status="changeStatus"/>
+        </div>
       </template>
       
       <template #tab2>
@@ -63,7 +68,8 @@ import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
 import VideoRecorder from '../components/VideoRecorder.vue'
 import VideoUploader from '../components/VideoUploader.vue'
-import Profile from '../../profile/components/Candidate.vue'
+import Profile from '../../profile-edit/ProfileEdit.vue'
+import ProfileEdit from '../../profile/components/Candidate.vue'
 import { PhVideoCamera } from '@phosphor-icons/vue'
 import Spinner from '@/components/Spinner.vue'
 import { toast } from 'vue3-toastify'
@@ -74,6 +80,11 @@ const videoResumes = ref<any[]>([])
 const candidacies = ref<any[]>([])
 const isUpLoading = ref<boolean>(false);
 const userId = localStorage.getItem("user_id");
+const profilestatus = ref(false)
+
+const changeStatus = () => {
+  profilestatus.value = !profilestatus.value
+}
 
 const tabs = [
   { title: 'My profile', value: 'tab1' },
