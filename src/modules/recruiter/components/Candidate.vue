@@ -1,12 +1,12 @@
 <template>
-  <div v-if="candidateId && videoId" class="flex w-full gap-8 rounded-xl border border-slate-200 p-6">
-    <div class="h-full w-40 xl:w-[250px] lg:w-48 md:44 shrink-0 rounded-xl">
+  <div v-if="candidateId && videoId" class="flex flex-col sm:flex-row w-full gap-8 rounded-xl border items-center border-slate-200 p-6">
+    <div class="h-full w-[250px] xl:w-[250px] lg:w-48 md:40 rounded-xl">
       <div v-if="!videoId">
         <PhImage class="h-full w-full text-slate-300" />
       </div>
       <div v-if="videoId">
         <mux-player
-          class="aspect-square max-h-40 xl:max-h-[244px] lg:max-h-48 md:max-h-44 w-full shrink-0 rounded-xl bg-slate-200"
+          class="aspect-square max-h-[244px] xl:max-h-[244px] lg:max-h-48 md:max-h-40 w-full rounded-xl bg-slate-200"
           ref="muxplayer"
           :playback-id="videoId"
           metadata-video-title="Test video title"

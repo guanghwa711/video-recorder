@@ -1,12 +1,12 @@
 <template>
   <div class="relative flex w-full flex-col gap-2 rounded-xl border border-slate-200 p-6">
-    <div class="aspect-square max-h-40 w-full shrink-0 rounded-xl bg-slate-200">
+    <div class="aspect-square max-h-48 w-full shrink-0 rounded-xl bg-slate-200">
       <div :hidden="!isHiddenPlayer"  class="h-full w-full">        
         <PhImage class="h-full w-full text-slate-300" />
       </div>
       <div :hidden="isHiddenPlayer">
         <mux-player
-          class="aspect-square max-h-40 w-full shrink-0 rounded-xl bg-slate-200"
+          class="aspect-square max-h-48 w-full shrink-0 rounded-xl bg-slate-200"
           ref="muxplayer"
           :playback-id="props.videoId"
           metadata-video-title="Test video title"

@@ -13,7 +13,7 @@
       
       <template #tab2>
         <div class="space-y-6 px-10">
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Candidacy v-for="candidacy in candidacies" :key="candidacy.id"
               :recruiter-name="candidacy.recruiter.first_name + ' ' + candidacy.recruiter.last_name"
               :date="candidacy.createdAt"
@@ -39,7 +39,7 @@
             <VideoUploader :uploaded-video-count="videoResumes.length" @get-video-resumes="getVideoResumes" />
           </div>
 
-          <div v-if="!isUpLoading && videoResumes.length > 0" class="grid grid-cols-3 gap-4">
+          <div v-if="!isUpLoading && videoResumes.length > 0" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <Video v-for="video in videoResumes" @get-video-resumes="getVideoResumes" :vid="video.id" :key="video.id" :date="video.createdAt" :is-live="video.is_live" :video-id="video.video_id" :status="video.status" />
           </div>
           <div v-if="!isUpLoading && videoResumes.length == 0" class="m-auto font-medium text-xl text-gray-700">

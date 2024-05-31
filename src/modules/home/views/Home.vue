@@ -108,7 +108,7 @@ watchEffect(() => {
                     })
             }
         } else {
-            router.push('/logged-out')
+            router.push('/home')
         }
     }
 })

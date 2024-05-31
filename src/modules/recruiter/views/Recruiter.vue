@@ -5,8 +5,8 @@
         <Profile/>
       </template>
       <template #tab2>
-        <div class="flex flex-col xl:flex-row px-10 gap-10">
-          <div class="w-full flex flex-row xl:flex-col max-w-60 gap-10 xl:gap-5 lg:gap-60 md:gap-28">
+        <div class="flex flex-col xl:flex-row gap-10">
+          <div class="w-full flex flex-col xl:flex-col md:flex-row ml-24 md:ml-4 max-w-60 gap-10 xl:gap-5 lg:gap-60 md:gap-28">
             <div>
               <div class="font-medium">Job Title</div>
               <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" />
@@ -62,12 +62,13 @@
           <div class="m-auto" v-if="isLoading">
             <Spinner />
           </div>
+          <!-- <Pagination /> -->
         </div>
       </template>
 
       <template #tab3>
         <div class="flex flex-col xl:flex-row gap-10">
-          <div class="w-full flex flex-row xl:flex-col items-center xl:items-start gap-3 xl:max-w-[220px]">
+          <div class="w-full flex flex-col md:flex-row xl:flex-col items-start md:items-center xl:items-start gap-3 max-w-60 xl:max-w-[220px] ml-24 xl:ml-auto md:ml-0">
             <div class="font-medium">Candidates</div>
             <Checkbox v-model:checked="candidacyStatus.shortlisted" label="Shortlisted" />
             <Checkbox v-model:checked="candidacyStatus.requested" label="Proposition Sent" />
@@ -117,6 +118,7 @@ import Checkbox from '@/components/Checkbox.vue'
 import Select from '@/components/Select.vue'
 import Slider from '@/components/RangeSlider.vue'
 import Profile from '../../profile/components/Recruiter.vue'
+import Pagination from '@/components/Pagination.vue'
 import API from '@/utils/api/api';
 import Spinner from '@/components/Spinner.vue'
 import type { ICandidateFilterObj } from '@/utils/common/types'

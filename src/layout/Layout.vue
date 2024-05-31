@@ -33,7 +33,7 @@ const themeColor = computed(()=> {
   if(user?.value?.user_role == 'admin') return 'bg-white'
 })
 
-const noAuthRoutes = ['/home', '/logged-out'];
+const noAuthRoutes = ['/home'];
 const otherRoutes = ['/about', '/contact', '/data-privacy', '/terms-of-service'];
 const isNoAuthRoute = computed(() => noAuthRoutes.includes(router.currentRoute.value.path))
 const isotherRoutes = computed(() => otherRoutes.includes(router.currentRoute.value.path))

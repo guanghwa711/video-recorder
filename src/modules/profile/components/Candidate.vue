@@ -21,7 +21,7 @@
                     <Button :outline="true" class="w-40" @click="triggerFileUplaodInput">Change</Button>
                 </div>
             </div>
-            <div class="flex flex-col space-y-4">
+            <div class="flex flex-col space-y-4 w-64 md:w-80">
                 <Input type="text" label="First name" v-model="candidate.first_name" placeholder="First name" />
                 <Input type="text" label="Last name" v-model="candidate.last_name" placeholder="Last name" />
                 <Input type="text" label="Phone number" v-model="candidate.phone" placeholder="Phone number" />

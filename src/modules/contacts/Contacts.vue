@@ -4,7 +4,7 @@
             class="w-full h-80 opacity-80 mix-blend-multiply bg-indigo-900 absolute flex items-center justify-center">
         </div>
         <div class="absolute flex flex-col items-center justify-center">
-            <div class="text-center text-white text-[56px] font-extrabold leading-[64px] tracking-widest">
+            <div class="text-center text-white text-4xl lg:text-6xl font-extrabold leading-[64px] tracking-widest">
                 Contact Us</div>
         </div>
         <div class="w-full h-80 bg-[url('@/assets/3.png')] bg-center bg-cover bg-no-repeat">

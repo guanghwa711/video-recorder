@@ -4,9 +4,9 @@
             class="w-full h-[470px] opacity-80 mix-blend-multiply bg-indigo-900 absolute flex items-center justify-center">
         </div>
         <div class="absolute flex flex-col items-center justify-center">
-            <div class="text-center text-white text-[56px] font-extrabold leading-[64px]">
+            <div class="text-center text-white text-4xl xl:text-6xl md:text-5xl font-extrabold leading-[64px]">
                 Titre de la page presentation</div>
-            <div class="w-[600px] h-[83px] mt-7 text-center text-white text-lg font-normal leading-7">
+            <div class="w-[250px] h-[83px] md:w-96 xl:w-[500px] mt-7 text-center text-white text-lg font-normal leading-7">
                 Lorem ipsum
                 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -25,9 +25,9 @@
         </div>
     </div>
     <div class="px-20 p-10">
-        <div class="text-5xl font-extrabold leading-[64px]">About Us</div>
+        <div class="text-3xl md:text-5xl font-extrabold leading-[64px]">About Us</div>
         <div class="flex items-center justify-center">
-            <div class="mt-7 text-xl text-black font-normal leading-7">
+            <div class="mt-7 text-base lg:text-xl text-black font-normal leading-7">
                 Lorem ipsum
                 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
