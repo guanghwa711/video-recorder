@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-primary-500">
+  <nav :class="themeColor">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 justify-between">
         <img src="../../assets/logo.png" @click="router.push('/')" class="cursor-pointer"/>
@@ -67,5 +67,6 @@ import NavbarItem from './NavbarItem.vue'
 
 const props = defineProps<{
   items: { title: string; to: string }[]
+  themeColor?: string
 }>()
 </script>

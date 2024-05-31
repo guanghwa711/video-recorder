@@ -25,29 +25,29 @@
       </div>
 
       <div v-if="props.propositionDate" class="mb-1 flex items-center text-sm text-slate-600">
-        <PhCheckCircle v-if="['shortlisted', 'approved'].includes(props.status as string)" class="h-6 w-6 text-primary-500" />
-        <PhClock v-if="props.status == 'requested'" class="h-6 w-6 text-primary-500" />
-        <PhX v-if="['uninterested', 'declined'].includes(props.status as string)" class="h-6 w-6 text-primary-500" />
+        <PhCheckCircle v-if="['shortlisted', 'approved'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
+        <PhClock v-if="props.status == 'requested'" class="h-6 w-6 text-red-600" />
+        <PhX v-if="['uninterested', 'declined'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
         <span class="ml-2">{{ props.status }}</span>
       </div>
       <div v-else class="flex w-full gap-4">
         <Button :outline="true" class="w-full max-w-52" @click="showShortlistModal = true">
           <div class="flex items-center">
-            <PhStar class="h-5 w-5 text-primary-500" />
+            <PhStar class="h-5 w-5 text-red-600" />
             <span class="ml-2">Shortlist</span>
           </div>
         </Button>
 
         <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
           <div class="flex items-center">
-            <PhPaperPlaneTilt class="h-5 w-5 text-primary-500" />
+            <PhPaperPlaneTilt class="h-5 w-5 text-red-600" />
             <span class="ml-2">Send proposition</span>
           </div>
         </Button>
 
         <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
           <div class="flex items-center">
-            <PhThumbsDown class="h-5 w-5 text-primary-500" />
+            <PhThumbsDown class="h-5 w-5 text-red-600" />
             <span class="ml-2">Not interested</span>
           </div>
         </Button>
@@ -57,7 +57,7 @@
         <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
           <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
             <div class="flex items-center">
-              <PhPaperPlaneTilt class="h-5 w-5 text-primary-500" />
+              <PhPaperPlaneTilt class="h-5 w-5 text-red-600" />
               <span class="ml-2">Send proposition</span>
             </div>
           </Button>
@@ -66,7 +66,7 @@
         <div v-if="['shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
           <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
             <div class="flex items-center">
-              <PhThumbsDown class="h-5 w-5 text-primary-500" />
+              <PhThumbsDown class="h-5 w-5 text-red-600" />
               <span class="ml-2">Not interested</span>
             </div>
           </Button>

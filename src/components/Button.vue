@@ -4,12 +4,12 @@
     :is="props.link ? 'a' : 'button'"
     :href="props.link ? props.href : undefined"
     :disabled="props.disabled || props.loading || (props.noTextLoading && props.loading)"
-    class="bg-primary-500 enabled:hover:bg-primary-600 flex cursor-pointer items-center justify-center rounded-md border border-transparent py-2 text-sm font-semibold text-white focus:outline-none"
+    class="bg-red-600 enabled:hover:bg-primary-600 flex cursor-pointer items-center justify-center rounded-md border border-transparent py-2 text-sm font-semibold text-white focus:outline-none"
     :class="{
       '!cursor-not-allowed bg-opacity-50':
         props.disabled || props.loading || (props.noTextLoading && props.loading),
-      '!border-primary-500 !text-primary-500 border !bg-transparent hover:!bg-slate-50/50': props.outline,
-      'ring-primary-500 ring-offset-2 ring-offset-white focus:ring-1 ':
+      '!border-red-600 !text-red-600 border !bg-transparent hover:!bg-slate-50/50': props.outline,
+      'ring-red-600 ring-offset-2 ring-offset-white focus:ring-1 ':
         props.ring
     }"
     @click="click"
@@ -18,7 +18,7 @@
       v-if="props.loading || (props.noTextLoading && props.loading)"
       class="-ml-6 mr-2 !h-4 !w-4 text-white"
       :class="{
-        '!text-primary-500': props.outline,
+        '!text-red-600': props.outline,
         'absolute !mx-0': props.noTextLoading
       }"
     />

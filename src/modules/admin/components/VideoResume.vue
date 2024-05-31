@@ -27,7 +27,7 @@
   
       <div class="flex items-center mt-2 gap-x-2">
         <div class="flex w-full gap-2">
-          <Button :outline="true" class="w-full max-w-52 text-primary-500 disabled:!bg-gray-300 disabled:!text-gray-600 disabled:!border-gray-300" @click="showApproveModal = true" :disabled="status == 'approved'">
+          <Button :outline="true" class="w-full max-w-52 text-red-600 disabled:!bg-gray-300 disabled:!text-gray-600 disabled:!border-gray-300" @click="showApproveModal = true" :disabled="status == 'approved'">
             <div class="flex items-center">
               <PhCheck class="h-5 w-5" />
               <span class="ml-2">{{status == "approved" ? "Approved" : "Approve"}}</span>
@@ -48,7 +48,7 @@
         </div>
         <div>
           <Button @click="deleteVideoModal = true" :outline="true" class="px-1 py-0">
-              <PhTrash class="h-5 w-5 text-primary-500" />
+              <PhTrash class="h-5 w-5 text-red-600" />
           </Button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <Navbar :items="navbarItems">
+  <Navbar :items="navbarItems" :themeColor="themeColor">
     <NavbarDropdown :items="navbarDropdownItems">
       <!-- <template #profile="{ active }">
         <button
@@ -9,7 +9,7 @@
           ]"
           @click="goToProfile"
         >
-          <PhUserCircle class="mr-2 h-5 w-5 text-primary-500" />
+          <PhUserCircle class="mr-2 h-5 w-5 text-red-600" />
           Profile
         </button>
       </template> -->
@@ -28,7 +28,7 @@
             ]"
               @click="goToLogin"
             >
-            <PhSignIn class="mr-2 h-5 w-5 text-primary-500" />
+            <PhSignIn class="mr-2 h-5 w-5 text-red-600" />
             Login
           </button>
         </div>
@@ -48,7 +48,7 @@
             ]"
             @click="goToLogout"
           >
-          <PhSignOut class="mr-2 h-5 w-5 text-primary-500" />
+          <PhSignOut class="mr-2 h-5 w-5 text-red-600" />
             Logout
           </button>
         </div>
@@ -59,11 +59,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, watchEffect } from 'vue'
+import { onMounted, watchEffect } from 'vue'
 import Navbar from '@/components/navbar/Navbar.vue'
 import NavbarDropdown from '@/components/navbar/NavbarDropdown.vue'
 import API from '@/utils/api/api'
-import { PhUserCircle, PhSignOut, PhSignIn } from '@phosphor-icons/vue'
+import { PhSignOut, PhSignIn } from '@phosphor-icons/vue'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue';
 const {loginWithRedirect, isAuthenticated, isLoading, logout, user} = useAuth0();
@@ -83,7 +83,7 @@ const navbarDropdownItems = [{ name: 'login' }, { name: 'logout' }]
 onMounted(() => {
   if(['/recruiter', '/candidate', '/admin', '/about', '/contact', '/data-privacy', '/terms-of-service'].includes(router.currentRoute.value.path)) {
     const userRole = localStorage.getItem('user_role')
-  
+    
     if(userRole) {
       handeRouteByUserRole(userRole);
     }
@@ -101,20 +101,20 @@ watchEffect(() => {
           user_type: user.value?.user_role, 
           sub: user.value?.sub
         })
-          .then((response) => {
-            localStorage.setItem("user_id", response.data?.id);
-            if(response.data?.is_admin) {
-              localStorage.setItem("user_role", 'admin');
-              handeRouteByUserRole('admin')
-            }
-            else {
-              localStorage.setItem("user_role", user.value?.user_role);
-              handeRouteByUserRole(user.value?.user_role)
-            }
-          })
-          .catch(error => {
-            console.log(error, "User creation failed")
-          })
+        .then((response) => {
+          localStorage.setItem("user_id", response.data?.id);
+          if(response.data?.is_admin) {
+            localStorage.setItem("user_role", 'admin');
+            handeRouteByUserRole('admin')
+          }
+          else {
+            localStorage.setItem("user_role", user.value?.user_role);
+            handeRouteByUserRole(user.value?.user_role)
+          }
+        })
+        .catch(error => {
+          console.log(error, "User creation failed")
+        })
       }
     } else {
       if(['/about', '/contact', '/data-privacy', '/terms-of-service'].includes(router.currentRoute.value.path)) {
@@ -141,19 +141,23 @@ function goToLogout() {
   logout({ 
     logoutParams: { 
       returnTo: window.location.origin 
-     } 
+    } 
   });
 }
 
 const handeRouteByUserRole = (userRole: string) => {
-    if (userRole == 'recruiter') {
-      router.push('/recruiter');
-    }
-    if (userRole == 'candidate') {
-      router.push('/candidate');
-    }
-    if (userRole == 'admin') {
-      router.push('/admin');
-    }
+  if (userRole == 'recruiter') {
+    router.push('/recruiter');
+  }
+  if (userRole == 'candidate') {
+    router.push('/candidate');
+  }
+  if (userRole == 'admin') {
+    router.push('/admin');
+  }
 }
+const props = defineProps<{
+  themeColor?: string
+}>()
+
 </script>

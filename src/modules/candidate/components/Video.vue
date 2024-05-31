@@ -31,20 +31,20 @@
           v-if="props.isLive"
           class="flex h-10 items-center rounded-lg justify-center bg-slate-50 text-sm text-slate-600"
         >
-          <PhCheckCircle class="h-6 w-6 text-primary-500" />
+          <PhCheckCircle class="h-6 w-6 text-red-600" />
           <span class="ml-2 font-medium">Live video</span>
         </div>
     
         <Button @click="handleOpenLiveVideoModal" v-else :outline="true" class="w-full">
           <div class="flex items-center">
-            <PhStar class="h-5 w-5 text-primary-500" />
+            <PhStar class="h-5 w-5 text-red-600" />
             <span class="ml-2">Make Live</span>
           </div>
         </Button>
       </div>
       <div>
         <Button @click="deleteVideoModal = true" :outline="true" class="px-1 py-0">
-            <PhTrash class="h-5 w-5 text-primary-500" />
+            <PhTrash class="h-5 w-5 text-red-600" />
         </Button>
       </div>
     </div>

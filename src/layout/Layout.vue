@@ -1,6 +1,6 @@
 <template>
   <div v-if="!isNoAuthRoute">
-    <Navbar />
+    <Navbar :themeColor="themeColor"/>
 
     <div class="py-10" style="height: calc(100% - 64px)" v-if="!isotherRoutes">
       <main v-if="isAuthenticated || isNoAuthRoute" class="mx-auto min-h-[80vh] max-w-7xl rounded-xl bg-white sm:px-6 lg:px-12 lg:py-8">
@@ -10,7 +10,7 @@
     <div v-else class="min-h-[783px]">
       <router-view />
     </div>
-    <Footer />
+    <Footer :themeColor="themeColor" />
   </div>
   <div v-else>
     <Home/>
@@ -24,8 +24,14 @@ import { useRouter } from 'vue-router'
 import Home from '@/modules/home/views/Home.vue'
 import { useAuth0 } from '@auth0/auth0-vue'
 import { computed } from 'vue';
-const { isAuthenticated } = useAuth0()
+const { isAuthenticated, user } = useAuth0()
 const router = useRouter()
+
+const themeColor = computed(()=> {
+  if(user?.value?.user_role == 'recruiter') return 'bg-red-600'
+  if(user?.value?.user_role == 'candidate') return 'bg-indigo-900'
+  if(user?.value?.user_role == 'admin') return 'bg-white'
+})
 
 const noAuthRoutes = ['/home', '/logged-out'];
 const otherRoutes = ['/about', '/contact', '/data-privacy', '/terms-of-service'];
