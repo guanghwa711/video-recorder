@@ -6,7 +6,7 @@
         class="border flex h-[22px] w-[22px] appearance-none items-center justify-center rounded-[4px] border-slate-300 bg-white outline-none hover:bg-slate-50"
       >
         <CheckboxIndicator class="flex h-full w-full items-center justify-center rounded bg-white">
-          <PhCheck class="h-4 w-4 text-red-500" weight="bold" />
+          <PhCheck class="h-4 w-4 text-red-600" weight="bold" />
         </CheckboxIndicator>
       </CheckboxRoot>
 

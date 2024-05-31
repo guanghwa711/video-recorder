@@ -31,7 +31,7 @@
           <div class="flex gap-4">
             <Button @click="handleClickRecordVideo" :outline="true" class="w-60">
               <div class="flex items-center">
-                <PhVideoCamera class="h-5 w-5 text-red-500" />
+                <PhVideoCamera class="h-5 w-5 text-red-600" />
                 <span class="ml-2">Record Video</span>
               </div>
             </Button>

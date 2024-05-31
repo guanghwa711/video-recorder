@@ -22,7 +22,7 @@
       <div class="text-sm font-medium">
         <span class="text-yellow-500" v-if="props.status == 'created'">Pending</span>
         <span class="text-green-500" v-if="props.status == 'approved'">Approved</span>
-        <span class="text-red-500" v-if="props.status == 'declined'">Declined</span>
+        <span class="text-red-600" v-if="props.status == 'declined'">Declined</span>
       </div>
   
       <div class="flex items-center mt-2 gap-x-2">

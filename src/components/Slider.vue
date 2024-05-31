@@ -4,10 +4,10 @@
       :step="10"
     >
       <SliderTrack class="bg-slate-300 relative grow rounded-full h-[3px]">
-        <SliderRange class="absolute bg-red-500 rounded-full h-full" />
+        <SliderRange class="absolute bg-red-600 rounded-full h-full" />
       </SliderTrack>
       <SliderThumb
-        class="block w-5 h-5 bg-red-500 shadow-[0_2px_2px] shadow-red-500 rounded-[10px] hover:bg-red-500 focus:outline-none"
+        class="block w-5 h-5 bg-red-600 shadow-[0_2px_2px] shadow-red-600 rounded-[10px] hover:bg-red-600 focus:outline-none"
         aria-label="Volume"
       />
     </SliderRoot>

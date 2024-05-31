@@ -1,7 +1,7 @@
 <template>
     <Button @click="triggerFileUplaodInput" :outline="true" class="w-60">
         <div class="flex items-center">
-            <PhUpload class="h-5 w-5 text-red-500" />
+            <PhUpload class="h-5 w-5 text-red-600" />
             <span class="ml-2">Upload Video</span>
         </div>
     </Button>

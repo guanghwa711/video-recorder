@@ -5,28 +5,34 @@
         <Profile/>
       </template>
       <template #tab2>
-        <div class="flex px-10">
-          <div class="w-full max-w-60 space-y-3">
-            <div class="font-medium">Job Title</div>
-            <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" />
+        <div class="flex flex-col xl:flex-row px-10 gap-10">
+          <div class="w-full flex flex-row xl:flex-col max-w-60 gap-28 xl:gap-5">
+            <div>
+              <div class="font-medium">Job Title</div>
+              <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" />
+            </div>
             <!-- <Checkbox v-model:checked="jobTitle.web" label="Web" />
             <Checkbox v-model:checked="jobTitle.mobile" label="Mobile" /> -->
-            
-            <div class="mb-4 pt-6 font-medium">Contract Type</div>
-            <Checkbox v-model:checked="contractType.apprenti" label="Apprenti" />
-            <Checkbox v-model:checked="contractType.employee" label="Employee" />
-            <Checkbox v-model:checked="contractType.cadre" label="Cadre" />
-
-            <div class="mb-4 pt-6 font-medium">Seeking Rate</div>
-            <!-- <Checkbox v-model:checked="enableSeekingRate" label="Enable Seeking Rate" /> -->
-            <div class="items-center gap-x-2 w-[180px]">
-              <Slider v-model:value="seekingRate" />
-              <div class="flex mt-2">
-                <span>{{ seekingRate[0] }} %</span>
-                <span class="ml-auto">{{ seekingRate[1] }} %</span>
-              </div>
-              
+            <div>
+              <div class="mb-4 font-medium">Contract Type</div>
+              <Checkbox v-model:checked="contractType.apprenti" label="Apprenti" />
+              <Checkbox v-model:checked="contractType.employee" label="Employee" />
+              <Checkbox v-model:checked="contractType.cadre" label="Cadre" />
             </div>
+            
+            <div>
+              <div class="mb-4 font-medium">Seeking Rate</div>
+              <!-- <Checkbox v-model:checked="enableSeekingRate" label="Enable Seeking Rate" /> -->
+              <div class="items-center gap-x-2 w-[180px]">
+                <Slider v-model:value="seekingRate" />
+                <div class="flex mt-2">
+                  <span>{{ seekingRate[0] }} %</span>
+                  <span class="ml-auto">{{ seekingRate[1] }} %</span>
+                </div>
+                
+              </div>
+            </div>
+            
           </div>
 
           <div v-if="!isLoading && candidates.length > 0"  class="w-full grid grid-cols-1 gap-4">
@@ -60,9 +66,9 @@
       </template>
 
       <template #tab3>
-        <div class="flex px-10">
-          <div class="w-full max-w-60 space-y-3">
-            <div class="mb-4 font-medium">Candidates</div>
+        <div class="flex flex-col xl:flex-row gap-10">
+          <div class="w-full flex flex-row xl:flex-col items-center xl:items-start gap-3 xl:max-w-[220px]">
+            <div class="font-medium">Candidates</div>
             <Checkbox v-model:checked="candidacyStatus.shortlisted" label="Shortlisted" />
             <Checkbox v-model:checked="candidacyStatus.requested" label="Proposition Sent" />
             <Checkbox v-model:checked="candidacyStatus.approved" label="Proposition Accepted" />
