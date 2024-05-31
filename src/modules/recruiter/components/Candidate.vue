@@ -1,12 +1,12 @@
 <template>
-  <div v-if="candidateId && videoId" class="flex h-52 min-h-52 w-full gap-8 rounded-xl border border-slate-200 p-6">
-    <div class="aspect-square h-full w-40 shrink-0 rounded-xl bg-slate-200 p-2">
+  <div v-if="candidateId && videoId" class="flex w-full gap-8 rounded-xl border border-slate-200 p-6">
+    <div class="h-full w-40 xl:w-[250px] lg:w-48 md:44 shrink-0 rounded-xl">
       <div v-if="!videoId">
         <PhImage class="h-full w-full text-slate-300" />
       </div>
       <div v-if="videoId">
         <mux-player
-          class="aspect-square max-h-40 w-full shrink-0 rounded-xl bg-slate-200"
+          class="aspect-square max-h-40 xl:max-h-[244px] lg:max-h-48 md:max-h-44 w-full shrink-0 rounded-xl bg-slate-200"
           ref="muxplayer"
           :playback-id="videoId"
           metadata-video-title="Test video title"
@@ -17,9 +17,9 @@
 
     <div class="flex h-full w-full flex-col justify-between">
       <div class="space-y-2" @click="showUserInfoModal= true">
-        <div class="text-2xl font-medium">{{ props.firstName }} {{ props.lastName }}</div>
+        <div class="text-lg font-bold">{{ props.firstName }} {{ props.lastName }}</div>
 
-        <div class="w-full rounded-lg text-sm text-slate-600">
+        <div class="w-full rounded-lg text-lg font-normal text-slate-600">
           {{ props.bio || "This candidate has not bio yet." }}
         </div>
       </div>
@@ -31,43 +31,43 @@
         <span class="ml-2">{{ props.status }}</span>
       </div>
       <div v-else class="flex w-full gap-4">
-        <Button :outline="true" class="w-full max-w-52" @click="showShortlistModal = true">
+        <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showShortlistModal = true">
           <div class="flex items-center">
             <PhStar class="h-5 w-5 text-red-600" />
-            <span class="ml-2">Shortlist</span>
+            <span class="ml-2 text-xs lg:text-sm">Shortlist</span>
           </div>
         </Button>
 
-        <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
+        <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showPropositionModal = true">
           <div class="flex items-center">
             <PhPaperPlaneTilt class="h-5 w-5 text-red-600" />
-            <span class="ml-2">Send proposition</span>
+            <span class="ml-2 text-xs lg:text-sm">Send proposition</span>
           </div>
         </Button>
 
-        <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
+        <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true">
           <div class="flex items-center">
             <PhThumbsDown class="h-5 w-5 text-red-600" />
-            <span class="ml-2">Not interested</span>
+            <span class="ml-2 text-xs lg:text-sm">Not interested</span>
           </div>
         </Button>
       
       </div>
       <div class="flex">
         <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
-          <Button :outline="true" class="w-full max-w-52" @click="showPropositionModal = true">
+          <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showPropositionModal = true">
             <div class="flex items-center">
               <PhPaperPlaneTilt class="h-5 w-5 text-red-600" />
-              <span class="ml-2">Send proposition</span>
+              <span class="ml-2 text-xs lg:text-sm">Send proposition</span>
             </div>
           </Button>
         </div>
 
         <div v-if="['shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
-          <Button :outline="true" class="w-full max-w-52" @click="showNotinteresetedModal = true">
+          <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true">
             <div class="flex items-center">
               <PhThumbsDown class="h-5 w-5 text-red-600" />
-              <span class="ml-2">Not interested</span>
+              <span class="ml-2 text-xs lg:text-sm">Not interested</span>
             </div>
           </Button>
         </div>

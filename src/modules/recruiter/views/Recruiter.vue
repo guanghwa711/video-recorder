@@ -13,7 +13,7 @@
             </div>
             <!-- <Checkbox v-model:checked="jobTitle.web" label="Web" />
             <Checkbox v-model:checked="jobTitle.mobile" label="Mobile" /> -->
-            <div>
+            <div class="space-y-3">
               <div class="mb-4 font-medium">Contract Type</div>
               <Checkbox v-model:checked="contractType.apprenti" label="Apprenti" />
               <Checkbox v-model:checked="contractType.employee" label="Employee" />
