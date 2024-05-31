@@ -25,9 +25,9 @@
       </div>
 
       <div v-if="props.propositionDate" class="mb-1 flex items-center text-sm text-slate-600">
-        <PhCheckCircle v-if="['shortlisted', 'approved'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
+        <PhStar v-if="['shortlisted', 'approved'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
         <PhClock v-if="props.status == 'requested'" class="h-6 w-6 text-red-600" />
-        <PhX v-if="['uninterested', 'declined'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
+        <PhThumbsDown v-if="['uninterested', 'declined'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
         <span class="ml-2">{{ props.status }}</span>
       </div>
       <div v-else class="flex w-full gap-4">
