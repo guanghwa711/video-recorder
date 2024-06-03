@@ -21,7 +21,7 @@
                     <Button :outline="true" class="w-40" @click="triggerFileUplaodInput">Change</Button>
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 min-w-[280px] w-full min-[450px]:w-[400px] px-8">
+            <div class="flex flex-col space-y-4 min-w-[280px] w-full min-[450px]:w-[400px] px-8 sm:p-0">
                 <Input type="text" label="First name" v-model="candidate.first_name" placeholder="First name" />
                 <Input type="text" label="Last name" v-model="candidate.last_name" placeholder="Last name" />
                 <Input type="text" label="Phone number" v-model="candidate.phone" placeholder="Phone number" />
@@ -155,7 +155,7 @@ const uploadAvatar = async (file: File) => {
         const newURL = new URL(response.data.url)
         const imgUrl = newURL.origin + newURL.pathname + `?t=${Date.now()}`;
         candidate.profile_photo = imgUrl;
-        getUser();
+        getUser();  
         console.log('File uploaded successfully:', imgUrl);
         isUploading.value = false;
         toast("Avatar image has been uploaded successfully!", {

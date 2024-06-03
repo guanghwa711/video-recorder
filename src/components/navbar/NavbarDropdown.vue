@@ -2,7 +2,7 @@
   <div class="absolute right-0 flex w-full justify-end">
     <Menu as="div" class="relative z-10 inline-block text-left">
       <MenuButton class="flex items-center">
-        <PhUserCircle class="h-8 w-8 text-white" weight="duotone" />
+        <PhUserCircle class="h-8 w-8" weight="duotone" :class="`${props.themeColor ? 'text-white'+ ' ' + props.themeColor  : 'text-black' + ' ' + props.themeColor}`" />
       </MenuButton>
 
       <transition
@@ -33,5 +33,6 @@ import { PhUserCircle } from '@phosphor-icons/vue'
 
 const props = defineProps<{
   items: { name: string }[]
+  themeColor: string
 }>()
 </script>

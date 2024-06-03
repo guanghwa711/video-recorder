@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-full items-center justify-center">
-    <div class="flex min-w-[280px] w-full min-[450px]:w-[400px] flex-col space-y-4 px-8">
+    <div class="flex min-w-[280px] w-full min-[450px]:w-[400px] flex-col space-y-4 px-8 sm:p-0">
       <Input type="text" label="First name" v-model="recruiter.first_name" placeholder="First name" />
       <Input type="text" label="Last name" v-model="recruiter.last_name" placeholder="Last name" />
       <Input type="text" label="Phone number" v-model="recruiter.phone" placeholder="Phone number" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full flex-col gap-2 rounded-xl border border-slate-200 p-6">
+  <div class="flex w-full flex-col gap-2 rounded-xl border border-slate-200 p-[10px]">
     <div class="aspect-square max-h-40 w-full shrink-0 rounded-xl bg-slate-200 p-2">
       <PhImage class="h-full w-full text-slate-300" />
     </div>

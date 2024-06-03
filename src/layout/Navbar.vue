@@ -1,6 +1,6 @@
 <template>
   <Navbar :items="navbarItems" :themeColor="themeColor">
-    <NavbarDropdown :items="navbarDropdownItems">
+    <NavbarDropdown :items="navbarDropdownItems" :themeColor="themeColor">
       <!-- <template #profile="{ active }">
         <button
           :class="[
