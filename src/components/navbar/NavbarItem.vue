@@ -4,7 +4,8 @@
     :to="{
       name: props.to
     }"
-    class="group inline-flex items-center text-sm font-medium text-white"
+    class="group inline-flex items-center text-sm font-medium"
+    :class="`${props.themeColor ? 'text-white'+ ' ' + props.themeColor  : 'text-black' + ' ' + props.themeColor}`"
     v-slot="{ isActive }"
   >
     <div
@@ -21,5 +22,6 @@
 <script setup lang="ts">
 const props = defineProps<{
   to: string
+  themeColor?: string
 }>()
 </script>

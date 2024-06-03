@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex w-full flex-col gap-2 rounded-xl border border-slate-200 p-6">
+  <div class="relative flex w-full flex-col gap-2 rounded-xl border border-slate-200 p-[10px]">
     <div class="aspect-square max-h-48 w-full shrink-0 rounded-xl bg-slate-200">
       <div :hidden="!isHiddenPlayer"  class="h-full w-full">        
         <PhImage class="h-full w-full text-slate-300" />
@@ -36,7 +36,7 @@
         </div>
     
         <Button @click="handleOpenLiveVideoModal" v-else :outline="true" class="w-full">
-          <div class="flex items-center">
+          <div class="flex items-center px-2">
             <PhStar class="h-5 w-5 text-red-600" />
             <span class="ml-2">Make Live</span>
           </div>

@@ -1,6 +1,11 @@
-<template>
-    <div class="flex items-center justify-center h-16 gap-2 text-xs lg:text-sm font-medium text-white" :class="props.themeColor">
-        © 2024 Your Company Name. All rights reserved. | <RouterLink to="data-privacy">Privacy Policy</RouterLink> | <RouterLink to="terms-of-service">Terms of Service</RouterLink>
+<template> 
+    <div class="flex flex-col sm:flex-row items-center text-wrap justify-center h-16 gap-2 text-xs md:text-sm font-medium" :class="`${props.themeColor ? 'text-white'+ ' ' + props.themeColor  : 'text-black' + ' ' +props.themeColor}`">
+      <div>
+        © 2024 Your Company Name. All rights reserved. | 
+      </div>
+      <div>
+        <RouterLink to="data-privacy">Privacy Policy</RouterLink> | <RouterLink to="terms-of-service">Terms of Service</RouterLink>
+      </div>
     </div>
 </template>
 
