@@ -32,7 +32,7 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { PhUserCircle } from '@phosphor-icons/vue'
 
 const props = defineProps<{
-  items: { name: string }[]
-  themeColor: string
+  items: { name: string }[];
+  themeColor?: string;
 }>()
 </script>
