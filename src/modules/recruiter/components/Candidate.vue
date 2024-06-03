@@ -24,7 +24,7 @@
           </div>
         </Button>
         <!-- <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40"@click="showPropositionModal = true"> -->
-        <div class="flex items-center" @click="showPropositionModal = true">
+        <div class="flex items-center" @click="showShortlistModal = true">
           <PhThumbsUp class="h-5 w-5 text-slate-600 cursor-pointer" />
           <!-- <span class="ml-2 text-xs lg:text-sm">Shortlist</span> -->
         </div>
