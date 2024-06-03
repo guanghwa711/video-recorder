@@ -21,7 +21,7 @@
                     <Button :outline="true" class="w-40" @click="triggerFileUplaodInput">Change</Button>
                 </div>
             </div>
-            <div class="flex flex-col space-y-4 w-64 md:w-80">
+            <div class="flex flex-col space-y-4">
                 <Input type="text" label="First name" v-model="candidate.first_name" placeholder="First name" />
                 <Input type="text" label="Last name" v-model="candidate.last_name" placeholder="Last name" />
                 <Input type="text" label="Phone number" v-model="candidate.phone" placeholder="Phone number" />
@@ -32,25 +32,25 @@
                 <Input type="text" label="Post Code" v-model="candidate.address_postcode" placeholder="Post Code" />
                 <Label>Bio</Label>
                 <textarea v-model="candidate.bio_text"
-                    class="peer h-28 w-full rounded-md border border-slate-400 bg-white focus-within:border-slate-400 pl-3 text-sm placeholder-slate-400 outline-none !ring-0 focus:ring-0"></textarea>
+                    class="peer h-28 w-full md:w-[400px] rounded-md border border-slate-400 bg-white focus-within:border-slate-400 pl-3 text-sm placeholder-slate-400 outline-none !ring-0 focus:ring-0"></textarea>
                 <Label>Contract Type</Label>
-                <Select v-model:selected:value="candidate.seeking_contract_type"
+                <Select v-model:selected:value="candidate.seeking_contract_type" :width="`w-full md:w-[400px]`"
                     :options="['apprenti', 'employee', 'cadre']" :label="`Contract Type`" />
                 <Label>Seeking</Label>
-                <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']"
+                <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :width="`w-full md:w-[400px]`"
                     :label="`Seeking`" />
                 <Label>Seeking Rate</Label>
-                <div class="flex items-center gap-x-2">
-                    <Slider class="w-[330px]" v-model:value="candidate.seeking_rate" />
-                    <span>{{ candidate.seeking_rate[0] }} %</span>
+                <div class="flex items-center gap-x-2 w-full md:w-[400px]">
+                    <Slider v-model:value="candidate.seeking_rate" />
+                    <span class="w-16">{{ candidate.seeking_rate[0] }} %</span>
                 </div>
 
                 <div class="pt-4">
-                    <Button @click="updateUser" class="w-full">Update Profile</Button>
+                    <Button @click="updateUser" class="w-full md:w-[400px]">Update Profile</Button>
                 </div>
 
-                <div class="pt-4">
-                    <Button @click="deleteCandidateModal = true" class="w-full">Delete Profile</Button>
+                <div class="pt-[10px] !m-0">
+                    <Button @click="deleteCandidateModal = true" class="w-full md:w-[400px]">Delete Profile</Button>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-full items-center justify-center">
-    <div class="flex w-full max-w-sm flex-col space-y-4 px-8">
+    <div class="flex w-full md:w-[400px] flex-col space-y-4 px-8">
       <Input type="text" label="First name" v-model="recruiter.first_name" placeholder="First name" />
       <Input type="text" label="Last name" v-model="recruiter.last_name" placeholder="Last name" />
       <Input type="text" label="Phone number" v-model="recruiter.phone" placeholder="Phone number" />
@@ -13,10 +13,10 @@
         placeholder="Commerce Registration" />
 
       <div class="pt-4">
-        <Button @click="updateUser" class="w-full">Update Profile</Button>
+        <Button @click="updateUser" class="w-full md:w-[400px]">Update Profile</Button>
       </div>
-      <div class="pt-4">
-          <Button @click="deleteRecruiterModal = true" class="w-full">Delete Profile</Button>
+      <div class="pt-[10px] !m-0">
+          <Button @click="deleteRecruiterModal = true" class="w-full md:w-[400px]">Delete Profile</Button>
       </div>
     </div>
   </div>

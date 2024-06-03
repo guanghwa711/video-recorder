@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col space-y-1">
+  <div class="flex flex-col space-y-1 w-full md:w-[400px]">
     <Label :name="props.name" class="font-medium">{{ props.label }}</Label>
 
     <Border

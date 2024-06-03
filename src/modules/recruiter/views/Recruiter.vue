@@ -9,7 +9,7 @@
           <div class="w-[300px] sm:w-[180px] flex flex-col xl:flex-col md:flex-row gap-8 xl:gap-5 lg:gap-60 md:gap-28 mr-0 sm:mr-14">
             <div>
               <div class="text-slate-900 text-lg font-bold leading-[27px] tracking-tight mb-4">Job Title</div>
-              <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" />
+              <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" :width="`w-full md:w-[180px]`"/>
             </div>
             <!-- <Checkbox v-model:checked="jobTitle.web" label="Web" />
             <Checkbox v-model:checked="jobTitle.mobile" label="Mobile" /> -->
