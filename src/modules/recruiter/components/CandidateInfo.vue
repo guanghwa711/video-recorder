@@ -9,8 +9,8 @@
                 <p class="text-2xl text-slate-700 font-medium ml-5">{{ props.firstName }} {{ props.lastName }}</p>
             </div>
             <hr class="my-5" />
-            <div class="mb-4 flex justify-center w-full">
-                <div class="aspect-square max-h-40 shrink-0 rounded-xl bg-slate-200 p-2 mr-5" v-if="props.videoId">
+            <div class="mb-4 flex flex-col sm:flex-row justify-center w-full gap-5">
+                <div class="aspect-square max-h-40 shrink-0 rounded-xl bg-slate-200 p-2" v-if="props.videoId">
                     <mux-player class="aspect-square max-h-40 w-full shrink-0 rounded-xl bg-slate-200" ref="muxplayer"
                         :playback-id="props.videoId" metadata-video-title="Test video title"
                         metadata-viewer-user-id="user-id-007"></mux-player>

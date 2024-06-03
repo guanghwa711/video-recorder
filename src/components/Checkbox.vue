@@ -10,7 +10,7 @@
         </CheckboxIndicator>
       </CheckboxRoot>
 
-      <span class="select-none text-sm">{{ props.label }}</span>
+      <span class="select-none text-slate-900 text-base font-normal leading-normal tracking-tight md:text-sm lg:text-base">{{ props.label }}</span>
     </label>
   </div>
 </template>

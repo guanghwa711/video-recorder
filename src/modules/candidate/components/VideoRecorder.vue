@@ -3,11 +3,11 @@
         <div class="relative bg-black w-full h-full mt-3">
             <div class="spinner" :hidden="!isUploading"></div>
             <div class="recording-spinner" :hidden="!isRecording"></div>
-            <video class="w-full flex h-[480px]" ref="camera" autoplay></video>
+            <video class="w-full flex h-[200px] md:h-[300px] lg:h-[400px] xl:h-[480px]" ref="camera" autoplay></video>
         </div>
         <div class="mt-3">
-            <div class="flex gap-x-2">
-                <Button class="w-48" @click="handleRecording" :disabled="isUploading">
+            <div class="flex flex-col md:flex-row gap-2">
+                <Button class="p-2" @click="handleRecording" :disabled="isUploading">
                     <div class="flex items-center">
                         <PhRecord class="h-5 w-5 text-white" />
                         <span class="ml-2">
@@ -15,7 +15,7 @@
                         </span>
                     </div>
                 </Button>
-                <Button class="w-48" @click="handleUploadRecordedVideo" :disabled="isRecording || isUploading || recordedBlobs.length == 0 || isUploaded">
+                <Button class="p-2" @click="handleUploadRecordedVideo" :disabled="isRecording || isUploading || recordedBlobs.length == 0 || isUploaded">
                     <div class="flex items-center">
                         <PhFloppyDisk class="h-5 w-5 text-white" />
                         <span class="ml-2">
@@ -23,7 +23,7 @@
                         </span>
                     </div>
                 </Button>
-                <Button class="px-1 py-0" @click="deleteRecordedVideo" :disabled="recordedBlobs.length == 0 || isUploaded || isUploading">
+                <Button class="px-1 py-0 ml-0 md:ml-auto" @click="deleteRecordedVideo" :disabled="recordedBlobs.length == 0 || isUploaded || isUploading">
                     <PhTrash class="h-5 w-5 text-white" />
                 </Button>
             </div>

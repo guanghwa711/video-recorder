@@ -18,9 +18,9 @@
 
     <div class="flex w-full gap-2 pt-4">
       <Button :outline="true" class="w-full max-w-52 text-red-600 disabled:!bg-gray-300 disabled:!text-gray-600 disabled:!border-gray-300" @click="showAcceptModal = true" :disabled="status == 'approved'">
-        <div class="flex items-center">
+        <div class="flex items-center px-1">
           <PhCheck class="h-5 w-5" />
-          <span class="ml-2">{{status == "approved" ? "Accepted" : "Accept"}}</span>
+          <span class="ml-2 text-sm md:text-xs lg:text-sm">{{status == "approved" ? "Accepted" : "Accept"}}</span>
         </div>
       </Button>
 
@@ -30,9 +30,9 @@
         @click="showDeclineModal = true"
         :disabled="status == 'declined'"
       >
-        <div class="flex items-center">
+        <div class="flex items-center px-1">
           <PhX class="h-5 w-5" />
-          <span class="ml-2">{{status == "declined" ? "Declined" : "Decline"}}</span>
+          <span class="ml-2 text-sm md:text-xs lg:text-sm">{{status == "declined" ? "Declined" : "Decline"}}</span>
         </div>
       </Button>
     </div>

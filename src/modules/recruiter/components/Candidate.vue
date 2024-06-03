@@ -1,77 +1,76 @@
 <template>
-  <div v-if="candidateId && videoId" class="flex flex-col sm:flex-row w-full gap-8 rounded-xl border items-center border-slate-200 p-6">
-    <div class="h-full w-[250px] xl:w-[250px] lg:w-48 md:40 rounded-xl">
-      <div v-if="!videoId">
-        <PhImage class="h-full w-full text-slate-300" />
-      </div>
-      <div v-if="videoId">
-        <mux-player
-          class="aspect-square max-h-[244px] xl:max-h-[244px] lg:max-h-48 md:max-h-40 w-full rounded-xl bg-slate-200"
-          ref="muxplayer"
-          :playback-id="videoId"
-          metadata-video-title="Test video title"
-          metadata-viewer-user-id="user-id-007"
-        ></mux-player>
-      </div>
+  <div v-if="candidateId && videoId" class="self-stretch justify-start items-start gap-4 flex sm:flex-row flex-col">
+    <div class="w-[300px] sm:w-[250px] h-[250px] relative bg-white">
+      <mux-player class="w-[300px] sm:w-[250px] h-[250px] rounded-2xl" ref="muxplayer" :playback-id="videoId"
+        metadata-video-title="Test video title" metadata-viewer-user-id="user-id-007"></mux-player>
     </div>
 
-    <div class="flex h-full w-full flex-col justify-between">
-      <div class="space-y-2" @click="showUserInfoModal= true">
-        <div class="text-lg font-bold">{{ props.firstName }} {{ props.lastName }}</div>
+    <div class="flex h-full w-full flex-col gap-4">
+      <div @click="showUserInfoModal = true">
+        <div class="text-[34px] font-bold text-slate-900 text-center sm:text-start">{{ props.firstName }} {{
+          props.lastName }}</div>
 
-        <div class="w-full rounded-lg text-lg font-normal text-slate-600">
+        <div class="w-full rounded-lg text-base font-normal text-slate-600">
           {{ props.bio || "This candidate has not bio yet." }}
         </div>
       </div>
+      <div v-if="!props.propositionDate" class="flex w-full gap-5">
+        <Button :outline="true"
+          class="w-[218px] h-[43px] px-[22px] py-2 rounded flex-col justify-center items-center inline-flex"
+          @click="showPropositionModal = true">
+          <div class="justify-center items-center gap-2 inline-flex">
+            <!-- <PhPaperPlaneTilt class="h-5 w-5 text-red-600 cursor-pointer" /> -->
+            <span class="text-red-600 text-lg font-bold leading-[27px] tracking-tight">Send proposition</span>
+          </div>
+        </Button>
+        <!-- <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40"@click="showPropositionModal = true"> -->
+        <div class="flex items-center" @click="showPropositionModal = true">
+          <PhThumbsUp class="h-5 w-5 text-slate-600 cursor-pointer" />
+          <!-- <span class="ml-2 text-xs lg:text-sm">Shortlist</span> -->
+        </div>
+        <!-- </Button> -->
+        <!-- <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true"> -->
+        <div class="flex items-center" @click="showNotinteresetedModal = true">
+          <PhThumbsDown class="h-5 w-5 text-slate-600 cursor-pointer" />
+          <!-- <span class="ml-2 text-xs lg:text-sm">Not interested</span> -->
+        </div>
+        <!-- </Button> -->
 
-      <div v-if="props.propositionDate" class="mb-1 flex items-center text-sm text-slate-600">
-        <PhStar v-if="['shortlisted', 'approved'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
-        <PhClock v-if="props.status == 'requested'" class="h-6 w-6 text-red-600" />
-        <PhThumbsDown v-if="['uninterested', 'declined'].includes(props.status as string)" class="h-6 w-6 text-red-600" />
-        <span class="ml-2">{{ props.status }}</span>
       </div>
-      <div v-else class="flex w-full gap-4">
-        <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showShortlistModal = true">
-          <div class="flex items-center">
-            <PhStar class="h-5 w-5 text-red-600" />
-            <span class="ml-2 text-xs lg:text-sm">Shortlist</span>
-          </div>
-        </Button>
 
-        <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showPropositionModal = true">
-          <div class="flex items-center">
-            <PhPaperPlaneTilt class="h-5 w-5 text-red-600" />
-            <span class="ml-2 text-xs lg:text-sm">Send proposition</span>
-          </div>
-        </Button>
-
-        <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true">
-          <div class="flex items-center">
-            <PhThumbsDown class="h-5 w-5 text-red-600" />
-            <span class="ml-2 text-xs lg:text-sm">Not interested</span>
-          </div>
-        </Button>
-      
-      </div>
-      <div class="flex">
-        <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
-          <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showPropositionModal = true">
-            <div class="flex items-center">
-              <PhPaperPlaneTilt class="h-5 w-5 text-red-600" />
-              <span class="ml-2 text-xs lg:text-sm">Send proposition</span>
+      <div v-if="props.propositionDate" class="flex gap-4">
+        <div v-if="['uninterested', 'shortlisted'].includes(props.status as string)" class="flex gap-5">
+          <Button :outline="true"
+            class="w-[218px] h-[43px] px-[22px] py-2 rounded flex-col justify-center items-center inline-flex"
+            @click="showPropositionModal = true">
+            <div class="justify-center items-center gap-2 inline-flex">
+              <!-- <PhPaperPlaneTilt class="h-5 w-5 text-red-600 cursor-pointer" /> -->
+              <span class="text-red-600 text-lg font-bold leading-[27px] tracking-tight">Send proposition</span>
             </div>
           </Button>
         </div>
 
-        <div v-if="['shortlisted'].includes(props.status as string)" class="flex w-full gap-4">
-          <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true">
-            <div class="flex items-center">
-              <PhThumbsDown class="h-5 w-5 text-red-600" />
-              <span class="ml-2 text-xs lg:text-sm">Not interested</span>
-            </div>
-          </Button>
+        <div v-if="['shortlisted'].includes(props.status as string)" class="flex gap-4">
+          <!-- <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true"> -->
+          <div class="flex items-center" @click="showNotinteresetedModal = true">
+            <PhThumbsDown class="h-5 w-5 text-slate-600 cursor-pointer" />
+            <!-- <span class="ml-2 text-xs lg:text-sm">Not interested</span> -->
+          </div>
+          <!-- </Button> -->
         </div>
       </div>
+      <div v-if="props.propositionDate"
+        class="w-[88px] h-[26px] px-[9px] py-3 bg-gray-200 rounded-[7px] justify-center items-center gap-2.5 inline-flex">
+        <PhStar v-if="props.status == 'shortlisted'" class="h-6 w-6 text-slate-900" />
+        <PhCheck v-if="props.status == 'approved'" class="h-6 w-6 text-slate-900" />
+        <PhClock v-if="props.status == 'requested'" class="h-6 w-6 text-slate-900" />
+        <PhEyeSlash v-if="props.status == 'uninterested'"
+          class="h-6 w-6 text-slate-900" />
+        <PhX v-if="props.status == 'declined'"
+          class="h-6 w-6 text-slate-900" />
+        <span class="text-zinc-600 text-[10px] font-normal leading-[15px] tracking-tight">{{ props.status }}</span>
+      </div>
+
     </div>
   </div>
 
@@ -92,11 +91,7 @@
     </div>
   </Modal>
 
-  <Modal
-    :show-modal="showPropositionModal"
-    :show-buttons="false"
-    @close="showPropositionModal = false"
-  >
+  <Modal :show-modal="showPropositionModal" :show-buttons="false" @close="showPropositionModal = false">
     <div class="space-y-2">
       <div class="text-xl font-medium">Send proposition to Candidate?</div>
 
@@ -114,11 +109,7 @@
     </div>
   </Modal>
 
-  <Modal
-    :show-modal="showNotinteresetedModal"
-    :show-buttons="false"
-    @close="showNotinteresetedModal = false"
-  >
+  <Modal :show-modal="showNotinteresetedModal" :show-buttons="false" @close="showNotinteresetedModal = false">
     <div class="space-y-2">
       <div class="text-xl font-medium">Not interested for this candidate?</div>
 
@@ -137,27 +128,17 @@
   </Modal>
 
   <Modal :show-modal="showUserInfoModal" :show-buttons="false" :size="`w-[500px]`" @close="showUserInfoModal = false">
-    <CandidateInfo 
-      :firstName="props.firstName" 
-      :lastName="props.lastName"
-      :email="props.email"
-      :phone="props.phone"
-      :company="props.company"
-      :videoId="props.videoId"
-      :seeking_contract_type="props.seeking_contract_type"
-      :seeking_field="props.seeking_field"
-      :seeking_rate="props.seeking_rate"
-      :bio="props.bio"
-      :status="props.status"
-      :profile_photo="props.profile_photo"
-    />
+    <CandidateInfo :firstName="props.firstName" :lastName="props.lastName" :email="props.email" :phone="props.phone"
+      :company="props.company" :videoId="props.videoId" :seeking_contract_type="props.seeking_contract_type"
+      :seeking_field="props.seeking_field" :seeking_rate="props.seeking_rate" :bio="props.bio" :status="props.status"
+      :profile_photo="props.profile_photo" />
   </Modal>
 
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { PhImage, PhStar, PhPaperPlaneTilt, PhCheckCircle, PhClock, PhX, PhThumbsDown } from '@phosphor-icons/vue'
+import { PhImage, PhStar, PhPaperPlaneTilt, PhCheck, PhClock, PhX, PhEyeSlash, PhThumbsUp, PhThumbsDown } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
 import API from '@/utils/api/api'
@@ -188,8 +169,8 @@ const props = defineProps<{
   propositionDate?: string
   videoId?: string
   status?: string
-  company?:string
-  seeking_contract_type?:string
+  company?: string
+  seeking_contract_type?: string
   seeking_field?: string
   seeking_rate?: string
   profile_photo?: string
@@ -201,13 +182,13 @@ const updateCandidacyStatus = (status: string) => {
     candidate_id: props.candidateId,
     status: status
   })
-  .then((response) => {
-    showPropositionModal.value = false;
-    showShortlistModal.value = false;
-    showNotinteresetedModal.value = false;
-    emit("getCandidacies");
-    emit("getCandidates");
-  })
+    .then((response) => {
+      showPropositionModal.value = false;
+      showShortlistModal.value = false;
+      showNotinteresetedModal.value = false;
+      emit("getCandidacies");
+      emit("getCandidates");
+    })
 }
 
 const showPropositionModal = ref(false)

@@ -30,7 +30,7 @@
         <div class="space-y-6 px-10">
           <div class="flex gap-4">
             <Button @click="handleClickRecordVideo" :outline="true" class="w-60">
-              <div class="flex items-center">
+              <div class="flex items-center px-2">
                 <PhVideoCamera class="h-5 w-5 text-red-600" />
                 <span class="ml-2">Record Video</span>
               </div>
@@ -49,7 +49,7 @@
             <Spinner />
           </div>
 
-          <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[35%]">
+          <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[95%] md:w-1/2 lg:w-1/2 xl:w-[40%]">
             <VideoRecorder @get-video-resumes="getVideoResumes" v-model:is-uploading="isUpLoading" />
           </Modal>
 

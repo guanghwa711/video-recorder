@@ -5,26 +5,26 @@
         <Profile/>
       </template>
       <template #tab2>
-        <div class="flex flex-col xl:flex-row gap-10">
-          <div class="w-full flex flex-col xl:flex-col md:flex-row ml-24 md:ml-4 max-w-60 gap-10 xl:gap-5 lg:gap-60 md:gap-28">
+        <div class="flex flex-col xl:flex-row gap-10 px-2.5 sm:px-0">
+          <div class="w-[300px] sm:w-[180px] flex flex-col xl:flex-col md:flex-row gap-8 xl:gap-5 lg:gap-60 md:gap-28 mr-0 sm:mr-14">
             <div>
-              <div class="font-medium">Job Title</div>
+              <div class="text-slate-900 text-lg font-bold leading-[27px] tracking-tight mb-4">Job Title</div>
               <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']" />
             </div>
             <!-- <Checkbox v-model:checked="jobTitle.web" label="Web" />
             <Checkbox v-model:checked="jobTitle.mobile" label="Mobile" /> -->
             <div class="space-y-3">
-              <div class="mb-4 font-medium">Contract Type</div>
+              <div class="text-slate-900 text-lg font-bold leading-[27px] tracking-tight">Contract Type</div>
               <Checkbox v-model:checked="contractType.apprenti" label="Apprenti" />
               <Checkbox v-model:checked="contractType.employee" label="Employee" />
               <Checkbox v-model:checked="contractType.cadre" label="Cadre" />
             </div>
             
             <div>
-              <div class="mb-4 font-medium">Seeking Rate</div>
+              <div class="text-slate-900 text-lg font-bold leading-[27px] tracking-tight mb-4">Seeking Rate</div>
               <!-- <Checkbox v-model:checked="enableSeekingRate" label="Enable Seeking Rate" /> -->
-              <div class="items-center gap-x-2 w-[180px]">
-                <Slider v-model:value="seekingRate" />
+              <div class="items-center gap-x-2 w-full sm:w-[180px]">
+                <Slider v-model:value="seekingRate"/>
                 <div class="flex mt-2">
                   <span>{{ seekingRate[0] }} %</span>
                   <span class="ml-auto">{{ seekingRate[1] }} %</span>
@@ -35,7 +35,7 @@
             
           </div>
 
-          <div v-if="!isLoading && candidates.length > 0"  class="w-full grid grid-cols-1 gap-4">
+          <div v-if="candidates.length > 0" class="flex-col justify-start items-start gap-8 inline-flex">
             <Candidate
               @get-candidacies="getCandidacies"
               @get-candidates="getCandidates"
@@ -56,20 +56,20 @@
               :profile_photo="candidate?.profile_photo"
             />
           </div>
-          <div v-if="!isLoading && candidates.length == 0" class="m-auto font-medium text-xl text-gray-700">
+          <div v-if="candidates.length == 0" class="m-auto font-medium text-xl text-gray-700">
             Not found
           </div>
-          <div class="m-auto" v-if="isLoading">
+          <!-- <div class="m-auto" v-if="isLoading">
             <Spinner />
-          </div>
+          </div> -->
           <!-- <Pagination /> -->
         </div>
       </template>
 
       <template #tab3>
-        <div class="flex flex-col xl:flex-row gap-10">
-          <div class="w-full flex flex-col md:flex-row xl:flex-col items-start md:items-center xl:items-start gap-3 max-w-60 xl:max-w-[220px] ml-24 xl:ml-auto md:ml-0">
-            <div class="font-medium">Candidates</div>
+        <div class="flex flex-col xl:flex-row gap-10 px-2.5 sm:px-0">
+          <div class="w-full flex flex-col md:flex-row xl:flex-col items-start md:items-center xl:items-start gap-3 max-w-60 xl:max-w-[220px]">
+            <div class="text-slate-900 text-lg font-bold leading-[27px] tracking-tight">Candidates</div>
             <Checkbox v-model:checked="candidacyStatus.shortlisted" label="Shortlisted" />
             <Checkbox v-model:checked="candidacyStatus.requested" label="Proposition Sent" />
             <Checkbox v-model:checked="candidacyStatus.approved" label="Proposition Accepted" />
@@ -77,7 +77,7 @@
             <Checkbox v-model:checked="candidacyStatus.uninterested" label="Uninterested" />
           </div>
 
-          <div v-if="candidacies.length > 0" class="w-full grid grid-cols-1 gap-4">
+          <div v-if="candidacies.length > 0" class="flex-col justify-start items-start gap-8 inline-flex">
             <Candidate
               @get-candidacies="getCandidacies"
               v-for="candidacy in candidacies"
@@ -98,12 +98,12 @@
               :profile_photo="candidacy?.candidate?.profile_photo"
             />
           </div>
-          <div v-if="!isLoading && candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">
+          <div v-if="candidacies.length == 0" class="m-auto font-medium text-xl text-gray-700">
             Not found
           </div>
-          <div class="m-auto" v-if="isLoading">
+          <!-- <div class="m-auto" v-if="isLoading">
             <Spinner />
-          </div>
+          </div> -->
         </div>
       </template>
     </Tabs>

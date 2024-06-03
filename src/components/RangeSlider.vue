@@ -1,6 +1,6 @@
 <template>
     <SliderRoot
-      v-model="sliderValue" :default-value="[20, 80]" :min-steps-between-thumbs="1" class="relative flex items-center select-none touch-none w-[180px] h-5" :max="100"
+      v-model="sliderValue" :default-value="[20, 80]" :min-steps-between-thumbs="1" class="relative flex items-center select-none touch-none h-5" :max="100"
       :step="10"
     >
       <SliderTrack class="bg-slate-300 relative grow rounded-full h-[3px]">
