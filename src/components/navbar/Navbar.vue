@@ -4,7 +4,7 @@
       <div class="flex h-16 justify-between">
         <img src="../../assets/logo.png" @click="router.push('/')" class="cursor-pointer" v-if="props.themeColor"/>
         <div v-else class="flex items-center justify-center">
-          <img src="../../assets/logo1.png" @click="router.push('/')" class="cursor-pointer h-9"/>
+          <img src="../../assets/logo1.png" @click="router.push('/')" class="cursor-pointer h-8"/>
         </div>
         <div class="flex">
           <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-4">

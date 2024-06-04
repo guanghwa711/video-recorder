@@ -3,16 +3,16 @@
         <div
             class="w-full h-[470px] opacity-80 mix-blend-multiply bg-indigo-900 absolute flex items-center justify-center">
         </div>
-        <div class="absolute flex flex-col items-center justify-center">
+        <div class="absolute flex flex-col items-center justify-center gap-y-5">
             <div class="text-center text-white text-4xl xl:text-6xl md:text-5xl font-extrabold leading-[64px]">
                 Titre de la page presentation</div>
-            <div class="w-[250px] h-[83px] md:w-96 xl:w-[500px] mt-7 text-center text-white text-lg font-normal leading-7">
+            <div class="w-[250px] md:w-96 xl:w-[500px] text-center text-white text-lg font-normal leading-7">
                 Lorem ipsum
                 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                 consequat.</div>
             <button
-                class="outline-slate-50 px-8 py-5 text-center mt-20 text-white text-lg font-bold leading-normal outline gap-2 outline-1 w-72 rounded-lg">
+                class="outline-slate-50 px-8 py-5 text-center text-white text-lg font-bold leading-normal outline gap-2 outline-1 w-72 rounded-lg">
                 Call to Action
             </button>
             <!-- <div

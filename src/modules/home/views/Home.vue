@@ -1,54 +1,86 @@
 <template>
-    <div class="relative">
+    <div class="relative h-full">
         <div class="flex justify-center">
-            <div class="absolute flex items-center justify-center p-4 gap-x-10 xl:gap-x-72 lg:gap-x-72 md:gap-x-48">
-                <img :src="getImgUrl(homepageContent?.navbar?.logo_img)"
-                    class="cursor-pointer w-14 xl:w-40 lg:w-28 md:w-16" />
-                <div class="flex flex-col sm:flex-row gap-5 xl:gap-20 lg:gap-15 md:gap-10">
-                    <button class="text-slate-50 text-xs xl:text-lg lg:text-base md:text-sm font-bold">
-                        <RouterLink to="/recruiter">{{ homepageContent?.navbar?.recruiter }}</RouterLink>
-                    </button>
-                    <button class="text-slate-50 text-xs xl:text-lg lg:text-base md:text-sm font-bold">
-                        <RouterLink to="/candidate">
-                            {{ homepageContent?.navbar?.candidate }}</RouterLink>
-                    </button>
-                    <button class="text-slate-50 text-xs xl:text-lg lg:text-base md:text-sm  font-bold">
+            <div class="flex flex-col md:flex-row absolute">
+                <div class="flex flex-col items-center justify-center">
+                    <img :src="getImgUrl(homepageContent?.recruiter_bg)" alt=""
+                        class="h-[100vh] w-[100vw] xl:w-[50vw] md:hidden absolute object-cover">
+                    <div
+                        class="flex items-center justify-center w-[100vw] mix-blend-multiply h-[100vh] bg-red-600 opacity-80 md:w-[50vw]">
+                    </div>
+
+                    <div class="absolute space-y-3 flex flex-col items-center justify-center">
+                        <div class="text-center text-white text-5xl font-bold leading-[52px]">{{
+                            homepageContent?.recruiter_title }}</div>
+                        <button
+                            class="px-6 py-2 rounded-lg text-base font-semibold leading-relaxed tracking-tight outline outline-1 justify-center cursor-pointer text-white items-center gap-2 inline-flex">
+                            <RouterLink to="/recruiter">{{ homepageContent?.recruiter }}</RouterLink>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-center justify-center">
+                    <img :src="getImgUrl(homepageContent?.candidate_bg)" alt=""
+                        class="h-[100vh] w-[100vw] xl:w-[50vw] md:hidden absolute object-cover" />
+                    <div
+                        class="flex items-center justify-center h-[100vh] w-[100vw] mix-blend-multiply bg-indigo-900 opacity-80 md:w-[50vw]">
+                    </div>
+                    <div class="absolute space-y-3 flex flex-col items-center justify-center">
+                        <div class="text-center text-white text-5xl font-bold leading-[52px]">{{
+                            homepageContent?.candidate_title }}</div>
+                        <button
+                            class="px-6 py-2 rounded-lg outline outline-1 justify-center text-base font-semibold leading-relaxed tracking-tight cursor-pointer text-white items-center gap-2 inline-flex">
+                            <RouterLink to="/candidate">{{ homepageContent?.candidate }}</RouterLink>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="absolute flex md:hidden bottom-0 w-full items-center justify-center">
+                    <div
+                        class="flex flex-col sm:flex-row items-center justify-center text-center h-16 gap-2 text-xs lg:text-sm  font-medium text-white">
+                        <div>
+                            © 2024 Nakama Agency. All rights reserved. |
+                        </div>
+                        <div>
+                            <RouterLink to="data-privacy">Privacy Policy</RouterLink> | <RouterLink to="terms-of-service">Terms
+                                of Service</RouterLink>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-[100vw] h-[100vh] overflow-hidden max-md:hidden">
+                <video ref="videoEl" id="video" preload="metadata" autoplay loop muted
+                    class="w-full h-full object-cover">
+                    <source :src="'https://shark-app-987ih.ondigitalocean.app/uploads/LP_bg_26e69fedde.mp4'"
+                        type="video/mp4" />
+                </video>
+            </div>
+            <div
+                class="absolute w-[85%] xl:w-[90%] mt-8 px-6 py-[4px] bg-opacity-10 bg-white rounded-lg backdrop-blur-[114px] justify-between items-center inline-flex">
+                <img :src="getImgUrl(homepageContent?.navbar?.logo_img)" class="cursor-pointer h-7" />
+                <div class="flex flex-col sm:flex-row gap-6 p-2.5 justify-end max-md:hidden">
+                    <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight">
                         <RouterLink to="/about">{{ homepageContent?.navbar?.aboutus }}</RouterLink>
                     </button>
-                    <button class="text-slate-50 text-xs xl:text-lg lg:text-base md:text-sm font-bold">
+                    <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight">
                         <RouterLink to="/contact">{{ homepageContent?.navbar?.contact }}</RouterLink>
                     </button>
                     <button
-                        class="outline-slate-50 text-slate-50 font-bold text-xs xl:text-lg lg:text-base md:text-sm outline outline-offset-8 outline-1 w-14 xl:w-28 lg:w-20 md:w-16 rounded-sm"
+                        class="px-6 py-2 rounded-lg border text-white border-white justify-center items-center gap-2 inline-flex"
                         v-if="!isAuthenticated" @click="goToLogin">Login</button>
                     <button
-                        class="outline-slate-50 text-slate-50 font-bold text-xs xl:text-lg lg:text-base md:text-sm outline outline-offset-8 outline-1 w-14 xl:w-28 lg:w-20 md:w-16 rounded-sm"
+                        class="px-6 py-2 rounded-lg border text-white border-white justify-center items-center gap-2 inline-flex"
                         v-else @click="goToLogout">Logout</button>
                 </div>
-            </div>
-            <div class="flex flex-col lg:flex-row">
-                <div class="flex items-center justify-center">
-                    <button
-                        class="outline-slate-50 text-slate-50 font-normal outline outline-offset-4 outline-1 text-2xl xl:text-3xl w-48 sm:w-80 xl:w-96 rounded-sm absolute">
-                        <RouterLink to="/recruiter">{{ homepageContent?.recruiter }}</RouterLink>
-                    </button>
-                    <img :src="getImgUrl(homepageContent?.recruiter_bg)" alt="" class="h-[100vh] w-[100vw] xl:w-[50vw]">
-                </div>
-                <div class="flex items-center justify-center">
-                    <button
-                        class="outline-slate-50 text-slate-50 font-normal outline outline-offset-4 outline-1 text-2xl xl:text-3xl w-48 sm:w-80 xl:w-96 rounded-sm absolute">
-                        <RouterLink to="/candidate">{{ homepageContent?.candidate }}</RouterLink>
-                    </button>
-                    <img :src="getImgUrl(homepageContent?.candidate_bg)" alt=""
-                        class="h-[100vh] w-[100vw] xl:w-[50vw]" />
-                </div>
+                <img src="/src//assets//menu.png" alt="" class="flex gap-6 py-5 justify-end md:hidden">
             </div>
         </div>
-        <div class="relative flex items-center justify-center">
+        <div class="absolute bottom-0 hidden md:flex w-full items-center justify-center">
             <div
-                class="flex flex-col sm:flex-row absolute items-center justify-center text-center h-16 gap-2 text-xs lg:text-sm  font-medium bottom-0 text-white">
+                class="flex flex-col sm:flex-row items-center justify-center text-center h-16 gap-2 text-xs lg:text-sm  font-medium text-white">
                 <div>
-                    © 2024 Your Company Name. All rights reserved. |
+                    © 2024 Nakama Agency. All rights reserved. |
                 </div>
                 <div>
                     <RouterLink to="data-privacy">Privacy Policy</RouterLink> | <RouterLink to="terms-of-service">Terms
@@ -63,7 +95,7 @@
 
 
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref, watchEffect, nextTick } from 'vue'
 import API from '@/utils/api/api'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue';
@@ -72,10 +104,23 @@ import { getStrapiObject, getImgUrl } from '@/utils/http/strapi';
 const { loginWithRedirect, isAuthenticated, isLoading, logout, user } = useAuth0();
 const userId = localStorage.getItem("user_id");
 const homepageContent = ref<any>(null);
+const videoEl = ref<HTMLVideoElement | null>(null);
 
 const router = useRouter()
+
+onMounted(() => {
+    nextTick(() => {
+        if (videoEl.value) {
+            videoEl.value.addEventListener('canplaythrough', () => {
+                videoEl.value?.play();
+            })
+        }
+    })
+})
+
 onMounted(async () => {
-    homepageContent.value = await getStrapiObject("home-page", ['navbar', 'recruiter_bg', 'candidate_bg'])
+    videoEl.value?.play()
+    homepageContent.value = await getStrapiObject("home-page", ['navbar', 'recruiter_bg', 'candidate_bg', 'landing_movie'])
     if (['/recruiter', '/candidate', '/admin'].includes(router.currentRoute.value.path)) {
         const userRole = localStorage.getItem('user_role')
 
