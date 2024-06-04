@@ -10,3 +10,15 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
+.gradient-border {
+  border-bottom: 2px;
+  border-color: transparent;
+  border-style: solid;
+}
+
+.gradient-border:hover {
+  border-bottom: 2px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #6F79BB, #F2674F) 1;
+}
+

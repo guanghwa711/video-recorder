@@ -9,6 +9,9 @@ export default {
         primary: {
           ...colors.red
         }
+      },
+      borderImage: {
+        'gradient-to-r': 'linear-gradient(to right, #ff7e5f, #feb47b)'
       }
     },
 

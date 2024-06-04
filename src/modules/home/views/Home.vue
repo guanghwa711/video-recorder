@@ -62,17 +62,17 @@
                 class="absolute w-[85%] xl:w-[90%] mt-8 px-6 py-[4px] bg-opacity-10 bg-white rounded-lg backdrop-blur-[114px] justify-between items-center inline-flex">
                 <img :src="getImgUrl(homepageContent?.navbar?.logo_img)" class="cursor-pointer h-7" />
                 <div class="flex flex-col sm:flex-row gap-6 p-2.5 justify-end max-md:hidden">
-                    <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight">
+                    <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight gradient-border">
                         <RouterLink to="/about">{{ homepageContent?.navbar?.aboutus }}</RouterLink>
                     </button>
-                    <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight">
+                    <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight gradient-border">
                         <RouterLink to="/contact">{{ homepageContent?.navbar?.contact }}</RouterLink>
                     </button>
                     <button
-                        class="px-6 py-2 rounded-lg border text-white border-white justify-center items-center gap-2 inline-flex"
+                        class="px-6 py-2 rounded-lg border text-white border-white hover:bg-white hover:bg-opacity-20 hover:shadow justify-center items-center gap-2 inline-flex"
                         v-if="!isAuthenticated" @click="goToLogin">Login</button>
                     <button
-                        class="px-6 py-2 rounded-lg border text-white border-white justify-center items-center gap-2 inline-flex"
+                        class="px-6 py-2 rounded-lg border text-white border-white hover:bg-white hover:bg-opacity-20 hover:shadow justify-center items-center gap-2 inline-flex"
                         v-else @click="goToLogout">Logout</button>
                 </div>
                 <img src="/src//assets//menu.png" alt="" class="flex gap-6 py-5 justify-end md:hidden">
