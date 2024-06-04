@@ -1,6 +1,15 @@
 <template>
     <div class="relative h-full">
         <div class="flex justify-center">
+            
+            <div class="w-[100vw] h-[100vh] overflow-hidden max-md:hidden">
+                <video ref="videoEl" id="video" preload="metadata" autoplay loop muted
+                    class="w-full h-full object-cover">
+                    <source :src="'https://shark-app-987ih.ondigitalocean.app/uploads/LP_bg_26e69fedde.mp4'"
+                        type="video/mp4" />
+                </video>
+            </div>
+
             <div class="flex flex-col md:flex-row absolute">
                 <div class="flex flex-col items-center justify-center">
                     <img :src="getImgUrl(homepageContent?.recruiter_bg)" alt=""
@@ -9,11 +18,11 @@
                         class="flex items-center justify-center w-[100vw] mix-blend-multiply h-[100vh] bg-red-600 opacity-80 md:w-[50vw]">
                     </div>
 
-                    <div class="absolute space-y-3 flex flex-col items-center justify-center">
+                    <div class="absolute gap-6 flex flex-col items-center justify-center">
                         <div class="text-center text-white text-5xl font-bold leading-[52px]">{{
                             homepageContent?.recruiter_title }}</div>
                         <button
-                            class="px-6 py-2 rounded-lg text-base font-semibold leading-relaxed tracking-tight outline outline-1 justify-center cursor-pointer text-white items-center gap-2 inline-flex">
+                            class="px-6 py-2 rounded-lg text-base font-semibold leading-relaxed tracking-tight hover:bg-red-600 outline outline-1 justify-center cursor-pointer text-white items-center gap-2 inline-flex">
                             <RouterLink to="/recruiter">{{ homepageContent?.recruiter }}</RouterLink>
                         </button>
                     </div>
@@ -25,11 +34,11 @@
                     <div
                         class="flex items-center justify-center h-[100vh] w-[100vw] mix-blend-multiply bg-indigo-900 opacity-80 md:w-[50vw]">
                     </div>
-                    <div class="absolute space-y-3 flex flex-col items-center justify-center">
+                    <div class="absolute gap-6 flex flex-col items-center justify-center">
                         <div class="text-center text-white text-5xl font-bold leading-[52px]">{{
                             homepageContent?.candidate_title }}</div>
                         <button
-                            class="px-6 py-2 rounded-lg outline outline-1 justify-center text-base font-semibold leading-relaxed tracking-tight cursor-pointer text-white items-center gap-2 inline-flex">
+                            class="px-6 py-2 rounded-lg outline outline-1 justify-center hover:bg-indigo-900 text-base font-semibold leading-relaxed tracking-tight cursor-pointer text-white items-center gap-2 inline-flex">
                             <RouterLink to="/candidate">{{ homepageContent?.candidate }}</RouterLink>
                         </button>
                     </div>
@@ -49,13 +58,6 @@
                 </div>
             </div>
 
-            <div class="w-[100vw] h-[100vh] overflow-hidden max-md:hidden">
-                <video ref="videoEl" id="video" preload="metadata" autoplay loop muted
-                    class="w-full h-full object-cover">
-                    <source :src="'https://shark-app-987ih.ondigitalocean.app/uploads/LP_bg_26e69fedde.mp4'"
-                        type="video/mp4" />
-                </video>
-            </div>
             <div
                 class="absolute w-[85%] xl:w-[90%] mt-8 px-6 py-[4px] bg-opacity-10 bg-white rounded-lg backdrop-blur-[114px] justify-between items-center inline-flex">
                 <img :src="getImgUrl(homepageContent?.navbar?.logo_img)" class="cursor-pointer h-7" />
