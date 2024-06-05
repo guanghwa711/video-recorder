@@ -59,7 +59,7 @@
             </div>
 
             <div
-                class="absolute w-[85%] xl:w-[90%] mt-8 px-6 py-[4px] bg-opacity-10 bg-white rounded-lg backdrop-blur-[114px] justify-between items-center inline-flex">
+                class="absolute w-[85%] xl:w-[90%] !min-h-[68px] mt-8 px-6 py-[4px] bg-opacity-10 bg-white rounded-lg backdrop-blur-[114px] justify-between items-center inline-flex">
                 <img :src="getImgUrl(homepageContent?.navbar?.logo_img)" class="cursor-pointer h-7" />
                 <div class="flex flex-col sm:flex-row gap-6 p-2.5 justify-end max-md:hidden">
                     <button class="text-slate-50 text-lg font-bold leading-[27px] tracking-tight gradient-border">
@@ -75,7 +75,7 @@
                         class="px-6 py-2 rounded-lg border text-white border-white hover:bg-white hover:bg-opacity-20 hover:shadow justify-center items-center gap-2 inline-flex"
                         v-else @click="goToLogout">Logout</button>
                 </div>
-                <img src="/src//assets//menu.png" alt="" class="flex gap-6 py-5 justify-end md:hidden">
+                <MobileMenu class="md:hidden"/>
             </div>
         </div>
         <div class="absolute bottom-0 hidden md:flex w-full items-center justify-center">
@@ -102,6 +102,7 @@ import API from '@/utils/api/api'
 import { useRouter } from 'vue-router'
 import { useAuth0 } from '@auth0/auth0-vue';
 import { getStrapiObject, getImgUrl } from '@/utils/http/strapi';
+import MobileMenu from './MobileMenu.vue';
 
 const { loginWithRedirect, isAuthenticated, isLoading, logout, user } = useAuth0();
 const userId = localStorage.getItem("user_id");
