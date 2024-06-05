@@ -28,10 +28,10 @@
                 <MenuItems
                     class="absolute right-0 mt-2 w-[100vw] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none">
                     <div class="flex flex-col px-1 py-1">
-                        <NavbarItem v-for="(item, index) in items" :key="index" :to="item.to" v-if="isAuthenticated">
-                            {{ item.title }}
+                        <NavbarItem v-for="(otheritem, idx) in otheritems" :key="idx" :to="otheritem.to" v-if="!isAuthenticated">
+                            {{ otheritem.title }}
                         </NavbarItem>
-                        <NavbarItem v-for="(item, idx) in otheritems" :key="idx" :to="item.to" v-else>
+                        <NavbarItem v-for="(item, index) in items" :key="index" :to="item.to" v-else>
                             {{ item.title }}
                         </NavbarItem>
                         <button :class="'text-gray-900 group flex w-full items-center rounded-md px-2 py-2 text-sm'"
@@ -57,7 +57,6 @@ import NavbarItem from './NavbarItem.vue';
 import { PhSignOut, PhSignIn } from '@phosphor-icons/vue'
 import { useAuth0 } from '@auth0/auth0-vue';
 const { logout, loginWithRedirect, isAuthenticated } = useAuth0();
-
 
 const items: { title: string; to: string }[] = [
     { title: 'Recruiters', to: 'recruiter' },

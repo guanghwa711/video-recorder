@@ -12,7 +12,7 @@
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                 consequat.</div>
             <button
-                class="outline-slate-50 px-8 py-5 text-center text-white text-lg font-bold leading-normal outline gap-2 outline-1 w-72 rounded-lg">
+                class="outline-slate-50 px-3 py-2 lg:px-8 lg:py-5 text-center text-white text-lg font-bold leading-normal outline gap-2 outline-1 w-48 lg:w-72 rounded-lg">
                 Call to Action
             </button>
             <!-- <div

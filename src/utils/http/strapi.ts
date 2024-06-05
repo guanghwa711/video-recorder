@@ -11,9 +11,9 @@ export const getStrapiObject = (singularApiId: string, relations?: string[]) => 
     return new Promise((resolve, reject) => {
         let mediaPopulateQuery = ''
         if (relations && relations?.length > 0) {
-            mediaPopulateQuery = relations?.map(relation => `populate[${relation}][populate]=*`).join('&')
+            mediaPopulateQuery = "?" + relations?.map(relation => `populate[${relation}][populate]=*`).join('&')
         }
-        strapi.get(`/api/${singularApiId}?${mediaPopulateQuery}`)
+        strapi.get(`/api/${singularApiId}${mediaPopulateQuery}`)
             .then((response) => {
                 resolve(response.data.data.attributes)
             })
