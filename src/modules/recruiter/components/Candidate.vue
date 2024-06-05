@@ -1,5 +1,5 @@
 <template>
-  <div v-if="candidateId && videoId" class="self-stretch justify-start items-start gap-4 flex sm:flex-row flex-col">
+  <div v-if="candidateId && videoId" class="justify-start items-start gap-4 flex sm:flex-row flex-col">
     <div class="w-[300px] sm:w-[250px] h-[250px] relative bg-white">
       <mux-player class="w-[300px] sm:w-[250px] h-[250px] rounded-2xl" ref="muxplayer" :playback-id="videoId"
         metadata-video-title="Test video title" metadata-viewer-user-id="user-id-007"></mux-player>
