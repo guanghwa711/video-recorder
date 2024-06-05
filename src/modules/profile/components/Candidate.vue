@@ -37,8 +37,8 @@
                 <Select v-model:selected:value="candidate.seeking_contract_type" :width="`w-full md:w-[400px]`"
                     :options="['apprenti', 'employee', 'cadre']" :label="`Contract Type`" />
                 <Label>Seeking</Label>
-                <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']" :width="`w-full md:w-[400px]`"
-                    :label="`Seeking`" />
+                <Select v-model:selected:value="candidate.seeking_field" :options="['web', 'mobile']"
+                    :width="`w-full md:w-[400px]`" :label="`Seeking`" />
                 <Label>Seeking Rate</Label>
                 <div class="flex items-center gap-x-2 w-full md:w-[400px]">
                     <Slider v-model:value="candidate.seeking_rate" />
@@ -49,8 +49,10 @@
                     <Button @click="updateUser" class="w-full md:w-[400px]">Update Profile</Button>
                 </div>
 
-                <div class="pt-[10px] !m-0">
-                    <Button @click="deleteCandidateModal = true" class="w-full md:w-[400px]">Delete Profile</Button>
+                <div class="pt-[10px] !m-0 flex justify-center items-center">
+                    <Button @click="deleteCandidateModal = true" class="w-full md:w-[200px] hover:!bg-transparent bg-white border-red-600 !text-slate-400">
+                        Delete Profile
+                    </Button>
                 </div>
             </div>
         </div>
@@ -155,7 +157,7 @@ const uploadAvatar = async (file: File) => {
         const newURL = new URL(response.data.url)
         const imgUrl = newURL.origin + newURL.pathname + `?t=${Date.now()}`;
         candidate.profile_photo = imgUrl;
-        updateUser();  
+        updateUser();
         console.log('File uploaded successfully:', imgUrl);
         isUploading.value = false;
         toast("Avatar image has been uploaded successfully!", {
