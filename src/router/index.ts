@@ -33,8 +33,7 @@ const router = createRouter({
                 type: "warning"
             });
             return false;
-            // router.push('/candidate');
-          } else return true
+          } router.push('/');
         }
       }
     },
@@ -53,8 +52,7 @@ const router = createRouter({
                 type: "warning"
             });
             return false;
-            // router.push('/recruiter');
-          } else return true
+          } router.push('/');
         }
       }
     },
@@ -83,8 +81,7 @@ const router = createRouter({
                 type: "warning"
             });
             return false;
-            // router.push('/recruiter');
-          } else return true
+          } router.push('/');
         }
       }
     },

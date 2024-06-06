@@ -1,6 +1,6 @@
 <template>
-    <div class="absolute right-0 flex justify-end">
-        <Menu as="div" class="relative z-10 inline-block text-left">
+    <div class="absolute right-0 w-full flex justify-end">
+        <Menu as="div" class="relative z-10 w-full flex justify-end text-left">
             <MenuButton class="flex items-center">
                 <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2 gap-6 py-5"
                     aria-controls="mobile-menu" aria-expanded="false">
@@ -13,7 +13,7 @@
                 leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
                 leave-to-class="transform scale-95 opacity-0">
                 <MenuItems
-                    class="absolute right-0 mt-2 max-w-[85vw] w-[85vw] origin-top-right divide-y divide-gray-100 rounded-md bg-white bg-opacity-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                    class="absolute right-0 top-16 w-full origin-top-right divide-y divide-gray-100 rounded-md bg-white bg-opacity-10 shadow-lg ring-1 ring-black/5 focus:outline-none">
                     <div class="flex flex-col px-1 py-1">
                         <NavbarItem v-for="(item, index) in items" :key="index" :to="item.to" class="!text-white">
                             {{ item.title }}

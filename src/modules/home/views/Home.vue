@@ -70,7 +70,7 @@
                     </button>
                     <button
                         class="px-6 py-2 rounded-lg border text-white border-white hover:bg-white hover:bg-opacity-20 hover:shadow justify-center items-center gap-2 inline-flex"
-                        v-if="!isAuthenticated" @click="goToLogin">Login</button>
+                        v-if="!userId" @click="goToLogin">Login</button>
                     <button
                         class="px-6 py-2 rounded-lg border text-white border-white hover:bg-white hover:bg-opacity-20 hover:shadow justify-center items-center gap-2 inline-flex"
                         v-else @click="goToLogout">Logout</button>
