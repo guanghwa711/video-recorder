@@ -2,8 +2,7 @@
     <div class="absolute right-0 flex w-full justify-end">
         <Menu as="div" class="relative z-10 inline-block text-left">
             <MenuButton class="flex items-center">
-                <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2"
-                    :class="props.themeColor ? 'text-white' : 'text-black'" aria-controls="mobile-menu"
+                <button type="button" class="relative inline-flex items-center justify-center rounded-md p-2" aria-controls="mobile-menu"
                     aria-expanded="false">
                     <span class="absolute -inset-0.5"></span>
                     <span class="sr-only">Open main menu</span>

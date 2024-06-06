@@ -5,7 +5,7 @@
       name: props.to
     }"
     class="group inline-flex items-center text-sm font-medium"
-    :class="`${props.themeColor ? 'text-white' : 'text-black'}`"
+    :class="`${props.themeColor ? 'text-white' : 'text-white'}`"
     v-slot="{ isActive }"
   >
     <div

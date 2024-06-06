@@ -17,6 +17,7 @@
                 :placeholder="contactContent?.email" />
             <Label>{{ contactContent?.message }}</Label>
             <textarea v-model="contact.message"
+                :placeholder="contactContent?.message"
                 class="peer h-28 w-full rounded-md border border-slate-400 bg-white focus-within:border-slate-400 pl-3 text-sm placeholder-slate-400 outline-none !ring-0 focus:ring-0"></textarea>
             <div class="pt-4">
                 <Button class="w-full mb-1" @click="sendEmail">Submit</Button>

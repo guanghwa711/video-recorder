@@ -2,7 +2,7 @@
   <div class="absolute right-0 flex w-full justify-end">
     <Menu as="div" class="relative z-10 inline-block text-left">
       <MenuButton class="flex items-center">
-        <PhUserCircle class="h-8 w-8" weight="duotone" :class="`${props.themeColor ? 'text-white'+ ' ' + props.themeColor  : 'text-black' + ' ' + props.themeColor}`" />
+        <PhUserCircle class="h-8 w-8" weight="duotone" :class="`${props.themeColor ? 'text-white'+ ' ' + props.themeColor  : 'text-white' + ' ' + 'bg-red-600'}`" />
       </MenuButton>
 
       <transition
