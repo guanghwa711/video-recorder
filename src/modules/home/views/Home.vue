@@ -23,7 +23,7 @@
                             homepageContent?.recruiter_title }}</div>
                         <button
                             class="px-6 py-2 rounded-lg text-base font-semibold leading-relaxed tracking-tight hover:bg-red-600 outline outline-1 justify-center cursor-pointer text-white items-center gap-2 inline-flex">
-                            <RouterLink to="/recruiter">{{ homepageContent?.recruiter }}</RouterLink>
+                            <RouterLink to="/recruiter">{{ homepageContent?.recruiter ? homepageContent?.recruiter : 'Start as Recruiter' }}</RouterLink>
                         </button>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             homepageContent?.candidate_title }}</div>
                         <button
                             class="px-6 py-2 rounded-lg outline outline-1 justify-center hover:bg-indigo-900 text-base font-semibold leading-relaxed tracking-tight cursor-pointer text-white items-center gap-2 inline-flex">
-                            <RouterLink to="/candidate">{{ homepageContent?.candidate }}</RouterLink>
+                            <RouterLink to="/candidate">{{ homepageContent?.candidate ? homepageContent?.candidate : 'Start as Candidate' }}</RouterLink>
                         </button>
                     </div>
                 </div>
