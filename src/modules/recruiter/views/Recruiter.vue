@@ -6,7 +6,7 @@
       </template>
       <template #tab2>
         <div class="flex flex-col xl:flex-row gap-10 px-2.5 sm:px-0">
-          <div class="grid grid-cols-1 min-[450px]:grid-cols-3 xl:grid-cols-1 justify-center items-center space-y-5 mr-0 xl:mr-[40px]">
+          <div class="max-xl:grid grid-cols-1 min-[450px]:grid-cols-3 xl:grid-cols-1 justify-center items-center space-y-5 mr-0 xl:mr-[40px]">
             <div class="flex flex-col justify-center items-start sm:items-center xl:items-start">
               <div class="text-slate-900 text-lg font-bold leading-[27px] tracking-tight mb-4">Job Title</div>
               <Select v-model:selected:value="selectedJobTitle" :options="['All', 'Web', 'Mobile']"

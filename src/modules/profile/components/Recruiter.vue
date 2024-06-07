@@ -16,7 +16,7 @@
         <Button @click="updateUser" class="w-full md:w-[400px]">Update Profile</Button>
       </div>
       <div class="pt-[10px] !m-0 flex justify-center items-center">
-          <Button @click="deleteRecruiterModal = true" class="w-full md:w-[200px] hover:!bg-transparent bg-white border-red-600 !text-slate-400">Delete Profile</Button>
+          <Button @click="deleteRecruiterModal = true" class="w-full md:w-[200px] hover:!bg-transparent !bg-white !border-red-600 !text-slate-400">Delete Profile</Button>
       </div>
     </div>
   </div>

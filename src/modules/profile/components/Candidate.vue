@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="pt-[10px] !m-0 flex justify-center items-center">
-                    <Button @click="deleteCandidateModal = true" class="w-full md:w-[200px] hover:!bg-transparent bg-white border-red-600 !text-slate-400">
+                    <Button @click="deleteCandidateModal = true" class="w-full md:w-[200px] hover:!bg-transparent !bg-white !border-red-600 !text-slate-400">
                         Delete Profile
                     </Button>
                 </div>
