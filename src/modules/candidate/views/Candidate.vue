@@ -16,6 +16,7 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Candidacy v-for="candidacy in candidacies" :key="candidacy.id"
               :recruiter-name="candidacy.recruiter.first_name + ' ' + candidacy.recruiter.last_name"
+              :recruiterEmail="candidacy.recruiter?.recruiter?.email"
               :date="candidacy.createdAt"
               :recruiter-id="candidacy.recruiter.id"
               :status="candidacy.status"

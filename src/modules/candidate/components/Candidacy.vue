@@ -50,7 +50,7 @@
 
       <div class="flex justify-end gap-2 pt-2">
         <Button :outline="true" @click="showAcceptModal = false" class="px-4">Cancel</Button>
-        <Button @click="() => updateCandidacyStatus('approved')" class="px-6">Accept</Button>
+        <Button @click="() => handleAccpet()" class="px-6">Accept</Button>
       </div>
     </div>
   </Modal>
@@ -76,6 +76,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import emailjs from '@emailjs/browser';
 import { PhCheck, PhX, PhImage } from '@phosphor-icons/vue'
 import Button from '@/components/Button.vue'
 import Modal from '@/components/Modal.vue'
@@ -86,7 +87,8 @@ const userId = localStorage.getItem("user_id");
 const props = defineProps<{
   recruiterName: string
   date: string
-  recruiterId: number
+  recruiterId: number,
+  recruiterEmail: string,
   status: string
   preposition_text?: string
 }>()
@@ -94,6 +96,30 @@ const props = defineProps<{
 const emit = defineEmits<{
   (e: 'getCandidacies'): void;
 }>();
+
+const contact = {
+    name:props.recruiterName,
+    email: props.recruiterEmail,
+    message: `${props.recruiterName} has accepted your proposition`
+};
+
+const handleAccpet = () => {
+  sendEmail();
+  updateCandidacyStatus('approved')
+}
+
+const sendEmail = () => {
+    emailjs.send(import.meta.env.VITE_YOUR_SERVICE_ID, import.meta.env.VITE_YOUR_TEMPLATE_ID, contact, {
+        publicKey: import.meta.env.VITE_YOUR_PUBLIC_KEY,
+    })
+        .then(() => {
+                console.log('success')
+            },
+            (error) => {
+                console.log('FAILED...', error.text);
+            },
+        );
+}
 
 const updateCandidacyStatus = (status: string) => {
   API.updateCandidacies({
