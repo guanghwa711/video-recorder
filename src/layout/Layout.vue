@@ -27,6 +27,18 @@ import { computed } from 'vue';
 const { isAuthenticated, user } = useAuth0()
 const router = useRouter()
 
+if(!localStorage.getItem('access') || localStorage.getItem('access')== 'fail'){
+  let sign = prompt("What's your sign?");
+
+  if (sign.toLowerCase() === "tchiips") {
+    alert("Wow! Singin Success!");
+    localStorage.setItem('access', 'success')
+  }
+  else{
+    localStorage.setItem('access', 'fail')
+  }
+}
+
 const themeColor = computed(()=> {
   if(user?.value?.user_role == 'recruiter') return 'bg-red-600'
   if(user?.value?.user_role == 'candidate') return 'bg-indigo-900'

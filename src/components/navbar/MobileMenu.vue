@@ -76,6 +76,7 @@ function goToLogin() {
 function goToLogout() {
     localStorage.removeItem('user_id');
     localStorage.removeItem("user_role");
+    localStorage.removeItem("access");
     logout({
         logoutParams: {
             returnTo: window.location.origin
