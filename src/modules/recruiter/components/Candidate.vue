@@ -1,7 +1,7 @@
 <template>
   <div v-if="candidateId && videoId" class="justify-start items-start gap-4 flex sm:flex-row flex-col">
     <div class="w-[300px] sm:w-[250px] h-[250px] relative bg-white">
-      <mux-player class="w-[300px] sm:w-[250px] h-[250px] rounded-2xl" ref="muxplayer" :playback-id="videoId"
+      <mux-player class="w-[300px] sm:w-[250px] h-[250px] rounded-2xl" ref="muxplayer" @click="handlePlayModal = true"
         metadata-video-title="Test video title" metadata-viewer-user-id="user-id-007"></mux-player>
     </div>
 
@@ -162,6 +162,13 @@
       :profile_photo="props.profile_photo" />
   </Modal>
 
+  <Modal :show-modal="handlePlayModal" :show-buttons="false" @close="handlePlayModal = false" size="w-[90%] min-[450px]:w-[70%] sm:w-1/2 xl:w-[680px]">
+    <div class="relative bg-black w-full h-full mt-3">
+      <mux-player class="w-full rounded-2xl h-[200px] md:h-[300px] lg:h-[400px] xl:h-[480px]" ref="muxplayer" :playback-id="videoId"
+      metadata-video-title="Test video title" metadata-viewer-user-id="user-id-007"></mux-player>
+    </div>
+  </Modal>
+
 </template>
 
 <script setup lang="ts">
@@ -228,6 +235,8 @@ const removeCandidacy = () => {
       emit("getCandidates");
     })
 }
+
+const handlePlayModal = ref(false) 
 
 const showPropositionModal = ref(false)
 const showShortlistModal = ref(false)
