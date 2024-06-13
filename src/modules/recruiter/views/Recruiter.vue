@@ -41,6 +41,7 @@
           <div v-if="candidates.length > 0" class="flex-col justify-start items-start gap-8 inline-flex">
             <Candidate @get-candidacies="getCandidacies" @get-candidates="getCandidates" :is-loading="true"
               v-for="candidate in candidates" :key="candidate.id" :candidateId="candidate.id"
+              :candidacyId="candidate.id"
               :firstName="candidate.first_name" :lastName="candidate.last_name" :email="candidate.candidate?.email"
               :phone="candidate.phone" :bio="candidate.bio_text" :video-id="candidate?.video_resume[0]?.video_id"
               :company="candidate?.company" :seeking_contract_type="candidate?.seeking_contract_type"
@@ -70,8 +71,9 @@
           </div>
 
           <div v-if="candidacies.length > 0" class="flex-col justify-start items-start gap-8 inline-flex">
-            <Candidate @get-candidacies="getCandidacies" v-for="candidacy in candidacies" :key="candidacy?.id"
+            <Candidate @get-candidacies="getCandidacies" @get-candidates="getCandidates" v-for="candidacy in candidacies" :key="candidacy?.id"
               :candidateId="candidacy?.candidate?.id" :firstName="candidacy?.candidate?.first_name"
+              :candidacyId="candidacy?.id"
               :lastName="candidacy?.candidate?.last_name" :email="candidacy?.candidate?.candidate?.email"
               :phone="candidacy?.candidate?.phone" :proposition-date="candidacy?.candidate?.createdAt"
               :bio="candidacy?.candidate?.bio_text" :video-id="candidacy?.candidate?.video_resume[0]?.video_id"
@@ -173,6 +175,7 @@ const getCandidacies = () => {
   API.getCandidacies(queryParams)
     .then(response => {
       candidacies.value = response.data
+      console.log(response.data)
     })
 }
 
