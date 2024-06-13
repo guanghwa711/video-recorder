@@ -1,6 +1,6 @@
 <template>
     <div class="flex h-full justify-center w-full">
-        <div class="flex w-full max-w-sm flex-col space-y-4">
+        <div class="flex w-full max-w-40 flex-col space-y-4">
             <div class="mb-4 flex justify-center items-center w-full">
                 <div class="flex h-20 w-20 items-center justify-center rounded-full border-slate-400 border-[2px] bg-slate-100 p-[0.5px]">
                     <PhImage v-if="!props.profile_photo" class="h-full w-full rounded-full text-slate-300" />

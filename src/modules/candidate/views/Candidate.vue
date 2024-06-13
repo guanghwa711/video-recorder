@@ -51,7 +51,7 @@
             <Spinner />
           </div>
 
-          <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[95%] md:w-1/2 lg:w-1/2 xl:w-[40%]">
+          <Modal :show-modal="showVideoRecorderModal" :show-buttons="false" @close="showVideoRecorderModal = false" size="w-[90%] min-[450px]:w-[70%] sm:w-1/2 xl:w-[40%]">
             <VideoRecorder @get-video-resumes="getVideoResumes" v-model:is-uploading="isUpLoading" />
           </Modal>
 
