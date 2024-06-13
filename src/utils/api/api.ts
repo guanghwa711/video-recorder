@@ -105,6 +105,15 @@ const API = {
             ))
         })
     },
+    removeCandidacy: (candidacyId: number) => {
+        return new Promise<AxiosResponse>((resolve, reject) => {
+            HTTP.delete(`/recruiters/candidacies/${candidacyId}`)
+            .then(response => resolve(response))
+            .catch(error => (
+                reject(error)
+            ))
+        })
+    },
     deleteVideoResume: (id: number) => {
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.post('/video-resumes/delete', {id})
@@ -113,7 +122,7 @@ const API = {
                 reject(error)
             ))
         })
-    },
+    }, 
     getUserById: (userId: number) => {
         return new Promise<AxiosResponse>((resolve, reject) => {
             HTTP.get(`/users/${userId}`)

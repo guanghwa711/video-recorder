@@ -52,12 +52,22 @@
 
         <div v-if="['shortlisted'].includes(props.status as string)" class="flex gap-4">
           <!-- <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true"> -->
-          <div class="flex items-center" @click="showNotinteresetedModal = true">
-            <PhThumbsDown class="h-5 w-5 text-slate-600 cursor-pointer" />
+          <div class="flex items-center" @click="removeShortlistModal = true">
+            <PhThumbsUp class="h-5 w-5 text-red-600 cursor-pointer"  weight="fill"/>
             <!-- <span class="ml-2 text-xs lg:text-sm">Not interested</span> -->
           </div>
           <!-- </Button> -->
         </div>
+
+        <div v-if="['shortlisted'].includes(props.status as string)" class="flex gap-4">
+          <!-- <Button :outline="true" class="w-full max-w-32 xl:max-w-52 md:max-w-40" @click="showNotinteresetedModal = true"> -->
+          <div class="flex items-center" @click="showNotinteresetedModal = true">
+            <PhThumbsDown class="h-5 w-5 text-slate-600 cursor-pointer"/>
+            <!-- <span class="ml-2 text-xs lg:text-sm">Not interested</span> -->
+          </div>
+          <!-- </Button> -->
+        </div>
+        
       </div>
       <div v-if="props.propositionDate"
         class="w-[88px] h-[26px] px-[9px] py-3 bg-gray-200 rounded-[7px] justify-center items-center gap-2.5 inline-flex">
@@ -127,6 +137,24 @@
     </div>
   </Modal>
 
+  <Modal :show-modal="removeShortlistModal" :show-buttons="false" @close="removeShortlistModal = false">
+    <div class="space-y-2">
+      <div class="text-xl font-medium">Will you remove this candidacy?</div>
+
+      <div class="space-y-4">
+        <div class="text-sm text-slate-600">
+          We will let them know. You can find their details in the "Find candidate" section from now
+          on.
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2">
+        <Button :outline="true" @click="showNotinteresetedModal = false" class="px-4">Cancel</Button>
+        <Button @click="() => removeCandidacy()" class="px-6">Ok</Button>
+      </div>
+    </div>
+  </Modal>
+
   <Modal :show-modal="showUserInfoModal" :show-buttons="false" :size="`w-[500px]`" @close="showUserInfoModal = false">
     <CandidateInfo :firstName="props.firstName" :lastName="props.lastName" :email="props.email" :phone="props.phone"
       :company="props.company" :videoId="props.videoId" :seeking_contract_type="props.seeking_contract_type"
@@ -161,6 +189,7 @@ const emit = defineEmits<{
 
 const props = defineProps<{
   candidateId: number
+  candidacyId: number
   firstName: string
   lastName: string
   email?: string
@@ -191,8 +220,18 @@ const updateCandidacyStatus = (status: string) => {
     })
 }
 
+const removeCandidacy = () => {
+  API.removeCandidacy(props.candidacyId)
+  .then((response) => {
+    removeShortlistModal.value = false;
+      emit("getCandidacies");
+      emit("getCandidates");
+    })
+}
+
 const showPropositionModal = ref(false)
 const showShortlistModal = ref(false)
 const showNotinteresetedModal = ref(false)
 const showUserInfoModal = ref<boolean>(false);
+const removeShortlistModal = ref(false)
 </script>
