@@ -19,6 +19,7 @@
               :recruiterEmail="candidacy.recruiter?.recruiter?.email"
               :date="candidacy.createdAt"
               :recruiter-id="candidacy.recruiter.id"
+              :candidateName="candidacy.candidate?.first_name + ' ' + candidacy.candidate?.last_name"
               :status="candidacy.status"
               :preposition_text="candidacy?.preposition_text"
               @get-candidacies="getCandidacies"
@@ -121,6 +122,7 @@ const getCandidacies = () => {
   API.getCandidacies({user_id: userId})
     .then(response => {
       candidacies.value = response.data
+      console.log(response.data)
     })
 }
 

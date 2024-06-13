@@ -89,6 +89,7 @@ const props = defineProps<{
   date: string
   recruiterId: number,
   recruiterEmail: string,
+  candidateName: string,
   status: string
   preposition_text?: string
 }>()
@@ -98,9 +99,9 @@ const emit = defineEmits<{
 }>();
 
 const contact = {
-    name:props.recruiterName,
+    name:props.candidateName,
     email: props.recruiterEmail,
-    message: `${props.recruiterName} has accepted your proposition`
+    message: `${props.candidateName} has accepted your proposition`
 };
 
 const handleAccpet = () => {
